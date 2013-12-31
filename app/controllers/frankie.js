@@ -35,29 +35,11 @@ frankieApp.controller('IndexCtrl', function ($scope, FrankieRestangular) {
     // reload data on message with reload status
     if (event.data.status === "reload") {
       $scope.loadFrankies();
-    };
+    }
   });
 
 
-  // -- Native navigation
 
-  // Set navigation bar..
-  steroids.view.navigationBar.show("Frankie index");
-
-  // ..and add a button to it
-  var addButton = new steroids.buttons.NavigationBarButton();
-  addButton.title = "Add";
-
-  // ..set callback for tap action
-  addButton.onTap = function() {
-    var addView = new steroids.views.WebView("/views/frankie/new.html");
-    steroids.modal.show(addView);
-  };
-
-  // and finally put it to navigation bar
-  steroids.view.navigationBar.setButtons({
-    right: [addButton]
-  });
 
 
 });
@@ -100,7 +82,7 @@ frankieApp.controller('ShowCtrl', function ($scope, FrankieRestangular) {
   editButton.onTap = function() {
     webView = new steroids.views.WebView("/views/frankie/edit.html");
     steroids.modal.show(webView);
-  }
+  };
 
   steroids.view.navigationBar.setButtons({
     right: [editButton]
@@ -112,7 +94,7 @@ frankieApp.controller('ShowCtrl', function ($scope, FrankieRestangular) {
 
 // New: http://localhost/views/frankie/new.html
 
-frankieApp.controller('NewCtrl', function ($scope, FrankieRestangular) {
+frankieApp.controller('SigninCtrl', function ($scope, FrankieRestangular) {
 
   $scope.close = function() {
     steroids.modal.hide();
@@ -137,9 +119,31 @@ frankieApp.controller('NewCtrl', function ($scope, FrankieRestangular) {
 
     });
 
-  }
+  };
 
   $scope.frankie = {};
+
+    // -- Native navigation
+
+
+    // Set navigation bar..
+  steroids.view.navigationBar.show();
+  // ..and add a button to it
+  var signupButton = new steroids.buttons.NavigationBarButton();
+  signupButton.title = "signup";
+
+  // ..set callback for tap action
+  signupButton.onTap = function() {
+    var signupView = new steroids.views.WebView("/views/frankie/signup.html");
+    steroids.modal.show(signupView);
+  };
+
+  // and finally put it to navigation bar
+  steroids.view.navigationBar.setButtons({
+    right: [signupButton]
+  });
+
+
 
 });
 
