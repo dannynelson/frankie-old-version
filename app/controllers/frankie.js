@@ -123,10 +123,9 @@ frankieApp.controller('SigninCtrl', function ($scope, FrankieRestangular) {
 
   $scope.frankie = {};
 
-    // -- Native navigation
+  // -- Native navigation
 
-
-    // Set navigation bar..
+  // Set navigation bar..
   steroids.view.navigationBar.show();
   // ..and add a button to it
   var signupButton = new steroids.buttons.NavigationBarButton();
@@ -135,7 +134,7 @@ frankieApp.controller('SigninCtrl', function ($scope, FrankieRestangular) {
   // ..set callback for tap action
   signupButton.onTap = function() {
     var signupView = new steroids.views.WebView("/views/frankie/signup.html");
-    steroids.modal.show(signupView);
+    steroids.layers.push(signupView);
   };
 
   // and finally put it to navigation bar
@@ -143,6 +142,40 @@ frankieApp.controller('SigninCtrl', function ($scope, FrankieRestangular) {
     right: [signupButton]
   });
 
+});
+
+frankieApp.controller('SignupCtrl', function ($scope, FrankieRestangular) {
+
+  $scope.close = function() {
+    steroids.modal.hide();
+  };
+
+  $scope.create = function(frankie) {
+    $scope.loading = true;
+
+    FrankieRestangular.all('frankie').post(frankie).then(function() {
+
+      // Notify the index.html to reload
+      var msg = { status: 'reload' };
+      window.postMessage(msg, "*");
+
+      $scope.close();
+      $scope.loading = false;
+
+    }, function() {
+      $scope.loading = false;
+
+      alert("Error when creating the object, is Restangular configured correctly, are the permissions set correctly?");
+
+    });
+
+  };
+
+  $scope.frankie = {};
+
+  // -- Native navigation
+
+  // Set navigation bar..
 
 
 });
