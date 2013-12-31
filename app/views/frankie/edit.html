@@ -1,0 +1,19 @@
+<div ng-app="frankieApp">
+
+  <div ng-controller="EditCtrl">
+    <div class="spinner" ng-show="loading"></div>
+    <div class="content-padded">
+      <h1>Edit</h1>
+
+      <form class="simple-form">
+        Name: <input type="text" ng-model="frankie.name" /><br />
+        Description: <input type="text" ng-model="frankie.description" /><br />
+
+        <a class="topcoat-button" hm-tap="update(frankie)">Update</a>
+        <a class="topcoat-button" hm-tap="close()">Cancel</a>
+      </form>
+    </div>
+
+  </div>
+
+</div>
