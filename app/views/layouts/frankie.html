@@ -14,22 +14,26 @@
   <script src="/components/angular/angular.min.js"></script>
 
   <script src="/components/underscore/underscore-min.js"></script>
-  <script src="/components/restangular/dist/restangular.min.js"></script>
 
   <script src="/vendor/hammerjs/hammer.min.js"></script>
   <script src="/vendor/angular-hammer/angular-hammer.js"></script>
 
+  <!-- Parse Javascript SDK -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
   <script src="http://www.parsecdn.com/js/parse-1.2.15.min.js"></script>
-  <script type="text/javascript">
-    Parse.initialize("P2Z0R55WriW7Mi8h6bQqmhlLgGZQxjPe3Vc7PVQx", "jvPhmi8qIckRbuv6C1ezzXCMMivYTfJrjjHK5Tcc");
-  </script>
 
-  <script src="/models/models.js"></script>
 
-  <script src="/controllers/<%= yield.controller %>.js"></script>
+  <!--<script src="/models/models.js"></script>-->
+
+  <script src="/controllers/frankie.js"></script>
 </head>
 <body>
-
+  <script type="text/javascript">
+    Parse.initialize(
+      "P2Z0R55WriW7Mi8h6bQqmhlLgGZQxjPe3Vc7PVQx",
+      "jvPhmi8qIckRbuv6C1ezzXCMMivYTfJrjjHK5Tcc"
+    );
+  </script>
 
   <%= yield.view %>
 

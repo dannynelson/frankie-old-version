@@ -4,7 +4,7 @@
 steroids.config.name = "steroids-angular-stackmob"
 
 # -- Initial Location --
-steroids.config.location = "http://localhost/views/frankie/signin.html"
+steroids.config.location = "http://localhost/views/frankie/index.html"
 
 # -- Tab Bar --
 # steroids.config.tabBar.enabled = true
