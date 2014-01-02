@@ -1,115 +1,25 @@
 var frankieApp = angular.module('frankieApp', ['FrankieModel', 'hmTouchevents']);
 
-
-// Index: http://localhost/views/frankie/index.html
-
-frankieApp.controller('IndexCtrl', function ($scope, FrankieRestangular) {
-
-  // This will be populated with Restangular
-  $scope.frankies = [];
-
-  // Helper function for opening new webviews
-  $scope.open = function(id) {
-    webView = new steroids.views.WebView("/views/frankie/show.html?id="+id);
-    steroids.layers.push(webView);
-  };
-
-  // Helper function for loading frankie data with spinner
-  $scope.loadFrankies = function() {
-    $scope.loading = true;
-
-    frankies.getList().then(function(data) {
-      $scope.frankies = data;
-      $scope.loading = false;
-    });
-
-  };
-
-  // Fetch all objects from the backend (see app/models/frankie.js)
-  var frankies = FrankieRestangular.all('frankie');
-  $scope.loadFrankies();
-
-
-  // Get notified when an another webview modifies the data and reload
-  window.addEventListener("message", function(event) {
-    // reload data on message with reload status
-    if (event.data.status === "reload") {
-      $scope.loadFrankies();
-    }
-  });
-
-
-
-
-
-});
-
-
-// Show: http://localhost/views/frankie/show.html?id=<id>
-
-frankieApp.controller('ShowCtrl', function ($scope, FrankieRestangular) {
-
-  // Helper function for loading frankie data with spinner
-  $scope.loadFrankie = function() {
-    $scope.loading = true;
-
-     frankie.get().then(function(data) {
-       $scope.frankie = data;
-       $scope.loading = false;
-    });
-
-  };
-
-  // Save current frankie id to localStorage (edit.html gets it from there)
-  localStorage.setItem("currentFrankieId", steroids.view.params.id);
-
-  var frankie = FrankieRestangular.one("frankie", steroids.view.params.id);
-  $scope.loadFrankie()
-
-  // When the data is modified in the edit.html, get notified and update (edit is on top of this view)
-  window.addEventListener("message", function(event) {
-    if (event.data.status === "reload") {
-      $scope.loadFrankie()
-    };
-  });
-
-  // -- Native navigation
-  steroids.view.navigationBar.show("Frankie: " + steroids.view.params.id );
-
-  var editButton = new steroids.buttons.NavigationBarButton();
-  editButton.title = "Edit";
-
-  editButton.onTap = function() {
-    webView = new steroids.views.WebView("/views/frankie/edit.html");
-    steroids.modal.show(webView);
-  };
-
-  steroids.view.navigationBar.setButtons({
-    right: [editButton]
-  });
-
-
-});
-
-
 // New: http://localhost/views/frankie/new.html
 
-frankieApp.controller('SigninCtrl', function ($scope, FrankieRestangular) {
+frankieApp.controller('SigninCtrl', function ($scope, FrankieLogin) {
 
   $scope.close = function() {
     steroids.modal.hide();
   };
 
   $scope.create = function(frankie) {
+    debugger;
     $scope.loading = true;
+    var queryString = "username=mozartman05&password=1234&token_type=mac";
 
-    FrankieRestangular.all('frankie').post(frankie).then(function() {
+    FrankieLogin.all('user/accessToken').post(queryString).then(function() {
 
       // Notify the index.html to reload
-      var msg = { status: 'reload' };
-      window.postMessage(msg, "*");
+      // var msg = { status: 'reload' };
+      // window.postMessage(msg, "*");
 
-      $scope.close();
+      // $scope.close();
       $scope.loading = false;
 
     }, function() {
@@ -173,55 +83,137 @@ frankieApp.controller('SignupCtrl', function ($scope, FrankieRestangular) {
 
   $scope.frankie = {};
 
-  // -- Native navigation
-
-  // Set navigation bar..
-
-
 });
 
 
 // Edit: http://localhost/views/frankie/edit.html
 
-frankieApp.controller('EditCtrl', function ($scope, FrankieRestangular) {
+// frankieApp.controller('EditCtrl', function ($scope, FrankieRestangular) {
 
-  var id  = localStorage.getItem("currentFrankieId"),
-      frankie = FrankieRestangular.one("frankie", id);
+//   var id  = localStorage.getItem("currentFrankieId"),
+//       frankie = FrankieRestangular.one("frankie", id);
 
-  $scope.close = function() {
-    steroids.modal.hide();
-  };
+//   $scope.close = function() {
+//     steroids.modal.hide();
+//   };
 
-  $scope.update = function(frankie) {
-    $scope.loading = true;
+//   $scope.update = function(frankie) {
+//     $scope.loading = true;
 
-    frankie.put().then(function() {
+//     frankie.put().then(function() {
 
-      // Notify the show.html to reload data
-      var msg = { status: "reload" };
-      window.postMessage(msg, "*");
+//       // Notify the show.html to reload data
+//       var msg = { status: "reload" };
+//       window.postMessage(msg, "*");
 
-      $scope.close();
-      $scope.loading = false;
-    }, function() {
-      $scope.loading = false;
+//       $scope.close();
+//       $scope.loading = false;
+//     }, function() {
+//       $scope.loading = false;
 
-      alert("Error when editing the object, is Restangular configured correctly, are the permissions set correctly?");
-    });
+//       alert("Error when editing the object, is Restangular configured correctly, are the permissions set correctly?");
+//     });
 
-  };
+//   };
 
-  // Helper function for loading frankie data with spinner
-  $scope.loadFrankie = function() {
-    $scope.loading = true;
+//   // Helper function for loading frankie data with spinner
+//   $scope.loadFrankie = function() {
+//     $scope.loading = true;
 
-    // Fetch a single object from the backend (see app/models/frankie.js)
-    frankie.get().then(function(data) {
-      $scope.frankie = data;
-      $scope.loading = false;
-    });
-  };
+//     // Fetch a single object from the backend (see app/models/frankie.js)
+//     frankie.get().then(function(data) {
+//       $scope.frankie = data;
+//       $scope.loading = false;
+//     });
+//   };
 
-  $scope.loadFrankie();
+//   $scope.loadFrankie();
 
-});
+// });
+
+
+
+// Index: http://localhost/views/frankie/index.html
+
+// frankieApp.controller('IndexCtrl', function ($scope, FrankieRestangular) {
+
+//   // This will be populated with Restangular
+//   $scope.frankies = [];
+
+//   // Helper function for opening new webviews
+//   $scope.open = function(id) {
+//     webView = new steroids.views.WebView("/views/frankie/show.html?id="+id);
+//     steroids.layers.push(webView);
+//   };
+
+//   // Helper function for loading frankie data with spinner
+//   $scope.loadFrankies = function() {
+//     $scope.loading = true;
+
+//     frankies.getList().then(function(data) {
+//       $scope.frankies = data;
+//       $scope.loading = false;
+//     });
+
+//   };
+
+//   // Fetch all objects from the backend (see app/models/frankie.js)
+//   var frankies = FrankieRestangular.all('frankie');
+//   $scope.loadFrankies();
+
+
+//   // Get notified when an another webview modifies the data and reload
+//   window.addEventListener("message", function(event) {
+//     // reload data on message with reload status
+//     if (event.data.status === "reload") {
+//       $scope.loadFrankies();
+//     }
+//   });
+
+// });
+
+
+// Show: http://localhost/views/frankie/show.html?id=<id>
+
+// frankieApp.controller('ShowCtrl', function ($scope, FrankieRestangular) {
+
+//   // Helper function for loading frankie data with spinner
+//   $scope.loadFrankie = function() {
+//     $scope.loading = true;
+
+//      frankie.get().then(function(data) {
+//        $scope.frankie = data;
+//        $scope.loading = false;
+//     });
+
+//   };
+
+//   // Save current frankie id to localStorage (edit.html gets it from there)
+//   localStorage.setItem("currentFrankieId", steroids.view.params.id);
+
+//   var frankie = FrankieRestangular.one("frankie", steroids.view.params.id);
+//   $scope.loadFrankie();
+
+//   // When the data is modified in the edit.html, get notified and update (edit is on top of this view)
+//   window.addEventListener("message", function(event) {
+//     if (event.data.status === "reload") {
+//       $scope.loadFrankie();
+//     }
+//   });
+
+//   // -- Native navigation
+//   steroids.view.navigationBar.show("Frankie: " + steroids.view.params.id );
+
+//   var editButton = new steroids.buttons.NavigationBarButton();
+//   editButton.title = "Edit";
+
+//   editButton.onTap = function() {
+//     webView = new steroids.views.WebView("/views/frankie/edit.html");
+//     steroids.modal.show(webView);
+//   };
+
+//   steroids.view.navigationBar.setButtons({
+//     right: [editButton]
+//   });
+
+// });
