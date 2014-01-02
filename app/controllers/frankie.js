@@ -1,34 +1,28 @@
-var frankieApp = angular.module('frankieApp', ['FrankieModel', 'hmTouchevents']);
+var frankieApp = angular.module('frankieApp', ['hmTouchevents']);
 
 // New: http://localhost/views/frankie/new.html
 
-frankieApp.controller('SigninCtrl', function ($scope, FrankieLogin) {
+frankieApp.controller('SigninCtrl', function ($scope) {
 
   $scope.close = function() {
     steroids.modal.hide();
   };
 
-  $scope.create = function(frankie) {
-    debugger;
+  $scope.create = function(credentials) {
     $scope.loading = true;
-    var queryString = "username=mozartman05&password=1234&token_type=mac";
-
-    FrankieLogin.all('user/accessToken').post(queryString).then(function() {
-
-      // Notify the index.html to reload
-      // var msg = { status: 'reload' };
-      // window.postMessage(msg, "*");
-
-      // $scope.close();
-      $scope.loading = false;
-
-    }, function() {
-      $scope.loading = false;
-
-      alert("Error when creating the object, is Restangular configured correctly, are the permissions set correctly?");
-
+    Parse.User.logIn(credentials.username, credentials.password, {
+      success: function(user) {
+        $scope.loading = false;
+        alert('login succeeded');
+        var appView = new steroids.views.WebView('/views/frankie/index.html');
+        steroids.modal.show('');
+      },
+      error: function(user, error) {
+        $scope.loading = false;
+        console.error(error);
+        alert("Login error");
+      }
     });
-
   };
 
   $scope.frankie = {};
@@ -54,29 +48,32 @@ frankieApp.controller('SigninCtrl', function ($scope, FrankieLogin) {
 
 });
 
-frankieApp.controller('SignupCtrl', function ($scope, FrankieRestangular) {
+frankieApp.controller('SignupCtrl', function ($scope) {
 
   $scope.close = function() {
     steroids.modal.hide();
   };
 
-  $scope.create = function(frankie) {
+  $scope.create = function(credentials) {
     $scope.loading = true;
 
-    FrankieRestangular.all('frankie').post(frankie).then(function() {
-
-      // Notify the index.html to reload
-      var msg = { status: 'reload' };
-      window.postMessage(msg, "*");
-
-      $scope.close();
-      $scope.loading = false;
-
-    }, function() {
-      $scope.loading = false;
-
-      alert("Error when creating the object, is Restangular configured correctly, are the permissions set correctly?");
-
+    var user = new Parse.User();
+    user.set("username", "my name");
+    user.set("password", "my pass");
+    user.set("email", "email@example.com");
+     
+    // other fields can be set just like with Parse.Object
+    user.set("phone", "415-392-0202");
+     
+    user.signUp(null, {
+      success: function(user) {
+        $scope.loading = false;
+        alert('account created');
+      },
+      error: function(user, error) {
+        $scope.loading = false;
+        alert("Error: " + error.code + " " + error.message);
+      }
     });
 
   };
