@@ -22,3 +22,41 @@
   -webkit-animation-iteration-count: infinite;
   -webkit-animation-timing-function: linear;
 }
+
+
+
+/*  Chevron style from Ratchet. Licensed under The MIT License:
+  http://opensource.org/licenses/MIT*/
+
+li {
+  position:relative;
+}
+.chevron {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  margin-top: -8px;
+  display:block;
+  height:20px;
+}
+/* Base styles for both 1/2's of the chevron */
+.chevron:before,
+.chevron:after {
+  position: relative;
+  display: block;
+  width: 14px;
+  height: 2px;
+  background-color: #999;
+  content: '';
+}
+/* Position and rotate respective 1/2's of the chevron */
+.chevron:before {
+  top: 2px;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+.chevron:after {
+  top: 9px;
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
