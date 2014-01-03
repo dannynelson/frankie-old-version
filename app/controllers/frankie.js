@@ -168,48 +168,35 @@ frankieApp.controller('SignupCtrl', function ($scope) {
 
 // Edit: http://localhost/views/frankie/edit.html
 
-// frankieApp.controller('EditCtrl', function ($scope, FrankieRestangular) {
+frankieApp.controller('EditCtrl', function ($scope) {
 
-//   var id  = localStorage.getItem("currentFrankieId"),
-//       frankie = FrankieRestangular.one("frankie", id);
+  $scope.project  = JSON.parse(localStorage.getItem("currentProject"));
 
-//   $scope.close = function() {
-//     steroids.modal.hide();
-//   };
+  //project gets modified by passing into function?
+  $scope.update = function(project) {
+    // Retrieve Object
+    $scope.loading = true;
+    var Project = Parse.Object.extend("Project");
+    var query = new Parse.Query(Project);
+    alert(project.objectId);
+    query.get(project.objectId, {
+      // update and save if successful
+      success: function(object) {
+        object.set("title", project.title);
+        object.set("notes", project.notes);
+        object.save();
+        $scope.loading = false;
+        steroids.layers.pop();
+      },
+      error: function(object, error) {
+        alert(error);
+      }
+    });
+  };
 
-//   $scope.update = function(frankie) {
-//     $scope.loading = true;
+  steroids.view.navigationBar.show('Edit Project');
 
-//     frankie.put().then(function() {
-
-//       // Notify the show.html to reload data
-//       var msg = { status: "reload" };
-//       window.postMessage(msg, "*");
-
-//       $scope.close();
-//       $scope.loading = false;
-//     }, function() {
-//       $scope.loading = false;
-
-//       alert("Error when editing the object, is Restangular configured correctly, are the permissions set correctly?");
-//     });
-
-//   };
-
-//   // Helper function for loading frankie data with spinner
-//   $scope.loadFrankie = function() {
-//     $scope.loading = true;
-
-//     // Fetch a single object from the backend (see app/models/frankie.js)
-//     frankie.get().then(function(data) {
-//       $scope.frankie = data;
-//       $scope.loading = false;
-//     });
-//   };
-
-//   $scope.loadFrankie();
-
-// });
+});
 
 
 
@@ -220,8 +207,6 @@ frankieApp.controller('SignupCtrl', function ($scope) {
 
 frankieApp.controller('ShowCtrl', function ($scope) {
 
-  // Save current frankie id to localStorage (edit.html gets it from there)
-  localStorage.setItem("currentFrankieId", steroids.view.params.id);
   $scope.project = {};
   
   // retrieve info
@@ -231,6 +216,8 @@ frankieApp.controller('ShowCtrl', function ($scope) {
   query.first({
     success: function(object) {
       $scope.project = object;
+      // Save current project info to localStorage (edit.html gets it from there)
+      localStorage.setItem("currentProject", JSON.stringify(object));
       $scope.$apply();
       setNavigation();
     },
@@ -254,8 +241,8 @@ frankieApp.controller('ShowCtrl', function ($scope) {
     editButton.title = "Edit";
 
     editButton.onTap = function() {
-      webView = new steroids.views.WebView("/views/frankie/edit.html");
-      steroids.modal.show(webView);
+      editProjectView = new steroids.views.WebView("/views/frankie/edit.html");
+      steroids.layers.push(editProjectView);
     };
 
     steroids.view.navigationBar.setButtons({
