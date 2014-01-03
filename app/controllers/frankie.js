@@ -8,7 +8,7 @@ frankieApp.controller('IndexCtrl', function ($scope) {
   var currentUser = Parse.User.current();
   if (!currentUser) {
     var signinView = new steroids.views.WebView("/views/frankie/signin.html");
-    steroids.modal.show(signinView);
+    steroids.layers.push(signinView);
   }
 
   // Build Drawer
@@ -71,6 +71,22 @@ frankieApp.controller('IndexCtrl', function ($scope) {
 });
 
 
+frankieApp.controller('DrawerCtrl', function ($scope) {
+
+  $scope.closeDrawerAndSendMessage = function(selection) {
+    var msg = { selection: selection };
+    window.postMessage(msg, "*");
+
+    steroids.drawers.hideAll();
+  };
+
+  $scope.logout = function() {
+    alert('loggin out');
+    Parse.User.logOut();
+  };
+
+});
+
 
 
 // New
@@ -101,9 +117,32 @@ frankieApp.controller('NewCtrl', function ($scope) {
 
 frankieApp.controller('SigninCtrl', function ($scope) {
 
+
+  $scope.init = function() {
+    // Navigation Bar
+    // steroids.view.navigationBar.show();
+    var signupButton = new steroids.buttons.NavigationBarButton();
+    signupButton.title = "signup";
+    signupButton.onTap = function() {
+      var signupView = new steroids.views.WebView("/views/frankie/signup.html");
+      steroids.layers.push(signupView);
+    };
+    steroids.view.navigationBar.setButtons({
+      right: [signupButton],
+      overrideBackButton: true
+    });
+  };
+  $scope.init();
+
+
   $scope.close = function() {
     steroids.modal.hide();
   };
+
+  // $scope.openSignupPage = function() {
+  //   var signupView = new steroids.views.WebView("/views/frankie/signup.html");
+  //   steroids.modal.show(signupView);
+  // }
 
   $scope.create = function(credentials) {
     $scope.loading = true;
@@ -123,18 +162,7 @@ frankieApp.controller('SigninCtrl', function ($scope) {
 
   $scope.frankie = {};
 
-  // Navigation Bar
-  steroids.view.navigationBar.show();
-  var signupButton = new steroids.buttons.NavigationBarButton();
-  signupButton.title = "signup";
-  signupButton.onTap = function() {
-    var signupView = new steroids.views.WebView("/views/frankie/signup.html");
-    steroids.layers.push(signupView);
-  };
-  steroids.view.navigationBar.setButtons({
-    right: [signupButton],
-    overrideBackButton: true
-  });
+
 
 });
 

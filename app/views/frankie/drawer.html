@@ -2,22 +2,23 @@
 
   // Sends message for the main view that listens with addEventListener()
 
-  function closeDrawerAndSendMessage(selection) {
-    var msg = { selection: selection };
-    window.postMessage(msg, "*");
 
-    steroids.drawers.hideAll();
-  }
 
 </script>
 
-<div class="topcoat-list__container white-bg">
-  <h3 class="topcoat-list__header">Settings</h3>
+<div ng-app="frankieApp">
 
-  <ul class="topcoat-list">
-    <li class="topcoat-list__item" ontouchend="closeDrawerAndSendMessage('home')">Logout</li>
-    <li class="topcoat-list__item" ontouchend="closeDrawerAndSendMessage('settings')">Settings</li>
-    <li class="topcoat-list__item" ontouchend="steroids.openURL('http://www.google.com')">Open Google</li>
-  </ul>
+  <div ng-controller="DrawerCtrl">
+    <div class="topcoat-list__container white-bg">
+      <h3 class="topcoat-list__header">Settings</h3>
 
+      <ul class="topcoat-list">
+        <li class="topcoat-list__item" ontouchend="logout()">Logout</li>
+        <li class="topcoat-list__item" ontouchend="closeDrawerAndSendMessage('settings')">Settings</li>
+        <li class="topcoat-list__item" ontouchend="steroids.openURL('http://www.google.com')">Open Google</li>
+      </ul>
+
+    </div>
+
+  </div>
 </div>

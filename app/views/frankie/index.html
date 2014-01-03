@@ -2,13 +2,13 @@
 
   <div ng-controller="IndexCtrl">
     <!-- Search Box -->
-    <input type="search" value="" placeholder="search" class="topcoat-search-input full">
+    <input type="search" ng-model="liveSearch" placeholder="search" class="topcoat-search-input full">
 
     <div class="topcoat-list__container">
 
       <ul class="topcoat-list">
         <!-- order is reversed created timestamp -->
-        <li class="topcoat-list__item" hm-tap="open(project.id)" ng-repeat="project in projects">
+        <li class="topcoat-list__item" hm-tap="open(project.id)" ng-repeat="project in projects | filter:liveSearch">
           Project: {{ project.attributes.title }}
           <span class="chevron"/>
         </li>
