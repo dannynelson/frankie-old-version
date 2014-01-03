@@ -12,7 +12,7 @@ frankieApp.controller('IndexCtrl', function ($scope) {
   }
   
   // build navigation bar
-  steroids.view.navigationBar.show('Index');
+  steroids.view.navigationBar.show('Calendar');
 
   var addButton = new steroids.buttons.NavigationBarButton();
   addButton.imagePath = "/icons/plus.png";
@@ -36,6 +36,16 @@ frankieApp.controller('IndexCtrl', function ($scope) {
 
 frankieApp.controller('NewCtrl', function ($scope) {
   steroids.view.navigationBar.show('New Project');
+
+  $scope.create = function(project) {
+    var Project = Parse.Object.extend("Project");
+    var privateProject = new Project();
+    privateProject.set("title", project.title);
+    privateProject.set("notes", project.notes);
+    privateProject.setACL(new Parse.ACL(Parse.User.current()));
+    privateProject.save();
+    alert('saved successfully');
+  };
 });
 
 // New: http://localhost/views/frankie/new.html
