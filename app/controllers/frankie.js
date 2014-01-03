@@ -4,6 +4,7 @@ var frankieApp = angular.module('frankieApp', ['hmTouchevents']);
 
 frankieApp.controller('IndexCtrl', function ($scope) {
 
+
   // test if user is logged in
   var currentUser = Parse.User.current();
   if (!currentUser) {
@@ -54,19 +55,22 @@ frankieApp.controller('IndexCtrl', function ($scope) {
   };
 
   // Fetch all objects from the backend (see app/models/frankie.js)
-  var Project = Parse.Object.extend("Project");
-  var query = new Parse.Query(Project);
-  query.equalTo("user", Parse.User.current());
-  query.find({
-    success: function(results) {
-      $scope.projects = results;
-      // necessary to update bindings for promises, should be wrapped in function to catch errors?
-      $scope.$apply();
-    },
-    error: function(error) {
-      alert("Error: " + error.code + " " + error.message);
-    }
-  });
+  $scope.load = function() {
+    var Project = Parse.Object.extend("Project");
+    var query = new Parse.Query(Project);
+    query.equalTo("user", Parse.User.current());
+    query.find({
+      success: function(results) {
+        $scope.projects = results;
+        // necessary to update bindings for promises, should be wrapped in function to catch errors?
+        $scope.$apply();
+      },
+      error: function(error) {
+        alert("Error: " + error.code + " " + error.message);
+      }
+    });
+  };
+  $scope.load();
 
 });
 
@@ -83,6 +87,8 @@ frankieApp.controller('DrawerCtrl', function ($scope) {
   $scope.logout = function() {
     alert('loggin out');
     Parse.User.logOut();
+    $scope.closeDrawerAndSendMessage();
+    steroids.layers.pop();
   };
 
 });
@@ -136,7 +142,7 @@ frankieApp.controller('SigninCtrl', function ($scope) {
 
 
   $scope.close = function() {
-    steroids.modal.hide();
+    steroids.layers.pop();
   };
 
   // $scope.openSignupPage = function() {
@@ -144,9 +150,10 @@ frankieApp.controller('SigninCtrl', function ($scope) {
   //   steroids.modal.show(signupView);
   // }
 
-  $scope.create = function(credentials) {
+  $scope.create = function(user) {
     $scope.loading = true;
-    Parse.User.logIn(credentials.username, credentials.password, {
+    debugger;
+    Parse.User.logIn(user.username, user.password, {
       success: function(user) {
         $scope.loading = false;
         alert('login succeeded');
@@ -172,31 +179,28 @@ frankieApp.controller('SigninCtrl', function ($scope) {
 frankieApp.controller('SignupCtrl', function ($scope) {
 
   $scope.close = function() {
-    steroids.modal.hide();
+    steroids.layers.pop();
   };
 
   $scope.create = function(credentials) {
     $scope.loading = true;
 
     var user = new Parse.User();
-    user.set("username", "my name");
-    user.set("password", "my pass");
-    user.set("email", "email@example.com");
-     
-    // other fields can be set just like with Parse.Object
-    user.set("phone", "415-392-0202");
+    user.set("username", credentials.username);
+    user.set("password", credentials.password);
+    user.set("email", credentials.email);
      
     user.signUp(null, {
       success: function(user) {
         $scope.loading = false;
         alert('account created');
+        $scope.close();
       },
       error: function(user, error) {
         $scope.loading = false;
         alert("Error: " + error.code + " " + error.message);
       }
     });
-
   };
 
   $scope.frankie = {};
