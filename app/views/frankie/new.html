@@ -1,0 +1,19 @@
+<div ng-app="frankieApp">
+
+  <div ng-controller="NewCtrl">
+    <div class="spinner" ng-show="loading"></div>
+    <div class="content-padded">
+      <form class="simple-form">
+
+        <input class="topcoat-text-input full center" type="text" placeholder="Title of Project" ng-model="project.title" /><br />
+
+        <input class="topcoat-text-input full center" type="text" placeholder="Notes" ng-model="project.notes" /><br />
+
+        <a class="topcoat-button--cta full center" hm-tap="create(project)">Build Project</a>
+      </form>
+
+    </div>
+
+  </div>
+
+</div>

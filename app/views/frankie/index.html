@@ -1,13 +1,12 @@
 <div ng-app="frankieApp">
 
   <div ng-controller="IndexCtrl">
-    <div class="spinner" ng-show="loading"></div>
     <div class="topcoat-list__container">
 
       <ul class="topcoat-list">
         <!-- order is reversed created timestamp -->
-        <li class="topcoat-list__item" hm-tap="open(frankie.frankie_id)" ng-repeat="frankie in frankies | orderBy: '-createddate'">
-          Frankie: {{ frankie.name }}
+        <li class="topcoat-list__item" hm-tap="open(project.id)" ng-repeat="project in projects">
+          Project: {{ project.attributes.title }}
         </li>
       </ul>
 
