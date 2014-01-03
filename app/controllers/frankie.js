@@ -10,6 +10,18 @@ frankieApp.controller('IndexCtrl', function ($scope) {
     var signinView = new steroids.views.WebView("/views/frankie/signin.html");
     steroids.modal.show(signinView);
   }
+
+  // Build Drawer
+  var leftDrawer = new steroids.views.WebView("/views/frankie/drawer.html");
+  leftDrawer.preload({},{
+    onSuccess: initGesture  // When the view has loaded, enable finger tracking
+  });
+  function initGesture() {
+    steroids.drawers.enableGesture(leftDrawer);
+  }
+  function showDrawer() {
+    steroids.drawers.show(leftDrawer);
+  }
   
   // build navigation bar
   steroids.view.navigationBar.show('Calendar');
@@ -24,15 +36,15 @@ frankieApp.controller('IndexCtrl', function ($scope) {
   var settingsButton = new steroids.buttons.NavigationBarButton();
   settingsButton.imagePath = "/icons/cogwheels.png";
   settingsButton.onTap = function() {
-    
+    showDrawer();
   };
 
   steroids.view.navigationBar.setButtons({
-    left: [addButton],
-    right: [settingsButton]
+    left: [settingsButton],
+    right: [addButton]
   });
 
-  // This will be populated with Restangular
+  // This will be populated with Parse
   $scope.projects = [];
 
   // Helper function for opening new webviews
