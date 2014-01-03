@@ -8,45 +8,34 @@ frankieApp.controller('IndexCtrl', function ($scope) {
   var currentUser = Parse.User.current();
   if (!currentUser) {
     var signinView = new steroids.views.WebView("/views/frankie/signin.html");
-    steroids.layers.push(signinView);
+    steroids.modal.show(signinView);
   }
   
   // show navigation bar
   steroids.view.navigationBar.show('Index');
 
-  // // This will be populated with Restangular
-  // $scope.frankies = [];
+  var addButton = new steroids.buttons.NavigationBarButton();
+  addButton.imagePath = "/icons/plus.png";
+  addButton.onTap = function() {
+    var newView = new steroids.views.WebView('/views/frankie/new.html');
+    steroids.layers.push(newView);
+  };
 
-  // // Helper function for opening new webviews
-  // $scope.open = function(id) {
-  //   webView = new steroids.views.WebView("/views/frankie/show.html?id="+id);
-  //   steroids.layers.push(webView);
-  // };
+  var settingsButton = new steroids.buttons.NavigationBarButton();
+  settingsButton.imagePath = "/icons/cogwheels.png";
+  settingsButton.onTap = function() {
+    alert("Image button tapped");
+  };
 
-  // // Helper function for loading frankie data with spinner
-  // $scope.loadFrankies = function() {
-  //   $scope.loading = true;
+  steroids.view.navigationBar.setButtons({
+    left: [addButton],
+    right: [settingsButton]
+  });
 
-  //   frankies.getList().then(function(data) {
-  //     $scope.frankies = data;
-  //     $scope.loading = false;
-  //   });
+});
 
-  // };
-
-  // // Fetch all objects from the backend (see app/models/frankie.js)
-  // var frankies = FrankieRestangular.all('frankie');
-  // $scope.loadFrankies();
-
-
-  // // Get notified when an another webview modifies the data and reload
-  // window.addEventListener("message", function(event) {
-  //   // reload data on message with reload status
-  //   if (event.data.status === "reload") {
-  //     $scope.loadFrankies();
-  //   }
-  // });
-
+frankieApp.controller('NewCtrl', function ($scope) {
+  steroids.view.navigationBar.show('New Project');
 });
 
 // New: http://localhost/views/frankie/new.html
