@@ -24,13 +24,38 @@ frankieApp.controller('IndexCtrl', function ($scope) {
   var settingsButton = new steroids.buttons.NavigationBarButton();
   settingsButton.imagePath = "/icons/cogwheels.png";
   settingsButton.onTap = function() {
-    alert("Image button tapped");
+    
   };
 
   steroids.view.navigationBar.setButtons({
     left: [addButton],
     right: [settingsButton]
   });
+
+  // This will be populated with Restangular
+  $scope.projects = [];
+
+  // Helper function for opening new webviews
+  $scope.open = function(id) {
+    projectView = new steroids.views.WebView("/views/frankie/show.html?id="+id);
+    steroids.layers.push(projectView);
+  };
+
+  // Fetch all objects from the backend (see app/models/frankie.js)
+  var Project = Parse.Object.extend("Project");
+  var query = new Parse.Query(Project);
+  query.equalTo("user", Parse.User.current());
+  query.find({
+    success: function(results) {
+      $scope.projects = results;
+      // necessary to update bindings for promises, should be wrapped in function to catch errors?
+      $scope.$apply();
+    },
+    error: function(error) {
+      alert("Error: " + error.code + " " + error.message);
+    }
+  });
+  
 
 });
 
@@ -40,6 +65,7 @@ frankieApp.controller('NewCtrl', function ($scope) {
   $scope.create = function(project) {
     var Project = Parse.Object.extend("Project");
     var privateProject = new Project();
+    privateProject.set("user", Parse.User.current());
     privateProject.set("title", project.title);
     privateProject.set("notes", project.notes);
     privateProject.setACL(new Parse.ACL(Parse.User.current()));

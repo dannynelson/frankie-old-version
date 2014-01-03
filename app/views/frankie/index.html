@@ -1,8 +1,16 @@
 <div ng-app="frankieApp">
 
   <div ng-controller="IndexCtrl">
-    Index page
+    <div class="topcoat-list__container">
 
+      <ul class="topcoat-list">
+        <!-- order is reversed created timestamp -->
+        <li class="topcoat-list__item" ng-repeat="project in projects">
+          Project: {{ project.attributes.title }}
+        </li>
+      </ul>
+
+    </div>
 
   </div>
 
