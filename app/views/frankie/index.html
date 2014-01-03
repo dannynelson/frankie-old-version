@@ -1,6 +1,9 @@
 <div ng-app="frankieApp">
 
   <div ng-controller="IndexCtrl">
+    <!-- Search Box -->
+    <input type="search" value="" placeholder="search" class="topcoat-search-input full">
+
     <div class="topcoat-list__container">
 
       <ul class="topcoat-list">
@@ -9,7 +12,7 @@
           Project: {{ project.attributes.title }}
           <span class="chevron"/>
         </li>
-        
+
       </ul>
 
     </div>
