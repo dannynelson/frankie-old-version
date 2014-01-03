@@ -9,6 +9,16 @@
 
         <input class="topcoat-text-input full center" type="text" placeholder="Notes" ng-model="project.notes" /><br />
 
+        <a class="topcoat-button full center" hm-tap="openClientInfo()">
+          Client Information
+          <span class="chevron"/>
+        </a>  
+
+        <a class="topcoat-button full center">
+          Project Type
+          <span class="chevron"/>
+        </a>
+
         <a class="topcoat-button--cta full center" hm-tap="create(project)">Build Project</a>
       </form>
 

@@ -1,0 +1,23 @@
+<div ng-app="frankieApp">
+
+  <div ng-controller="NewCtrl">
+    <div class="spinner" ng-show="loading"></div>
+    <div class="content-padded">
+      <form class="simple-form">
+
+        <input class="topcoat-text-input full center" type="text" placeholder="First Name" ng-model="client.firstName" /><br />
+
+        <input class="topcoat-text-input full center" type="text" placeholder="Last Name" ng-model="client.lastName" /><br />
+
+        <input class="topcoat-text-input full center" type="text" placeholder="Phone" ng-model="client.phone" /><br />
+
+        <input class="topcoat-text-input full center" type="text" placeholder="Email" ng-model="client.email" /><br />
+
+        <a class="topcoat-button--cta full center" hm-tap="save(client)">Save</a>
+      </form>
+
+    </div>
+
+  </div>
+
+</div>

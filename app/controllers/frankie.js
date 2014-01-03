@@ -67,9 +67,13 @@ frankieApp.controller('IndexCtrl', function ($scope) {
       alert("Error: " + error.code + " " + error.message);
     }
   });
-  
 
 });
+
+
+
+
+// New
 
 frankieApp.controller('NewCtrl', function ($scope) {
   steroids.view.navigationBar.show('New Project');
@@ -84,9 +88,16 @@ frankieApp.controller('NewCtrl', function ($scope) {
     privateProject.save();
     alert('saved successfully');
   };
+
+  $scope.openClientInfo = function() {
+    var clientInfoView = new steroids.views.WebView("/views/frankie/client-information.html");
+    steroids.layers.push(clientInfoView);
+  };
 });
 
-// New: http://localhost/views/frankie/new.html
+
+
+// Signin
 
 frankieApp.controller('SigninCtrl', function ($scope) {
 
@@ -100,8 +111,7 @@ frankieApp.controller('SigninCtrl', function ($scope) {
       success: function(user) {
         $scope.loading = false;
         alert('login succeeded');
-        var appView = new steroids.views.WebView('/views/frankie/index.html');
-        steroids.modal.show(appView);
+        $scope.close();
       },
       error: function(user, error) {
         $scope.loading = false;
@@ -164,6 +174,8 @@ frankieApp.controller('SignupCtrl', function ($scope) {
   $scope.frankie = {};
 
 });
+
+
 
 
 // Edit: http://localhost/views/frankie/edit.html
