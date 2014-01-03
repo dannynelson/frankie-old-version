@@ -11,7 +11,7 @@ frankieApp.controller('IndexCtrl', function ($scope) {
     steroids.modal.show(signinView);
   }
   
-  // show navigation bar
+  // build navigation bar
   steroids.view.navigationBar.show('Index');
 
   var addButton = new steroids.buttons.NavigationBarButton();
