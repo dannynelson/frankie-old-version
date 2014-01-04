@@ -77,7 +77,7 @@ frankieApp.controller('IndexCtrl', function ($scope) {
       $scope.load();
     }
     if (event.data.status === "logout") {
-      $scope.showSigninView();
+      steroids.layers.pop();
     }
   });
 
@@ -111,6 +111,7 @@ frankieApp.controller('NewCtrl', function ($scope) {
     privateProject.set("user", Parse.User.current());
     privateProject.set("title", project.title);
     privateProject.set("notes", project.notes);
+    privateProject.set("clientInfo", JSON.parse(localStorage.getItem("clientInfo"))
     privateProject.setACL(new Parse.ACL(Parse.User.current()));
     privateProject.save();
     alert('saved successfully');
@@ -138,7 +139,7 @@ frankieApp.controller('SigninCtrl', function ($scope) {
     // Navigation Bar
     steroids.view.navigationBar.show();
     var signupButton = new steroids.buttons.NavigationBarButton();
-    signupButton.title = "signup";
+    signupButton.title = "signup >";
     signupButton.onTap = function() {
       var signupView = new steroids.views.WebView("/views/frankie/signup.html");
       steroids.layers.push(signupView);
@@ -314,3 +315,19 @@ frankieApp.controller('ShowCtrl', function ($scope) {
   }
 
 });
+
+// frankieApp.controller('ClientCtrl', function ($scope) {
+//   steroids.view.navigationBar.show('Client Info');
+
+//   $scope.create = function(input) {
+//     var Client = Parse.Object.extend("Client");
+//     var client = new Client();
+//     client.set("firstName", input.firstName);
+//     client.set("lastName", input.lastName);
+//     client.set("phone", input.phone);
+//     client.set("email", input.email);
+//     localStorage.setItem("clientInfo", JSON.stringify(client));
+
+//     steroids.layers.pop();
+//   };
+// });

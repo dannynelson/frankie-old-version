@@ -1,4 +1,4 @@
-<div ng-app="frankieApp">
+<div class="signin" ng-app="frankieApp">
 
   <div ng-controller="SigninCtrl">
     <div class="spinner" ng-show="loading"></div>
@@ -6,10 +6,12 @@
       <h1>FRANKIE</h1>
 
       <form class="simple-form">
-        <input class="topcoat-text-input full center" type="text" placeholder="Username" ng-model="frankie.username" /><br />
-
-        <input class="topcoat-text-input full center" type="password" placeholder="Password" ng-model="frankie.password" /><br />
-
+        
+        <div class="input-group">
+          <input class="topcoat-text-input full center" type="text" placeholder="Username" ng-model="frankie.username" /><br />
+          <input class="topcoat-text-input full center" type="password" placeholder="Password" ng-model="frankie.password" /><br />
+        </div>
+        
         <a class="topcoat-button--cta full center" hm-tap="create(frankie)">Signin</a>
       </form>
 
