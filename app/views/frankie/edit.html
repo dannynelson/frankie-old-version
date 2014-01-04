@@ -3,18 +3,30 @@
   <div ng-controller="EditCtrl">
     <div class="spinner" ng-show="loading"></div>
     <div class="content-padded">
+      <form class="simple-form" ng-submit="create(project)">
+        
+        <input class="topcoat-text-input full" type="text" placeholder="Title of Project" ng-model="project.title" /><br />
 
-      <form class="simple-form">
-        <input class="topcoat-text-input full" type="text" ng-model="project.title" placeholder="Title of Project"></input><br />
+        <input class="topcoat-text-input full" type="text" placeholder="Notes" ng-model="project.notes" /><br />
 
-        <input class="topcoat-text-input full" type="text" ng-model="project.notes" placeholder="Notes"></input><br />
+        <input class="topcoat-text-input full" type="date" placeholder="Start Date" ng-model="project.start" />
 
-        <input class="topcoat-text-input full" type="date" ng-model="project.start" value="{{ project.start }}"></input>
+        <input class="topcoat-text-input full" type="date" placeholder="End Date" ng-model="project.end" /><br />
 
-        <input class="topcoat-text-input full" type="date" ng-model="project.end" value="{{ project.end }}"></input><br />
+        <a class="topcoat-button full" hm-tap="openClientInfo()">
+          Client Information
+          <span class="chevron"/>
+        </a>  
 
-        <a class="topcoat-button--cta full center" hm-tap="update(project)">Update</a>
+        <a class="topcoat-button full" hm-tap="openTimeline()">
+          Timeline
+          <span class="chevron"/>
+        </a> 
+        
+        <input type="submit" value="Update"></input>
+
       </form>
+
     </div>
 
   </div>

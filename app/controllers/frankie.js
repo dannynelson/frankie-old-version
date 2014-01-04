@@ -99,6 +99,9 @@ frankieApp.controller('DrawerCtrl', function ($scope) {
 // New
 
 frankieApp.controller('NewCtrl', function ($scope) {
+  
+
+
   steroids.view.navigationBar.show('New Project');
 
   $scope.create = function(project) {
@@ -118,10 +121,51 @@ frankieApp.controller('NewCtrl', function ($scope) {
     steroids.layers.pop();
   };
 
+  $scope.openTimeline = function() {
+    var timelineView = new steroids.views.WebView("/views/frankie/timeline.html");
+    steroids.layers.push(timelineView);
+  };
+
   $scope.openClientInfo = function() {
     var clientInfoView = new steroids.views.WebView("/views/frankie/client-information.html");
     steroids.layers.push(clientInfoView);
   };
+});
+
+// Edit: http://localhost/views/frankie/edit.html
+
+frankieApp.controller('EditCtrl', function ($scope) {
+
+  $scope.project = JSON.parse(localStorage.getItem("currentProject"));
+
+  //project gets modified by passing into function?
+  $scope.update = function(project) {
+    // Retrieve Object
+    $scope.loading = true;
+    var Project = Parse.Object.extend("Project");
+    var query = new Parse.Query(Project);
+    query.get(project.objectId, {
+      // update and save if successful
+      success: function(object) {
+        object.set(project);
+        object.save();
+        $scope.loading = false;
+        steroids.layers.pop();
+      },
+      error: function(object, error) {
+        alert(error);
+      }
+    });
+  };
+
+  $scope.openClientInfo = function() {
+    localStorage.setItem("clientInfo", JSON.stringify($scope.project.clientInfo));
+    var clientInfoView = new steroids.views.WebView("/views/frankie/update-client.html");
+    steroids.layers.push(clientInfoView);
+  };
+
+  steroids.view.navigationBar.show('Edit Project');
+
 });
 
 
@@ -198,6 +242,7 @@ frankieApp.controller('SigninCtrl', function ($scope) {
 
 
 
+
 frankieApp.controller('SignupCtrl', function ($scope) {
 
   $scope.close = function() {
@@ -230,36 +275,7 @@ frankieApp.controller('SignupCtrl', function ($scope) {
 
 
 
-// Edit: http://localhost/views/frankie/edit.html
 
-frankieApp.controller('EditCtrl', function ($scope) {
-
-  $scope.project  = JSON.parse(localStorage.getItem("currentProject"));
-
-  //project gets modified by passing into function?
-  $scope.update = function(project) {
-    // Retrieve Object
-    $scope.loading = true;
-    var Project = Parse.Object.extend("Project");
-    var query = new Parse.Query(Project);
-    alert(project.objectId);
-    query.get(project.objectId, {
-      // update and save if successful
-      success: function(object) {
-        object.set(project);
-        object.save();
-        $scope.loading = false;
-        steroids.layers.pop();
-      },
-      error: function(object, error) {
-        alert(error);
-      }
-    });
-  };
-
-  steroids.view.navigationBar.show('Edit Project');
-
-});
 
 
 
@@ -332,6 +348,74 @@ frankieApp.controller('ClientCtrl', function ($scope) {
       phone: input.phone,
       email: input.email
     };
+    localStorage.setItem("clientInfo", JSON.stringify(client));
+
+    steroids.layers.pop();
+  };
+});
+
+frankieApp.controller('UpdateClientCtrl', function ($scope) {
+  
+  steroids.view.navigationBar.show('Update Client');
+
+  $scope.client = JSON.parse(localStorage.getItem("clientInfo"));
+  
+  $scope.create = function(input) {
+
+    var client = {
+      firstName: input.firstName,
+      lastName: input.lastName,
+      phone: input.phone,
+      email: input.email
+    };
+
+    localStorage.setItem("clientInfo", JSON.stringify(client));
+
+    steroids.layers.pop();
+  };
+});
+
+
+frankieApp.controller('TimelineCtrl', function ($scope) {
+  
+  $scope.addMilestone = function() {
+
+    $scope.milestones.push({
+      description: '',
+      date: ''
+    });
+    
+  };
+
+  $scope.milestones = [
+    {
+      description: "",
+      date: ""
+    }
+  ];
+
+  // Add navigation
+  steroids.view.navigationBar.show('Timeline');
+  var addButton = new steroids.buttons.NavigationBarButton();
+  addButton.imagePath = "/icons/plus.png";
+  addButton.onTap = function() {
+    $scope.$apply($scope.addMilestone());
+  };
+  steroids.view.navigationBar.setButtons({
+    right: [addButton],
+  });
+
+
+
+  $scope.create = function(input) {
+
+    var client = {
+      firstName: input.firstName,
+      lastName: input.lastName,
+      phone: input.phone,
+      email: input.email
+    };
+
     localStorage.setItem("clientInfo", JSON.stringify(client));
 
     steroids.layers.pop();

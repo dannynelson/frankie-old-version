@@ -1,0 +1,16 @@
+<div ng-app="frankieApp">
+
+  <div ng-controller="TimelineCtrl">
+
+    <ul class="topcoat-list">
+
+      <li class="topcoat-list__item" ng-repeat="milestone in milestones">
+        <input class="topcoat-text-input full" type="text" ng-model="milestone.description" placeholder="milestone">
+        <input class="topcoat-text-input full" type="date" ng-model="milestone.date">
+      </li>
+
+    </ul>
+
+  </div>
+
+</div>
