@@ -3,7 +3,7 @@ steroids.config.name = "steroids-angular-stackmob";
 
 steroids.config.location = "http://localhost/views/frankie/signin.html";
 
-steroids.config.navigationBar.tintColor = "#1c2e57";
+steroids.config.navigationBar.tintColor = "#00aeef";
 
 steroids.config.navigationBar.titleColor = "#ffffff";
 

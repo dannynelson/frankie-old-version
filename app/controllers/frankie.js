@@ -87,7 +87,6 @@ frankieApp.controller('IndexCtrl', function ($scope) {
 frankieApp.controller('DrawerCtrl', function ($scope) {
 
   $scope.logout = function() {
-    alert('loggin out');
     Parse.User.logOut();
     steroids.drawers.hideAll();
 
@@ -140,7 +139,7 @@ frankieApp.controller('SigninCtrl', function ($scope) {
     // Navigation Bar
     steroids.view.navigationBar.show();
     var signupButton = new steroids.buttons.NavigationBarButton();
-    signupButton.title = "signup >";
+    signupButton.title = "signup";
     signupButton.onTap = function() {
       var signupView = new steroids.views.WebView("/views/frankie/signup.html");
       steroids.layers.push(signupView);
@@ -160,6 +159,7 @@ frankieApp.controller('SigninCtrl', function ($scope) {
 
   $scope.showIndexView = function() {
     var indexView = new steroids.views.WebView("/views/frankie/index.html");
+    indexView.preload();
     steroids.layers.push(indexView);
   };
 
