@@ -111,7 +111,8 @@ frankieApp.controller('NewCtrl', function ($scope) {
     privateProject.set("user", Parse.User.current());
     privateProject.set("title", project.title);
     privateProject.set("notes", project.notes);
-    privateProject.set("clientInfo", JSON.parse(localStorage.getItem("clientInfo"))
+
+    privateProject.set("clientInfo", JSON.parse(localStorage.getItem("clientInfo")));
     privateProject.setACL(new Parse.ACL(Parse.User.current()));
     privateProject.save();
     alert('saved successfully');
@@ -164,7 +165,7 @@ frankieApp.controller('SigninCtrl', function ($scope) {
 
   $scope.create = function(user) {
     $scope.loading = true;
-    debugger;
+
     Parse.User.logIn(user.username, user.password, {
       success: function(user) {
         $scope.loading = false;
@@ -316,18 +317,25 @@ frankieApp.controller('ShowCtrl', function ($scope) {
 
 });
 
-// frankieApp.controller('ClientCtrl', function ($scope) {
-//   steroids.view.navigationBar.show('Client Info');
+frankieApp.controller('ClientCtrl', function ($scope) {
+  steroids.view.navigationBar.show('Client Info');
 
-//   $scope.create = function(input) {
-//     var Client = Parse.Object.extend("Client");
-//     var client = new Client();
-//     client.set("firstName", input.firstName);
-//     client.set("lastName", input.lastName);
-//     client.set("phone", input.phone);
-//     client.set("email", input.email);
-//     localStorage.setItem("clientInfo", JSON.stringify(client));
+  $scope.create = function(input) {
+    // var Client = Parse.Object.extend("Client");
+    // var client = new Client();
+    // client.set("firstName", input.firstName);
+    // client.set("lastName", input.lastName);
+    // client.set("phone", input.phone);
+    // client.set("email", input.email);
 
-//     steroids.layers.pop();
-//   };
-// });
+    var client = {
+      firstName: input.firstName,
+      lastName: input.lastName,
+      phone: input.phone,
+      email: input.email
+    };
+    localStorage.setItem("clientInfo", JSON.stringify(client));
+
+    steroids.layers.pop();
+  };
+});
