@@ -6,7 +6,7 @@ frankieApp.controller('IndexCtrl', function ($scope) {
 
   $scope.showSigninView = function() {
     var signinView = new steroids.views.WebView("/views/frankie/signin.html");
-    steroids.layers.push(signinView);
+    steroids.modal.show(signinView);
   };
 
   // test if user is logged in
@@ -28,6 +28,7 @@ frankieApp.controller('IndexCtrl', function ($scope) {
   }
   
   // build navigation bar
+  steroids.view.navigationBar.hide();
   steroids.view.navigationBar.show('Calendar');
 
   var addButton = new steroids.buttons.NavigationBarButton();
@@ -45,7 +46,8 @@ frankieApp.controller('IndexCtrl', function ($scope) {
 
   steroids.view.navigationBar.setButtons({
     left: [settingsButton],
-    right: [addButton]
+    right: [addButton],
+    overrideBackButton: true
   });
 
   // This will be populated with Parse
@@ -121,6 +123,7 @@ frankieApp.controller('NewCtrl', function ($scope) {
     // Notify the index.html to reload
     var msg = { status: 'reload' };
     window.postMessage(msg, "*");
+
     steroids.layers.pop();
   };
 
@@ -139,7 +142,7 @@ frankieApp.controller('SigninCtrl', function ($scope) {
 
   $scope.init = function() {
     // Navigation Bar
-    // steroids.view.navigationBar.show();
+    steroids.view.navigationBar.show();
     var signupButton = new steroids.buttons.NavigationBarButton();
     signupButton.title = "signup";
     signupButton.onTap = function() {
@@ -155,13 +158,19 @@ frankieApp.controller('SigninCtrl', function ($scope) {
 
 
   $scope.close = function() {
-    steroids.layers.pop();
+    steroids.modal.hide();
   };
 
-  // $scope.openSignupPage = function() {
-  //   var signupView = new steroids.views.WebView("/views/frankie/signup.html");
-  //   steroids.modal.show(signupView);
-  // }
+  $scope.showSignupView = function() {
+    var signupView = new steroids.views.WebView("/views/frankie/signup.html");
+    steroids.modal.hide();
+    steroids.modal.show(signupView);
+  };
+
+  $scope.showIndexView = function() {
+    var indexView = new steroids.views.WebView("/views/frankie/index.html");
+    steroids.layers.push(indexView);
+  };
 
   $scope.create = function(user) {
     $scope.loading = true;
@@ -171,6 +180,12 @@ frankieApp.controller('SigninCtrl', function ($scope) {
         $scope.loading = false;
         alert('login succeeded');
         $scope.close();
+
+        // send message to reload data
+        var msg = { status: 'reload' };
+        window.postMessage(msg, "*");
+
+        $scope.showIndexView();
       },
       error: function(user, error) {
         $scope.loading = false;
