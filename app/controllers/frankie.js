@@ -72,6 +72,12 @@ frankieApp.controller('IndexCtrl', function ($scope) {
   };
   $scope.load();
 
+  window.addEventListener("message", function(event) {
+    if (event.data.status === "reload") {
+      $scope.load();
+    }
+  });
+
 });
 
 
@@ -109,6 +115,10 @@ frankieApp.controller('NewCtrl', function ($scope) {
     privateProject.setACL(new Parse.ACL(Parse.User.current()));
     privateProject.save();
     alert('saved successfully');
+
+    // Notify the index.html to reload
+    var msg = { status: 'reload' };
+    window.postMessage(msg, "*");
   };
 
   $scope.openClientInfo = function() {
