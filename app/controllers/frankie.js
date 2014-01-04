@@ -4,16 +4,10 @@ var frankieApp = angular.module('frankieApp', ['hmTouchevents']);
 
 frankieApp.controller('IndexCtrl', function ($scope) {
 
-  $scope.showSigninView = function() {
-    var signinView = new steroids.views.WebView("/views/frankie/signin.html");
-    steroids.modal.show(signinView);
-  };
-
-  // test if user is logged in
-  var currentUser = Parse.User.current();
-  if (!currentUser) {
-    $scope.showSigninView();
-  }
+  // $scope.showSigninView = function() {
+  //   var signinView = new steroids.views.WebView("/views/frankie/signin.html");
+  //   steroids.modal.show(signinView);
+  // };
 
   // Build Drawer
   var leftDrawer = new steroids.views.WebView("/views/frankie/drawer.html");
@@ -77,6 +71,7 @@ frankieApp.controller('IndexCtrl', function ($scope) {
   };
   $scope.load();
 
+  // Event listeners
   window.addEventListener("message", function(event) {
     if (event.data.status === "reload") {
       $scope.load();
@@ -139,7 +134,6 @@ frankieApp.controller('NewCtrl', function ($scope) {
 
 frankieApp.controller('SigninCtrl', function ($scope) {
 
-
   $scope.init = function() {
     // Navigation Bar
     steroids.view.navigationBar.show();
@@ -155,11 +149,6 @@ frankieApp.controller('SigninCtrl', function ($scope) {
     });
   };
   $scope.init();
-
-
-  $scope.close = function() {
-    steroids.modal.hide();
-  };
 
   $scope.showSignupView = function() {
     var signupView = new steroids.views.WebView("/views/frankie/signup.html");
@@ -178,8 +167,6 @@ frankieApp.controller('SigninCtrl', function ($scope) {
     Parse.User.logIn(user.username, user.password, {
       success: function(user) {
         $scope.loading = false;
-        alert('login succeeded');
-        $scope.close();
 
         // send message to reload data
         var msg = { status: 'reload' };
@@ -197,7 +184,11 @@ frankieApp.controller('SigninCtrl', function ($scope) {
 
   $scope.frankie = {};
 
-
+  // test if user is logged in
+  var currentUser = Parse.User.current();
+  if (currentUser) {
+    $scope.showIndexView();
+  }
 
 });
 
