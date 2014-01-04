@@ -119,6 +119,7 @@ frankieApp.controller('NewCtrl', function ($scope) {
     // Notify the index.html to reload
     var msg = { status: 'reload' };
     window.postMessage(msg, "*");
+    steroids.layers.pop();
   };
 
   $scope.openClientInfo = function() {
