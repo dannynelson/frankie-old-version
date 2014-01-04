@@ -4,12 +4,15 @@ var frankieApp = angular.module('frankieApp', ['hmTouchevents']);
 
 frankieApp.controller('IndexCtrl', function ($scope) {
 
+  $scope.showSigninView = function() {
+    var signinView = new steroids.views.WebView("/views/frankie/signin.html");
+    steroids.layers.push(signinView);
+  };
 
   // test if user is logged in
   var currentUser = Parse.User.current();
   if (!currentUser) {
-    var signinView = new steroids.views.WebView("/views/frankie/signin.html");
-    steroids.layers.push(signinView);
+    $scope.showSigninView();
   }
 
   // Build Drawer
@@ -76,6 +79,9 @@ frankieApp.controller('IndexCtrl', function ($scope) {
     if (event.data.status === "reload") {
       $scope.load();
     }
+    if (event.data.status === "logout") {
+      $scope.showSigninView();
+    }
   });
 
 });
@@ -83,18 +89,14 @@ frankieApp.controller('IndexCtrl', function ($scope) {
 
 frankieApp.controller('DrawerCtrl', function ($scope) {
 
-  $scope.closeDrawerAndSendMessage = function(selection) {
-    var msg = { selection: selection };
-    window.postMessage(msg, "*");
-
-    steroids.drawers.hideAll();
-  };
-
   $scope.logout = function() {
     alert('loggin out');
     Parse.User.logOut();
-    $scope.closeDrawerAndSendMessage();
-    steroids.layers.pop();
+    steroids.drawers.hideAll();
+
+    //send message to for index.html to logout
+    var msg = { status: "logout" };
+    window.postMessage(msg, "*");
   };
 
 });
