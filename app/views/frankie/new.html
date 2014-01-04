@@ -3,7 +3,7 @@
   <div ng-controller="NewCtrl">
     <div class="spinner" ng-show="loading"></div>
     <div class="content-padded">
-      <form class="simple-form">
+      <form class="simple-form" ng-submit="create(project)">
         
         <input class="topcoat-text-input full" type="text" placeholder="Title of Project" ng-model="project.title" /><br />
 
@@ -22,8 +22,9 @@
           Client Information
           <span class="chevron"/>
         </a>  
+        
+        <input type="submit" value="Build Project"></input>
 
-        <a class="topcoat-button--cta full center" hm-tap="create(project)">Build Project</a>
       </form>
 
     </div>

@@ -5,14 +5,14 @@
  -->    <div class="content-padded">
       <h1>Signup</h1>
 
-      <form class="simple-form">
+      <form class="simple-form" ng-submit="create(user)">
         <input class="topcoat-text-input full" type="text" placeholder="Username" ng-model="user.username" /><br />
 
         <input class="topcoat-text-input full" type="text" placeholder="Email" ng-model="user.email" /><br />
 
         <input class="topcoat-text-input full" type="password" placeholder="Password" ng-model="user.password" /><br />
 
-        <a class="topcoat-button--cta full center" hm-tap="create(user)">Signup</a>
+        <input type="submit" value="Create Account"></input>
       </form>
 
     </div>

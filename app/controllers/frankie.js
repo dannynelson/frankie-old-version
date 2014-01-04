@@ -180,8 +180,7 @@ frankieApp.controller('SigninCtrl', function ($scope) {
       },
       error: function(user, error) {
         $scope.loading = false;
-        console.error(error);
-        alert("Login error");
+        alert("Invalid Username or Password");
       }
     });
   };
