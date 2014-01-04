@@ -5,9 +5,13 @@
     <div class="content-padded">
 
       <form class="simple-form">
-        <input class="topcoat-text-input full" type="text" ng-model="project.title">{{ project.attributes.title }}</input><br />
+        <input class="topcoat-text-input full" type="text" ng-model="project.title" placeholder="Title of Project"></input><br />
 
-        <input class="topcoat-text-input full" type="text" ng-model="project.notes">{{ project.attributes.notes }}</input><br />
+        <input class="topcoat-text-input full" type="text" ng-model="project.notes" placeholder="Notes"></input><br />
+
+        <input class="topcoat-text-input full" type="date" ng-model="project.start" value="{{ project.start }}"></input>
+
+        <input class="topcoat-text-input full" type="date" ng-model="project.end" value="{{ project.end }}"></input><br />
 
         <a class="topcoat-button--cta full center" hm-tap="update(project)">Update</a>
       </form>

@@ -104,10 +104,8 @@ frankieApp.controller('NewCtrl', function ($scope) {
   $scope.create = function(project) {
     var Project = Parse.Object.extend("Project");
     var privateProject = new Project();
+    privateProject.set(project);
     privateProject.set("user", Parse.User.current());
-    privateProject.set("title", project.title);
-    privateProject.set("notes", project.notes);
-
     privateProject.set("clientInfo", JSON.parse(localStorage.getItem("clientInfo")));
     privateProject.setACL(new Parse.ACL(Parse.User.current()));
     privateProject.save();
@@ -157,7 +155,7 @@ frankieApp.controller('SigninCtrl', function ($scope) {
   $scope.showIndexView = function() {
     var indexView = new steroids.views.WebView("/views/frankie/index.html");
     steroids.layers.push(indexView);
-    
+
     // can only preload once
     // indexView.preload({},{
     //   onSuccess: function() {
@@ -211,9 +209,7 @@ frankieApp.controller('SignupCtrl', function ($scope) {
     $scope.loading = true;
 
     var user = new Parse.User();
-    user.set("username", credentials.username);
-    user.set("password", credentials.password);
-    user.set("email", credentials.email);
+    user.set(credentials);
      
     user.signUp(null, {
       success: function(user) {
@@ -251,8 +247,7 @@ frankieApp.controller('EditCtrl', function ($scope) {
     query.get(project.objectId, {
       // update and save if successful
       success: function(object) {
-        object.set("title", project.title);
-        object.set("notes", project.notes);
+        object.set(project);
         object.save();
         $scope.loading = false;
         steroids.layers.pop();
@@ -284,9 +279,9 @@ frankieApp.controller('ShowCtrl', function ($scope) {
   query.equalTo("objectId", steroids.view.params.id);
   query.first({
     success: function(object) {
-      $scope.project = object;
+      $scope.project = object.attributes;
       // Save current project info to localStorage (edit.html gets it from there)
-      localStorage.setItem("currentProject", JSON.stringify(object));
+      localStorage.setItem("currentProject", JSON.stringify(object.attributes));
       $scope.$apply();
       setNavigation();
     },
@@ -304,7 +299,7 @@ frankieApp.controller('ShowCtrl', function ($scope) {
 
   function setNavigation() {
     // -- Native navigation
-    steroids.view.navigationBar.show($scope.project.attributes.title);
+    steroids.view.navigationBar.show($scope.project.title);
 
     var editButton = new steroids.buttons.NavigationBarButton();
     editButton.title = "Edit";

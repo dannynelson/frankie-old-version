@@ -4,7 +4,11 @@
     <!-- Search Box -->
     <input type="search" ng-model="liveSearch" placeholder="search" class="topcoat-search-input full">
 
-    <div class="topcoat-list__container">
+<!--     <h3 ng-hide="projects.length">
+      Click the + button to add a project
+    </h3> -->
+
+    <div ng-show="projects.length" class="topcoat-list__container">
 
       <ul class="topcoat-list">
         <!-- order is reversed created timestamp -->
