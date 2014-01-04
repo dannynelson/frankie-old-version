@@ -5,9 +5,9 @@
     <div class="content-padded">
 
       <form class="simple-form">
-        Title: <input type="text" ng-model="project.title">{{ project.attributes.title }}</input><br />
+        <input class="topcoat-text-input full" type="text" ng-model="project.title">{{ project.attributes.title }}</input><br />
 
-        Notes: <input type="text" ng-model="project.notes">{{ project.attributes.notes }}</input><br />
+        <input class="topcoat-text-input full" type="text" ng-model="project.notes">{{ project.attributes.notes }}</input><br />
 
         <a class="topcoat-button--cta full center" hm-tap="update(project)">Update</a>
       </form>

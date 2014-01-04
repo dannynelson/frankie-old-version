@@ -17,9 +17,6 @@ frankieApp.controller('IndexCtrl', function ($scope) {
   function initGesture() {
     steroids.drawers.enableGesture(leftDrawer);
   }
-  function showDrawer() {
-    steroids.drawers.show(leftDrawer);
-  }
   
   // build navigation bar
   steroids.view.navigationBar.hide();
@@ -35,7 +32,7 @@ frankieApp.controller('IndexCtrl', function ($scope) {
   var settingsButton = new steroids.buttons.NavigationBarButton();
   settingsButton.imagePath = "/icons/cogwheels.png";
   settingsButton.onTap = function() {
-    showDrawer();
+    steroids.drawers.show(leftDrawer);
   };
 
   steroids.view.navigationBar.setButtons({
@@ -159,8 +156,15 @@ frankieApp.controller('SigninCtrl', function ($scope) {
 
   $scope.showIndexView = function() {
     var indexView = new steroids.views.WebView("/views/frankie/index.html");
-    indexView.preload();
     steroids.layers.push(indexView);
+    
+    // can only preload once
+    // indexView.preload({},{
+    //   onSuccess: function() {
+    //     steroids.layers.push(indexView);
+    //   }
+    // });
+    
   };
 
   $scope.create = function(user) {
@@ -170,9 +174,9 @@ frankieApp.controller('SigninCtrl', function ($scope) {
       success: function(user) {
         $scope.loading = false;
 
-        // send message to reload data
-        var msg = { status: 'reload' };
-        window.postMessage(msg, "*");
+        // // send message to reload data
+        // var msg = { status: 'reload' };
+        // window.postMessage(msg, "*");
 
         $scope.showIndexView();
       },
