@@ -3,12 +3,19 @@
   <div ng-controller="ShowCtrl">
     <div class="spinner" ng-show="loading"></div>
     <div class="content-padded">
+      <!-- Project Info -->
       <h2>{{ project.attributes.title }}</h2>
       <p>{{ project.attributes.notes }}</p>
-      <h2>{{ project.attributes.clientInfo.firstName + ' ' + project.attributes.clientInfo.firstName }}</h2>
-      <a href="mailto:{{ project.attributes.clientInfo.email }}">email</a></br>
-      <a href="tel:{{ project.attributes.clientInfo.phone }}">call</a></br>
-      <a href="sms:{{ project.attributes.clientInfo.phone }}">text</a></br>
+      
+      <!-- Client Info -->
+      <div ng-show="project.attributes.clientInfo">
+        <h2> Client Info: </h2>
+        <div>{{ project.attributes.clientInfo.firstName + ' ' + project.attributes.clientInfo.firstName }}</div>
+        <a href="mailto:{{ project.attributes.clientInfo.email }}">email</a></br>
+        <a href="tel:{{ project.attributes.clientInfo.phone }}">call</a></br>
+        <a href="sms:{{ project.attributes.clientInfo.phone }}">text</a></br>
+      </div>
+
     </div>
 
   </div>
