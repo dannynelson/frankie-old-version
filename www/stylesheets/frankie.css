@@ -26,6 +26,72 @@
 /*  Chevron style from Ratchet. Licensed under The MIT License:
   http://opensource.org/licenses/MIT*/
 
+/* Signin/Signup page Styling */
+
+/* Basic Configuration */
+* {
+  font-size: 16px;
+}
+
+body.landing {
+  background-color: #273552;
+}
+
+/* Signin logo */
+.title {
+  text-align: center;
+  font-weight: 900;
+  font-size: 80px;
+  margin-top: 150px;
+  color: #ff6b26;
+}
+
+/* For an input group */
+.input-group {
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.input {
+  padding: 6px;
+  padding-left: 10px;
+}
+
+input {
+  border: none;
+  display: inline-block;
+  width: 60%;
+}
+
+label {
+  display: inline-block;
+  width: 30%;
+  font-weight: bold;
+  color: #273552;
+}
+
+.underline {
+  border-bottom: 1px solid #cfcfcf;
+}
+
+.form-button {
+  margin-top: 10px;
+  background: #ff6b26;
+  width: 100%;
+  text-align: center;
+  height: 50px;
+  line-height: 50px;
+  font-weight: 400;
+  border-radius: 5px;
+  color: #fff;
+}
+
+a {
+  font-size: 20px;
+}
+
+
+
 li {
   position:relative;
 }

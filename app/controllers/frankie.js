@@ -108,6 +108,7 @@ frankieApp.controller('NewCtrl', function ($scope) {
     var Project = Parse.Object.extend("Project");
     var privateProject = new Project();
     privateProject.set(project);
+    privateProject.set("timeline", [{description:"cat"},{date:"1234"}]);
     privateProject.set("user", Parse.User.current());
     privateProject.set("clientInfo", JSON.parse(localStorage.getItem("clientInfo")));
     privateProject.setACL(new Parse.ACL(Parse.User.current()));
@@ -175,6 +176,9 @@ frankieApp.controller('EditCtrl', function ($scope) {
 frankieApp.controller('SigninCtrl', function ($scope) {
 
   $scope.init = function() {
+    // Landing class to add purple background
+    document.body.className = "landing";
+
     // Navigation Bar
     steroids.view.navigationBar.show();
     var signupButton = new steroids.buttons.NavigationBarButton();
@@ -187,6 +191,7 @@ frankieApp.controller('SigninCtrl', function ($scope) {
       right: [signupButton],
       overrideBackButton: true
     });
+
   };
   $scope.init();
 
@@ -245,6 +250,9 @@ frankieApp.controller('SigninCtrl', function ($scope) {
 
 frankieApp.controller('SignupCtrl', function ($scope) {
 
+  // Landing class to add purple background
+  document.body.className = "landing";
+  
   $scope.close = function() {
     steroids.layers.pop();
   };

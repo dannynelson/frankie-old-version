@@ -3,16 +3,27 @@
   <div ng-controller="SignupCtrl">
 <!--     <div class="spinner" ng-show="loading"></div>
  -->    <div class="content-padded">
-      <h1>Signup</h1>
-
+      <div class="title">Signup</div>
+      
       <form class="simple-form" ng-submit="create(user)">
-        <input class="topcoat-text-input full" type="text" placeholder="Username" ng-model="user.username" /><br />
 
-        <input class="topcoat-text-input full" type="text" placeholder="Email" ng-model="user.email" /><br />
+        <div class="input-group">
+          
+          <div class="input underline">
+            <label for="username">Username</label>
+            <input type="text" id="username" placeholder="Username" ng-model="user.username" />
+          </div>
+          
+          <div class="input">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Password" ng-model="user.password" />
+          </div>
 
-        <input class="topcoat-text-input full" type="password" placeholder="Password" ng-model="user.password" /><br />
-
-        <input type="submit" value="Create Account"></input>
+        </div>
+        
+        <div class="form-button">
+          <a hm-tap="create(user)">Signup</a>
+        </div>
       </form>
 
     </div>

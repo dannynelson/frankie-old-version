@@ -3,7 +3,7 @@ steroids.config.name = "Frankie";
 
 steroids.config.location = "http://localhost/views/frankie/signin.html";
 
-steroids.config.navigationBar.tintColor = "#00aeef";
+steroids.config.navigationBar.tintColor = "#273552";
 
 steroids.config.navigationBar.titleColor = "#ffffff";
 
