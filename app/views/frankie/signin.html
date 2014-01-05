@@ -7,22 +7,20 @@
 
       <form class="simple-form" ng-submit="create(frankie)">
         
-        <div class="input-group">
+        <div class="floating-input-group">
           
           <div class="input underline">
             <label for="username">Username</label>
-            <input type="text" id="username" placeholder="Username" ng-model="frankie.username" />
+            <input type="text" id="username" placeholder="myuser" ng-model="frankie.username" />
           </div>
           
           <div class="input">
             <label for="password">Password</label>
-            <input type="password" id="password" placeholder="Password" ng-model="frankie.password" />
+            <input type="password" id="password" placeholder="mypass" ng-model="frankie.password" />
           </div>
         </div>
         
-        <div class="form-button">
-          <a hm-tap="create(frankie)">Signin</a>
-        </div>
+        <input type="submit" value="Signin" />
 
       </form>
 

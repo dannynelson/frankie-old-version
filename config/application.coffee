@@ -31,8 +31,8 @@ steroids.config.location = "http://localhost/views/frankie/signin.html"
 # -- Navigation Bar --
 steroids.config.navigationBar.tintColor = "#273552"
 steroids.config.navigationBar.titleColor = "#ffffff"
-steroids.config.navigationBar.buttonTintColor = "#ffffff"
-steroids.config.navigationBar.buttonTitleColor = "#ffffff"
+steroids.config.navigationBar.buttonTintColor = "#ff6b26"
+steroids.config.navigationBar.buttonTitleColor = "#ff6b26"
 
 # steroids.config.navigationBar.landscape.backgroundImage = ""
 # steroids.config.navigationBar.portrait.backgroundImage = ""

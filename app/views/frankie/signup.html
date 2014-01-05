@@ -7,23 +7,22 @@
       
       <form class="simple-form" ng-submit="create(user)">
 
-        <div class="input-group">
+        <div class="floating-input-group">
           
           <div class="input underline">
             <label for="username">Username</label>
-            <input type="text" id="username" placeholder="Username" ng-model="user.username" />
+            <input type="text" id="username" placeholder="Required" ng-model="user.username" />
           </div>
           
           <div class="input">
             <label for="password">Password</label>
-            <input type="password" id="password" placeholder="Password" ng-model="user.password" />
+            <input type="password" id="password" placeholder="Required" ng-model="user.password" />
           </div>
 
         </div>
         
-        <div class="form-button">
-          <a hm-tap="create(user)">Signup</a>
-        </div>
+        <input type="submit" value="Signup" />
+
       </form>
 
     </div>
