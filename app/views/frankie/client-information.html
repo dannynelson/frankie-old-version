@@ -1,19 +1,33 @@
 <div ng-app="frankieApp">
-
   <div ng-controller="ClientCtrl">
     <div class="spinner" ng-show="loading"></div>
-    <div class="content-padded">
+
       <form class="simple-form" ng-submit="create(client)">
         
-        <input class="topcoat-text-input full" type="text" placeholder="First Name" ng-model="client.firstName" name="fname" /><br />
+        <div class="input-group">
+          <div class="input underline">
+            <input type="text" placeholder="First Name" ng-model="client.firstName" /><br />
+          </div>
 
-        <input class="topcoat-text-input full" type="text" placeholder="Last Name" ng-model="client.lastName" /><br />
-        
-        <input class="topcoat-text-input full" type="tel" placeholder="Phone" ng-model="client.phone" /><br />
+          <div class="input">
+            <input type="text" placeholder="Last Name" ng-model="client.lastName" /><br />
+          </div>
+        </div>
 
-        <input class="topcoat-text-input full" type="email" placeholder="Email" ng-model="client.email" /><br />
+        <div class="input-group">
+          <div class="input underline">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" placeholder="111-111-1111" ng-model="client.phone" /><br />
+          </div>
+
+          <div class="input">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="name@example.com" ng-model="client.email" /><br />
+          </div>
+        </div>
 
         <input type="submit" value="Save"></input>
+
       </form>
 
     </div>
