@@ -13,7 +13,7 @@
 
 /* Basic Configuration */
 * {
-  font-size: 16px;
+  font-size: 17px;
 }
 
 input[type="date"] {
@@ -33,6 +33,14 @@ input[type="submit"] {
   color: #fff;
 }
 
+input[type="number"] {
+  -webkit-appearance: none;
+}
+
+body {
+  background-color: #e3e3e3;
+}
+
 body.landing {
   background-color: #273552;
 }
@@ -50,6 +58,10 @@ body.landing {
 .floating-input-group {
   background-color: #fff;
   border-radius: 5px;
+}
+
+.floating-input-group .input {
+
 }
 
 .input {
