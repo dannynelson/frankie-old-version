@@ -3,7 +3,8 @@
   <div ng-controller="NewCtrl">
     <div class="spinner" ng-show="loading"></div>
       <form class="simple-form" ng-submit="create(project)">
-
+        
+        <!-- Basic Info -->
         <div class="input-group">
           <div class="input underline">
             <label for="title">Title</label>
@@ -29,10 +30,12 @@
             </div>
           </a>  
         </div>
+        
+        <!-- To show photo -->
+        <div class="photo" ng-show="photo"></div>
 
+        <!-- Dates -->
         <div class="input-group">
-
-
           
           <div class="input underline">
             <label for="start">Start date</label>
