@@ -6,7 +6,13 @@
 
         <div class="input-group">
           <div class="input underline">
-            <input id="title" type="text" placeholder="Title" ng-model="project.title" /><br />
+            <label for="title">Title</label>
+            <input id="title" type="text" placeholder="My Project" ng-model="project.title" /><br />
+          </div>
+
+          <div class="input underline">
+            <label for="price">Price</label>
+            $<input id="price" type="number" placeholder="150" ng-model="project.price" /><br />
           </div>
 
           <div class="input">
@@ -17,7 +23,8 @@
         <div class="input-group">
           <a hm-tap="openClientInfo()">
             <div class="input">
-              Cover Photo
+              <label for="photo">Photo</label>
+              <input id="photo" type="text" placeholder="None" ng-model="project.price" disabled/>
               <span class="chevron"/>
             </div>
           </a>  
@@ -25,10 +32,7 @@
 
         <div class="input-group">
 
-          <div class="input underline">
-            <label for="price">Price</label>
-            $<input id="price" type="number" placeholder="150" ng-model="project.price" /><br />
-          </div>
+
           
           <div class="input underline">
             <label for="start">Start date</label>
@@ -45,7 +49,8 @@
         <div class="input-group">
           <a hm-tap="openClientInfo()">
             <div class="input">
-              Client Information
+              <label for="client">Client</label>
+              <input id="client" type="text" placeholder="No Client" ng-model="project.price" disabled/>
               <span class="chevron"/>
             </div>
           </a>  
@@ -54,7 +59,8 @@
         <div class="input-group">
           <a hm-tap="openTimeline()">
             <div class="input">
-              Timeline
+              <label for="timeline">Timeline</label>
+              <input id="timeline" type="text" placeholder="0 Milestones" ng-model="project.price" disabled/>
               <span class="chevron"/>
             </div>
           </a> 
