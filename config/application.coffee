@@ -1,7 +1,7 @@
 # For an explanation of the steroids.config properties, see the guide at
 # http://guides.appgyver.com/steroids/guides/project_configuration/config-application-coffee/
 
-steroids.config.name = "steroids-angular-stackmob"
+steroids.config.name = "Frankie"
 
 # -- Initial Location --
 steroids.config.location = "http://localhost/views/frankie/signin.html"
@@ -41,8 +41,8 @@ steroids.config.navigationBar.buttonTitleColor = "#ffffff"
 steroids.config.loadingScreen.tintColor = "#262626"
 
 # -- iOS Status Bar --
-steroids.config.statusBar.enabled = true
-steroids.config.statusBar.style = "default"
+steroids.config.statusBar.enabled = true;
+steroids.config.statusBar.style = "light"
 
 # -- File Watcher --
 # steroids.config.watch.exclude = ["www/my_excluded_file.js", "www/my_excluded_dir"]
