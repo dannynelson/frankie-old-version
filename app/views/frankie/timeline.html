@@ -5,21 +5,16 @@
       <div class="input-group" ng-repeat="milestone in milestones">
 
         <div class="input underline">
-          <label for="description">Description</label>
-          <input id="description" type="text" ng-model="milestone.description" placeholder="milestone">
+          <label for="description">{{ "Milestone " + ($index + 1) }}</label>
+          <input id="description" type="text" ng-model="milestone.description" placeholder="title">
         </div>
 
         <div class="input">
-          <label for="date">Date</label>
+          <label for="date">Due Date</label>
           <input id="date" type="date" ng-model="milestone.date">
         </div>
 
       </div>
-
-<!--       <li class="topcoat-list__item" ng-repeat="milestone in milestones">
-        <input class="topcoat-text-input full" type="text" ng-model="milestone.description" placeholder="milestone">
-        <input class="topcoat-text-input full" type="date" ng-model="milestone.date">
-      </li> -->
 
     <a class="topcoat-button--cta full center" hm-tap="save()">Save Timeline</a>
 
