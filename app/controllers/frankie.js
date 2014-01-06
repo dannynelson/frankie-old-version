@@ -464,11 +464,17 @@ frankieApp.controller('UpdateClientCtrl', function ($scope) {
 
 frankieApp.controller('TimelineCtrl', function ($scope) {
   
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth()+1; //January is 0!
+  var yyyy = today.getFullYear();
+  if (dd<10){dd='0'+dd} if(mm<10){mm='0'+mm} today = yyyy+'-'+mm+'-'+dd;
+
   $scope.addMilestone = function() {
 
     $scope.milestones.push({
-      description: '',
-      date: ''
+      description: "",
+      date: today
     });
     
   };
@@ -476,7 +482,7 @@ frankieApp.controller('TimelineCtrl', function ($scope) {
   $scope.milestones = [
     {
       description: "",
-      date: ""
+      date: today
     }
   ];
 
@@ -493,16 +499,9 @@ frankieApp.controller('TimelineCtrl', function ($scope) {
 
 
 
-  $scope.create = function(input) {
-
-    var client = {
-      firstName: input.firstName,
-      lastName: input.lastName,
-      phone: input.phone,
-      email: input.email
-    };
-
-    localStorage.setItem("clientInfo", JSON.stringify(client));
+  $scope.save = function() {
+    // localStorage.setItem("timeline", JSON.stringify($scope.milestones));
+    localStorage.setItem("timeline", angular.toJson($scope.milestones));
 
     steroids.layers.pop();
   };

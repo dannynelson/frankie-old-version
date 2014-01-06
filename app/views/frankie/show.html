@@ -6,15 +6,23 @@
       <!-- Project Info -->
       <h2>{{ project.title }}</h2>
       <p>{{ project.notes }}</p>
-      <h3>{{ project.timeline }}</h3>
       
       <!-- Client Info -->
       <div ng-show="project.clientInfo">
         <h2> Client Info: </h2>
-        <div>{{ project.clientInfo.firstName + ' ' + project.clientInfo.firstName }}</div>
+        <div>{{ project.clientInfo.firstName + ' ' + project.clientInfo.lastName }}</div>
         <a href="mailto:{{ project.clientInfo.email }}">email</a></br>
         <a href="tel:{{ project.clientInfo.phone }}">call</a></br>
         <a href="sms:{{ project.clientInfo.phone }}">text</a></br>
+      </div>
+
+      <!-- Timeline -->
+      <div ng-show="project.timeline">
+        <h2>Timeline</h2>
+        <ul ng-repeat="milestone in project.timeline">
+          <li>Description: {{ milestone.description }}</li>
+          <li>Date: {{ milestone.date }}</li>
+        </ul>
       </div>
 
     </div>
