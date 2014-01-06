@@ -133,6 +133,7 @@ frankieApp.controller('NewCtrl', function ($scope) {
   $scope.create = function(project) {
     // save everything else
     var saveObject = function() {
+      alert('saving object');
       var Project = Parse.Object.extend("Project");
       var privateProject = new Project();
       privateProject.set(project);
@@ -160,21 +161,20 @@ frankieApp.controller('NewCtrl', function ($scope) {
     // do not add anything angular related to that input field!
     // save file first
     var fileUploadControl = document.getElementById('photo');
-    console.log(JSON.stringify(fileUploadControl));
+    // alert(JSON.stringify(fileUploadControl));
     if (fileUploadControl.files.length > 0) {
-      console.log('file upload begin');
+      alert('file upload begin');
       var file = fileUploadControl.files[0];
-      console.log(JSON.stringify(file));
+      alert(JSON.stringify(file));
       var name = "cover-photo.jpg";
       var parseFile = new Parse.File(name, file);
-      console.log('parseFile created: ' + JSON.stringify(parseFile));
+      alert('parseFile created: ' + JSON.stringify(parseFile));
       parseFile.save().then(function() {
-        console.log('file saved');
+        alert('file saved');
         saveObject();
       }, function(error) {
-        console.log(error);
+        alert(error);
       });
-      saveObject();
     } else {
       saveObject();
     }
