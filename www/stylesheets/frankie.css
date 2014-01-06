@@ -16,12 +16,11 @@
   font-size: 17px;
 }
 
-input[type="date"] {
+input[type="date"], input[type="submit"], input[type="file"] {
   -webkit-appearance: none;
 }
 
 input[type="submit"] {
-  -webkit-appearance: none;
   margin-top: 10px;
   background: #ff6b26;
   width: 100%;
@@ -31,6 +30,11 @@ input[type="submit"] {
   font-weight: 400;
   border-radius: 5px;
   color: #fff;
+}
+
+img {
+  display: block;
+  width: 100%;
 }
 
 input[type="number"] {

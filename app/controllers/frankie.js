@@ -1,5 +1,23 @@
 var frankieApp = angular.module('frankieApp', ['hmTouchevents']);
 
+frankieApp.directive("fileread", [function () {
+    return {
+        scope: {
+            fileread: "="
+        },
+        link: function (scope, element, attributes) {
+            element.bind("change", function (changeEvent) {
+                var reader = new FileReader();
+                reader.onload = function (loadEvent) {
+                    scope.$apply(function () {
+                        scope.fileread = loadEvent.target.result;
+                    });
+                }
+                reader.readAsDataURL(changeEvent.target.files[0]);
+            });
+        }
+    }
+}]);
 // Index: http://localhost/views/frankie/index.html
 
 frankieApp.controller('IndexCtrl', function ($scope) {
@@ -99,7 +117,7 @@ frankieApp.controller('DrawerCtrl', function ($scope) {
 // New
 
 frankieApp.controller('NewCtrl', function ($scope) {
-  
+
   // generate current date
   var today = new Date();
   var dd = today.getDate();
@@ -112,29 +130,50 @@ frankieApp.controller('NewCtrl', function ($scope) {
     end: today
   };
 
-
   $scope.create = function(project) {
-    var Project = Parse.Object.extend("Project");
-    var privateProject = new Project();
-    privateProject.set(project);
-    privateProject.set("timeline", [{description:"cat"},{date:"1234"}]);
-    privateProject.set("user", Parse.User.current());
-    privateProject.set("clientInfo", JSON.parse(localStorage.getItem("clientInfo")));
-    privateProject.setACL(new Parse.ACL(Parse.User.current()));
-    privateProject.save(null, {
-      success: function(object) {
-          alert('New object created with objectId: ' + object.id);
-        },
-        error: function(object, error) {
-          alert('Failed to create new object, with error code: ' + error.description);
-        }
-    });
+    // save everything else
+    var saveObject = function() {
+      var Project = Parse.Object.extend("Project");
+      var privateProject = new Project();
+      privateProject.set(project);
+      privateProject.set("photo", parseFile);
+      privateProject.set("timeline", [{description:"cat"},{date:"1234"}]);
+      privateProject.set("user", Parse.User.current());
+      privateProject.set("clientInfo", JSON.parse(localStorage.getItem("clientInfo")));
+      privateProject.setACL(new Parse.ACL(Parse.User.current()));
+      privateProject.save(null, {
+        success: function(object) {
+            alert('New object created with objectId: ' + object.id);
+          },
+          error: function(object, error) {
+            alert('Failed to create new object, with error code: ' + error.description);
+          }
+      });
 
-    // Notify the index.html to reload
-    var msg = { status: 'reload' };
-    window.postMessage(msg, "*");
+      // Notify the index.html to reload
+      var msg = { status: 'reload' };
+      window.postMessage(msg, "*");
 
-    steroids.layers.pop();
+      steroids.layers.pop();
+    };
+
+    // do not add anything angular related to that input field!
+    // save file first
+    var fileUploadControl = document.getElementById('photo');
+    if (fileUploadControl.files.length > 0) {
+      var file = fileUploadControl.files[0];
+      var name = "cover-photo.jpg";
+      var parseFile = new Parse.File(name, file);
+      parseFile.save().then(function() {
+        alert('file saved');
+        saveObject();
+      }, function(error) {
+        alert(error);
+      });
+    } else {
+      saveObject();
+    }
+
   };
 
   $scope.openTimeline = function() {

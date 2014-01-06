@@ -20,19 +20,19 @@
             <textarea class="text-box" rows="2" placeholder="Notes" ng-model="project.notes"></textarea><br />
           </div>
         </div>
-
+        
+        <!-- Photo upload -->
         <div class="input-group">
-          <a hm-tap="openClientInfo()">
-            <div class="input">
-              <label for="photo">Photo</label>
-              <input id="photo" type="text" placeholder="None" ng-model="project.price" disabled/>
-              <span class="chevron"/>
-            </div>
-          </a>  
+          <div class="input">
+            <label for="photo">Photo</label>
+            <input id="photo" type="file" accept="image/*" placeholder="None" />
+            <span class="chevron"/>
+          </div>
         </div>
         
         <!-- To show photo -->
-        <div class="photo" ng-show="photo"></div>
+        <img ng-src="{{ photo.src }}" class="photo" ng-show="photo.display"></img>
+        <div ng-show="photo.display">PHOTO! {{ photo.src }}</div>
 
         <!-- Dates -->
         <div class="input-group">
@@ -68,6 +68,8 @@
             </div>
           </a> 
         </div>
+
+        <input type="submit" value="Update"></input>
       </form>
 
   </div>
