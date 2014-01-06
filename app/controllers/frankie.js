@@ -160,16 +160,21 @@ frankieApp.controller('NewCtrl', function ($scope) {
     // do not add anything angular related to that input field!
     // save file first
     var fileUploadControl = document.getElementById('photo');
+    console.log(JSON.stringify(fileUploadControl));
     if (fileUploadControl.files.length > 0) {
+      console.log('file upload begin');
       var file = fileUploadControl.files[0];
+      console.log(JSON.stringify(file));
       var name = "cover-photo.jpg";
       var parseFile = new Parse.File(name, file);
+      console.log('parseFile created: ' + JSON.stringify(parseFile));
       parseFile.save().then(function() {
-        alert('file saved');
+        console.log('file saved');
         saveObject();
       }, function(error) {
-        alert(error);
+        console.log(error);
       });
+      saveObject();
     } else {
       saveObject();
     }
