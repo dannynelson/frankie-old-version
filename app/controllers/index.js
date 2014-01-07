@@ -12,7 +12,6 @@ frankieApp.controller('IndexCtrl', function ($scope) {
   }
   
   // build navigation bar
-  steroids.view.navigationBar.hide();
   steroids.view.navigationBar.show('Calendar');
   var addButton = new steroids.buttons.NavigationBarButton();
   addButton.title = 'add';
@@ -66,6 +65,7 @@ frankieApp.controller('IndexCtrl', function ($scope) {
       $scope.load();
     }
     if (event.data.status === "logout") {
+      alert('logging out!')
       steroids.layers.pop();
     }
   });

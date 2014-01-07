@@ -19,11 +19,11 @@ frankieApp.controller('NewCtrl', function ($scope, today) {
       privateProject.setACL(new Parse.ACL(Parse.User.current()));
       privateProject.save(null, {
         success: function(object) {
-            alert('New object created with objectId: ' + object.id);
-          },
-          error: function(object, error) {
-            alert('Failed to create new object, with error code: ' + error.description);
-          }
+          alert('New object created with objectId: ' + object.id);
+        },
+        error: function(object, error) {
+          alert('Failed to create new object, with error code: ' + error.description);
+        }
       });
 
       // Notify the index.html to reload
