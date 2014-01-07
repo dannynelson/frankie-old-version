@@ -4,7 +4,7 @@
     <!-- Search Box -->
     <input type="search" ng-model="liveSearch" placeholder="search" class="topcoat-search-input">
 
-    <!-- Listings -->
+    <!-- Listing -->
     <div ng-show="projects.length">
       <div class="listing-group">
         <div class="listing underline" hm-tap="open(project.id)" ng-repeat="project in projects | filter:liveSearch">

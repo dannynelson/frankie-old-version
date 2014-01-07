@@ -36,4 +36,4 @@ frankieApp.run(function() {
     "P2Z0R55WriW7Mi8h6bQqmhlLgGZQxjPe3Vc7PVQx",
     "jvPhmi8qIckRbuv6C1ezzXCMMivYTfJrjjHK5Tcc"
   );
-})
+});
