@@ -9,4 +9,10 @@ frankieApp.controller('DrawerCtrl', function ($scope) {
     window.postMessage(msg, "*");
   };
 
+  $scope.settings = function() {
+    var settings = new steroids.views.WebView("/views/frankie/settings.html");
+    steroids.layers.push(settings);
+    steroids.drawers.hideAll();
+  };
+
 });

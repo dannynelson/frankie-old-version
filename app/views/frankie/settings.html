@@ -1,0 +1,31 @@
+<div ng-app="frankieApp">
+
+  <div ng-controller="SettingsCtrl">
+  
+    <div class="content-padded">
+
+      <div class="header">Update Settings</div>
+      
+      <form class="simple-form" ng-submit="create(user)">
+
+        <div class="floating-input-group">
+          
+          <div class="input underline">
+            <label for="username">Old Username</label>
+            <input type="text" id="username" placeholder="Required" ng-model="user.username" />
+          </div>
+          
+          <div class="input">
+            <label for="password">Old Password</label>
+            <input type="password" id="password" placeholder="Required" ng-model="user.password" />
+          </div>
+
+        </div>
+        
+        <input type="submit" value="Update" />
+
+    </div>
+
+  </div>
+
+</div>
