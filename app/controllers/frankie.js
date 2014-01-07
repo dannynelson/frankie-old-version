@@ -161,24 +161,33 @@ frankieApp.controller('NewCtrl', function ($scope) {
 
     // do not add anything angular related to that input field!
     // save file first
-    var fileUploadControl = document.getElementById('photo');
-    // alert(JSON.stringify(fileUploadControl));
-    if (fileUploadControl.files.length > 0) {
-      alert('file upload begin');
-      var file = fileUploadControl.files[0];
-      alert(JSON.stringify(file));
-      var name = "cover-photo.jpg";
-      var parseFile = new Parse.File(name, file);
-      alert('parseFile created: ' + JSON.stringify(parseFile));
-      parseFile.save().then(function() {
-        alert('file saved');
-        saveObject();
-      }, function(error) {
-        alert(error);
-      });
-    } else {
+    debugger;
+    var base64 = $scope.photo.split('base64,')[1];
+    var parseFile = new Parse.File("myfile.txt", { base64: base64 });
+    parseFile.save().then(function() {
+      alert('file saved');
       saveObject();
-    }
+    }, function(error) {
+      alert(error);
+    });
+    // var fileUploadControl = document.getElementById('photo');
+    // alert(JSON.stringify(fileUploadControl));
+    // if (fileUploadControl.files.length > 0) {
+    //   alert('file upload begin');
+    //   var file = fileUploadControl.files[0];
+    //   alert(JSON.stringify(file));
+    //   var name = "cover-photo.jpg";
+    //   var parseFile = new Parse.File(name, file);
+    //   alert('parseFile created: ' + JSON.stringify(parseFile));
+    //   parseFile.save().then(function() {
+    //     alert('file saved');
+    //     saveObject();
+    //   }, function(error) {
+    //     alert(error);
+    //   });
+    // } else {
+    //   saveObject();
+    // }
 
   };
 
