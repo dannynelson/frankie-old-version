@@ -29,14 +29,6 @@ frankieApp.controller('SigninCtrl', function ($scope) {
   $scope.showIndexView = function() {
     var indexView = new steroids.views.WebView("/views/frankie/index.html");
     steroids.layers.push(indexView);
-
-    // can only preload once
-    // indexView.preload({},{
-    //   onSuccess: function() {
-    //     steroids.layers.push(indexView);
-    //   }
-    // });
-    
   };
 
   $scope.create = function(user) {
@@ -45,11 +37,6 @@ frankieApp.controller('SigninCtrl', function ($scope) {
     Parse.User.logIn(user.username, user.password, {
       success: function(user) {
         $scope.loading = false;
-
-        // // send message to reload data
-        // var msg = { status: 'reload' };
-        // window.postMessage(msg, "*");
-
         $scope.showIndexView();
       },
       error: function(user, error) {
