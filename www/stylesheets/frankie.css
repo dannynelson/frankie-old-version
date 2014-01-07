@@ -24,11 +24,6 @@ input[type="submit"] {
   color: #fff;
 }
 
-img {
-  width: 140px;
-  height: 100px;
-}
-
 input[type="number"] {
   -webkit-appearance: none;
 }
@@ -41,6 +36,50 @@ body.landing {
   background-color: #273552;
 }
 
+/* Seach Bar */
+.topcoat-search-input {
+  background-color: #fff;
+  width: 97%;
+  height: 2.5rem;
+}
+
+/* List styling */
+
+.listing {
+  position: relative;
+  padding: 12px 0px 8px 0px;
+}
+
+.listing-group {
+  background-color: #fff;
+  border-top: 1px solid #cfcfcf;
+  border-bottom: 1px solid #cfcfcf;
+}
+
+.listing-group .listing {
+  margin-left: 20px;
+}
+
+.listing-group a {
+  font-weight: bold;
+}
+
+.listing-img {
+  width: 100px;
+  height: 70px;
+}
+
+.listing-text {
+  margin-top: 3px;
+  display: inline-block;
+  margin-left: 10px;
+  vertical-align: top;
+}
+
+.listing-title {
+  font-weight: bold;
+  color: #273552;
+}
 
 
 

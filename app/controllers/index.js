@@ -68,5 +68,4 @@ frankieApp.controller('IndexCtrl', function ($scope) {
       steroids.layers.pop();
     }
   });
-
 });

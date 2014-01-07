@@ -2,23 +2,25 @@
 
   <div ng-controller="IndexCtrl">
     <!-- Search Box -->
-    <input type="search" ng-model="liveSearch" placeholder="search" class="topcoat-search-input full">
+    <input type="search" ng-model="liveSearch" placeholder="search" class="topcoat-search-input">
 
-<!--     <h3 ng-hide="projects.length">
-      Click the + button to add a project
-    </h3> -->
+    <div ng-show="projects.length">
 
-    <div ng-show="projects.length" class="topcoat-list__container">
-
-      <ul class="topcoat-list">
+      <div class="listing-group">
         <!-- order is reversed created timestamp -->
-        <li class="topcoat-list__item" hm-tap="open(project.id)" ng-repeat="project in projects | filter:liveSearch">
-          <img class="list-img" ng-src="{{ project.get('photo').url() || placeholder }}"></img>
-          {{ project.attributes.title }}
-          <span class="chevron"/>
-        </li>
+        <div class="listing underline" hm-tap="open(project.id)" ng-repeat="project in projects | filter:liveSearch">
+          <img class="listing-img" ng-src="{{ project.get('photo').url() || placeholder }}"></img>
+          
+          <div class="listing-text">
+            <div class="listing-title">{{ project.attributes.title }}</div>
+            <div>Next step: {{ project.attributes.timeline[0].description }} </div>
+            <div>Due in 1 Day</div>
+          </div>
 
-      </ul>
+          <span class="chevron"/>
+        </div>
+
+      </div>
 
     </div>
 
