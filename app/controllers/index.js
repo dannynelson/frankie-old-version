@@ -65,7 +65,6 @@ frankieApp.controller('IndexCtrl', function ($scope) {
       $scope.load();
     }
     if (event.data.status === "logout") {
-      alert('logging out!')
       steroids.layers.pop();
     }
   });
