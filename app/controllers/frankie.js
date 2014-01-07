@@ -1,5 +1,23 @@
 var frankieApp = angular.module('frankieApp', ['hmTouchevents']);
 
+frankieApp.directive("fileread", [function () {
+    return {
+        scope: {
+            fileread: "="
+        },
+        link: function (scope, element, attributes) {
+            element.bind("change", function (changeEvent) {
+                var reader = new FileReader();
+                reader.onload = function (loadEvent) {
+                    scope.$apply(function () {
+                        scope.fileread = loadEvent.target.result;
+                    });
+                }
+                reader.readAsDataURL(changeEvent.target.files[0]);
+            });
+        }
+    }
+}]);
 // Index: http://localhost/views/frankie/index.html
 
 frankieApp.controller('IndexCtrl', function ($scope) {
@@ -23,7 +41,8 @@ frankieApp.controller('IndexCtrl', function ($scope) {
   steroids.view.navigationBar.show('Calendar');
 
   var addButton = new steroids.buttons.NavigationBarButton();
-  addButton.imagePath = "/icons/plus.png";
+  addButton.title = 'add';
+  // addButton.imagePath = "/icons/plus.png";
   addButton.onTap = function() {
     var newView = new steroids.views.WebView('/views/frankie/new.html');
     steroids.layers.push(newView);
