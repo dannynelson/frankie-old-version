@@ -1,31 +1,26 @@
 var frankieApp = angular.module('frankieApp', ['hmTouchevents']);
 
 frankieApp.directive("fileread", [function () {
-    return {
-        scope: {
-            fileread: "="
-        },
-        link: function (scope, element, attributes) {
-            element.bind("change", function (changeEvent) {
-                var reader = new FileReader();
-                reader.onload = function (loadEvent) {
-                    scope.$apply(function () {
-                        scope.fileread = loadEvent.target.result;
-                    });
-                }
-                reader.readAsDataURL(changeEvent.target.files[0]);
-            });
-        }
+  return {
+    scope: {
+      fileread: "="
+    },
+    link: function (scope, element, attributes) {
+      element.bind("change", function (changeEvent) {
+        var reader = new FileReader();
+        reader.onload = function (loadEvent) {
+          scope.$apply(function () {
+            scope.fileread = loadEvent.target.result;
+          });
+        };
+        reader.readAsDataURL(changeEvent.target.files[0]);
+      });
     }
+  };
 }]);
 // Index: http://localhost/views/frankie/index.html
 
 frankieApp.controller('IndexCtrl', function ($scope) {
-
-  // $scope.showSigninView = function() {
-  //   var signinView = new steroids.views.WebView("/views/frankie/signin.html");
-  //   steroids.modal.show(signinView);
-  // };
 
   // Build Drawer
   var leftDrawer = new steroids.views.WebView("/views/frankie/drawer.html");
@@ -76,6 +71,7 @@ frankieApp.controller('IndexCtrl', function ($scope) {
     query.equalTo("user", Parse.User.current());
     query.find({
       success: function(results) {
+        debugger;
         $scope.projects = results;
         // necessary to update bindings for promises, should be wrapped in function to catch errors?
         $scope.$apply();
@@ -160,7 +156,7 @@ frankieApp.controller('NewCtrl', function ($scope) {
 
     if ($scope.photo) {
       var base64 = $scope.photo.split('base64,')[1];
-      var parseFile = new Parse.File("myfile.txt", { base64: base64 });
+      var parseFile = new Parse.File("photo.jpg", { base64: base64 });
       parseFile.save().then(function() {
         alert('file saved');
         saveObject();
@@ -180,6 +176,8 @@ frankieApp.controller('NewCtrl', function ($scope) {
     steroids.layers.push(clientInfoView);
   };
 
+
+  // navigationbar
   steroids.view.navigationBar.show('New Project');
 
   var cancelButton = new steroids.buttons.NavigationBarButton();
