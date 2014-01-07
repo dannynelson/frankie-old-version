@@ -25,6 +25,15 @@ frankieApp.factory('today', function() {
   var dd = today.getDate();
   var mm = today.getMonth()+1; //January is 0!
   var yyyy = today.getFullYear();
-  if (dd<10){dd='0'+dd} if(mm<10){mm='0'+mm} today = yyyy+'-'+mm+'-'+dd;
+  if (dd < 10) dd = '0' + dd;
+  if (mm < 10) mm = '0' + mm;
+  today = yyyy+'-'+mm+'-'+dd;
   return today;
 });
+
+frankieApp.run(function() {
+  Parse.initialize(
+    "P2Z0R55WriW7Mi8h6bQqmhlLgGZQxjPe3Vc7PVQx",
+    "jvPhmi8qIckRbuv6C1ezzXCMMivYTfJrjjHK5Tcc"
+  );
+})
