@@ -1,23 +1,21 @@
-<script>
-
-  // Sends message for the main view that listens with addEventListener()
-
-
-
-</script>
-
 <div ng-app="frankieApp">
 
   <div ng-controller="DrawerCtrl">
+
     <div class="topcoat-list__container white-bg">
+
       <h3 class="topcoat-list__header">Settings</h3>
 
       <ul class="topcoat-list">
+
+        <li class="topcoat-list__item" hm-tap="settings()">Settings</li>
+        
         <li class="topcoat-list__item" hm-tap="logout()">Logout</li>
-        <li class="topcoat-list__item" ontouchend="closeDrawerAndSendMessage('settings')">Settings</li>
+
       </ul>
 
     </div>
 
   </div>
+
 </div>
