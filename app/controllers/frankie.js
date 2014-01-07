@@ -22,6 +22,8 @@ frankieApp.directive("fileread", [function () {
 
 frankieApp.controller('IndexCtrl', function ($scope) {
 
+  $scope.placeholder = 'http://placehold.it/140x100';
+
   // Build Drawer
   var leftDrawer = new steroids.views.WebView("/views/frankie/drawer.html");
   leftDrawer.preload({},{

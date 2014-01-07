@@ -13,7 +13,7 @@
       <ul class="topcoat-list">
         <!-- order is reversed created timestamp -->
         <li class="topcoat-list__item" hm-tap="open(project.id)" ng-repeat="project in projects | filter:liveSearch">
-          <img class="list-img" ng-src="{{ project.get('photo').url() }}"></img>
+          <img class="list-img" ng-src="{{ project.get('photo').url() || placeholder }}"></img>
           {{ project.attributes.title }}
           <span class="chevron"/>
         </li>
