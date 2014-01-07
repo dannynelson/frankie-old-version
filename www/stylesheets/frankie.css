@@ -1,15 +1,7 @@
-
-
 /*body {
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
   font-weight: 300;
 }*/
-
-/*  Chevron style from Ratchet. Licensed under The MIT License:
-  http://opensource.org/licenses/MIT*/
-
-/* Signin/Signup page Styling */
-
 
 /* Basic Configuration */
 * {
@@ -49,7 +41,10 @@ body.landing {
   background-color: #273552;
 }
 
-/* Signin logo */
+
+
+
+/* Landing pages */
 .title {
   text-align: center;
   font-weight: 900;
@@ -58,7 +53,6 @@ body.landing {
   color: #ff6b26;
 }
 
-/* For an landing page input group */
 .floating-input-group {
   background-color: #fff;
   border-radius: 5px;
@@ -102,7 +96,14 @@ label {
   color: #fff;
 }
 
-/* For in-app input groups */
+
+
+
+/*  */
+
+
+
+/* Input groups */
 .input-group {
   margin-top: 40px;
   background-color: #fff;
@@ -117,6 +118,9 @@ label {
 .input-group a {
   font-weight: bold;
 }
+
+
+
 
 /* Text Box */
 
@@ -136,6 +140,8 @@ textarea.text-box {
   height:20px;
 }
 
+
+
 /* Chevron */
 
 li, .input {
@@ -149,6 +155,9 @@ li, .input {
   display:block;
   height:20px;
 }
+
+
+
 /* Base styles for both 1/2's of the chevron */
 .chevron:before,
 .chevron:after {
