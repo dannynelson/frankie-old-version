@@ -11,6 +11,7 @@ frankieApp.controller('ShowCtrl', function ($scope) {
   query.first({
     success: function(object) {
       $scope.project = object.attributes;
+      debugger;
       // Save current project info to localStorage (edit.html gets it from there)
       localStorage.setItem("currentProject", JSON.stringify(object.attributes));
       $scope.$apply();

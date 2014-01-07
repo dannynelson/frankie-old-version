@@ -6,7 +6,7 @@
     <!-- Header information -->
     <div class="listing-group">
       <div class="listing">
-        <img class="show-img" ng-src="{{ project.get('photo').url() || placeholder }}"></img>
+        <img class="show-img" ng-src="{{ project.photo.url() || placeholder }}"></img>
         <div class="listing-text">
           <div ng-show="!project.clientInfo" class="listing-title"> No client info </div>
           <div ng-show="project.clientInfo" class="listing-title">

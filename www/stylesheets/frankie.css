@@ -12,6 +12,10 @@ input[type="date"], input[type="submit"], input[type="file"] {
   -webkit-appearance: none;
 }
 
+input, textarea {
+  padding: 0px;
+}
+
 input[type="submit"] {
   margin-top: 10px;
   background: #ff6b26;
@@ -121,7 +125,7 @@ body.landing {
 }
 
 .input {
-  padding: 8px 0px 8px 0px;
+  padding: 6px 0px 6px 0px;
   line-height: 24px;
 }
 
@@ -163,7 +167,7 @@ label {
 
 /* Input groups */
 .input-group {
-  margin-top: 40px;
+  margin-top: 30px;
   background-color: #fff;
   border-top: 1px solid #cfcfcf;
   border-bottom: 1px solid #cfcfcf;
