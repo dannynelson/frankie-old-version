@@ -7,6 +7,8 @@ frankieApp.controller('NewCtrl', function ($scope, today) {
 
   $scope.create = function(project) {
     // save everything else
+    alert('inside create');
+
     var saveObject = function() {
       alert('saving object');
       var Project = Parse.Object.extend("Project");
@@ -41,6 +43,8 @@ frankieApp.controller('NewCtrl', function ($scope, today) {
       }, function(error) {
         alert(error);
       });
+    } else {
+      saveObject();
     }
   };
 
