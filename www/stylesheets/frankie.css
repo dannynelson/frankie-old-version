@@ -67,6 +67,7 @@ body.landing {
 .listing-img {
   width: 100px;
   height: 70px;
+  border-radius: 5px;
 }
 
 .listing-text {

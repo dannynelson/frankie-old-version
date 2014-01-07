@@ -1,5 +1,7 @@
 frankieApp.controller('ShowCtrl', function ($scope) {
 
+  $scope.placeholder = 'http://placehold.it/140x100';
+
   $scope.project = {};
   
   // retrieve info

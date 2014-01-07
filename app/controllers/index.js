@@ -47,7 +47,6 @@ frankieApp.controller('IndexCtrl', function ($scope) {
     query.equalTo("user", Parse.User.current());
     query.find({
       success: function(results) {
-        debugger;
         $scope.projects = results;
         // necessary to update bindings for promises, should be wrapped in function to catch errors?
         $scope.$apply();
