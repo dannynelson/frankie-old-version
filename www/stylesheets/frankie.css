@@ -24,11 +24,7 @@ input[type="date"], input[type="submit"], input[type="file"] {
 }
 
 input[type="file"] {
-  position: absolute;
-  top: 20px;
-  right: 50px;
-/*  display: none;
-*/  z-index: 2;
+  display: none;
 }
 
 
@@ -92,10 +88,6 @@ body.landing {
 .listing-group .listing {
   margin-left: 20px;
 }
-
-/*.listing-group a {
-  font-weight: bold;
-}*/
 
 .listing-img {
   width: 100px;
