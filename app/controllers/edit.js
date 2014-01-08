@@ -47,15 +47,16 @@ frankieApp.controller('EditCtrl', function ($scope) {
             // var deleteMsg = { status: 'delete' };
             // window.postMessage(deleteMsg, "*");
             // steroids.layers.pop();
-            var msg = { status: 'reload' };
-            window.postMessage(msg, "*");
-            steroids.layers.popAll();
+            
+            // var msg = { status: 'reload' };
+            // window.postMessage(msg, "*");
+            // steroids.layers.popAll();
 
-            // var newIndexView = new steroids.views.WebView("/views/frankie/index.html");
-            // steroids.layers.push({
-            //   view: newIndexView,
-            //   navigationBar: false
-            // });
+            var newIndexView = new steroids.views.WebView("/views/frankie/index.html");
+            steroids.layers.push({
+              view: newIndexView,
+              navigationBar: false
+            });
 
             // var newIndexView = new steroids.views.WebView("/views/frankie/index.html");
             // newIndexView.preload({},{
