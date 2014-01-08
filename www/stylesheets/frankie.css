@@ -17,11 +17,7 @@ input[type="date"], input[type="submit"], input[type="file"] {
   position: relative;
 }
 
-.fa-2x {
-  position: absolute;
-  top: 20px;
-  right: 50px;
-}
+
 
 input[type="file"] {
   display: none;
@@ -125,20 +121,34 @@ body.landing {
   color: #fff;
 }
 
-.timeline-photo-button {
-  margin: 5px 5px 0px 0px;
-  vertical-align: top;
-  padding: 5px 10px 5px 10px;
-  border: none;
-  color: #273552;
-  font-weight: normal;
-  background-color: white;
-  border-radius: 5px;
+.timeline-photo {
   float: right;
+  vertical-align: top;
+  margin: 20px 20px 0px 0px;
+  color: #273552;
 }
 
+.checkbox {
+  vertical-align: top;
+  margin: 20px 10px 0px 0px;
+  color: #D3D3D3; 
+}
 
+.checkbox.selected {
+  color: #669900;
+}
 
+/* New styling */
+.new-photo {
+  text-align: center;
+  color: #273552;
+  margin: 10px 0px 10px 0px;
+}
+.new-photo img {
+  width: 150px;
+  height: 100;
+  border-radius: 5px;
+}
 
 
 /* Landing pages */

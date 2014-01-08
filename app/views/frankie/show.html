@@ -13,13 +13,22 @@
           <div ng-show="project.clientInfo" class="listing-title">
             {{ project.title }}
           </div>
+          <div ng-show="project.price">
+            ${{ project.price }}
+          </div>
           <div>
             {{ project.start }} - {{ project.end }}
           </div>
           <div>
-            <a class="contact-button" href="tel:{{ project.clientInfo.phone }}">call</a>
-            <a class="contact-button" href="mailto:{{ project.clientInfo.email }}">email</a>
-            <a class="contact-button" href="sms:{{ project.clientInfo.phone }}">text</a>
+            <a class="contact-button" href="tel:{{ project.clientInfo.phone }}">
+              <i class="fa fa-phone"></i>
+            </a>
+            <a class="contact-button" href="mailto:{{ project.clientInfo.email }}">
+              <i class="fa fa-comment"></i>
+            </a>
+            <a class="contact-button" href="sms:{{ project.clientInfo.phone }}">
+              <i class="fa fa-envelope"></i>
+            </a>
           </div>
         </div>
       </div>
@@ -31,15 +40,13 @@
     <div ng-show="project.timeline">
       <div class="listing-group">
         <div class="listing underline" hm-tap="open(project.id)" ng-repeat="milestone in project.timeline">
-          <input type="checkbox"></input>
+          <i class="fa fa-check-circle fa-2x checkbox" ng-class="{ selected: milestone.completed }" hm-tap="toggleCompleted($index)"></i>
           <img class="listing-img" ng-src="{{ milestone.photoURL || placeholder }}"></img>
           <div class="listing-text">
             <div class="listing-title">{{ milestone.description }}</div>
             <div>Due on: {{ milestone.date }} </div>
           </div>
-          <div class="timeline-photo-button file-upload">
-            <i class="fa fa-camera fa-2x" hm-tap="uploadPhoto()"></i> 
-          </div>
+          <i class="fa fa-camera fa-2x timeline-photo" hm-tap="uploadPhoto($index)"></i> 
         </div>
       </div>
     </div>

@@ -23,12 +23,14 @@
         
         <!-- Photo upload -->
         <div class="input-group">
-          <div class="input">
-            <label for="photo">Photo</label>
+          <div class="input new-photo">
             <input id="photo" type="file" fileread="photo" accept="image/*" />
-            <span class="chevron"/>
+            <i ng-hide="photo" class="fa fa-camera fa-4x" hm-tap="uploadPhoto()"></i>
+            <img ng-show="photo" ng-src="{{ photo }}"></img>
           </div>
         </div>
+
+
 
         <!-- Dates -->
         <div class="input-group">

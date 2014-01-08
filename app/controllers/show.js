@@ -4,19 +4,26 @@ frankieApp.controller('ShowCtrl', function ($scope) {
 
   $scope.project = {};
 
-  $scope.uploadPhoto = function() {
+  $scope.uploadPhoto = function($index) {
+    $scope.selectedIdx = $index;
+    debugger;
     alert('photo uploaded');
     document.getElementById('file').click();
   };
 
+  $scope.toggleCompleted = function($index) {
+    $scope.project.timeline[$index].completed = !$scope.project.timeline[$index].completed;
+  };
+
   //why is this getting called on initialize?
   $scope.savePhoto = function() {
+    debugger;
     if (!$scope.photo) return; //why is this getting called on initialize?
     var base64 = $scope.photo.split('base64,')[1];
     var parseFile = new Parse.File("photo.jpg", { base64: base64 });
     parseFile.save().then(function() {
       debugger;
-      $scope.project.timeline[0].photoURL = parseFile.url();
+      $scope.project.timeline[$scope.selectedIdx].photoURL = parseFile.url();
       $scope.$apply();
       $scope.parseProject.attributes = $scope.project;
       $scope.parseProject.save();
