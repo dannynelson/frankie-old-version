@@ -4,9 +4,9 @@ frankieApp.controller('IndexCtrl', function ($scope) {
 
   // Build Drawer
   var leftDrawer = new steroids.views.WebView("/views/frankie/drawer.html");
-  // leftDrawer.preload({},{
-  //   onSuccess: initGesture  // When the view has loaded, enable finger tracking
-  // });
+  leftDrawer.preload({},{
+    onSuccess: initGesture  // When the view has loaded, enable finger tracking
+  });
   function initGesture() {
     steroids.drawers.enableGesture(leftDrawer);
   }
