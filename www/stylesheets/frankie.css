@@ -18,11 +18,11 @@ input[type="date"], input[type="submit"], input[type="file"] {
 }
 
 
-/*
+
 input[type="file"] {
   display: none;
 }
-*/
+
 
 input, textarea {
   padding: 0px;
@@ -138,8 +138,17 @@ body.landing {
   color: #669900;
 }
 
-
-
+/* New styling */
+.new-photo {
+  text-align: center;
+  color: #273552;
+  margin: 10px 0px 10px 0px;
+}
+.new-photo img {
+  width: 150px;
+  height: 100;
+  border-radius: 5px;
+}
 
 
 /* Landing pages */

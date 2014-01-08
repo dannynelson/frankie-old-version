@@ -5,10 +5,11 @@ frankieApp.controller('NewCtrl', function ($scope, today) {
     end: today
   };
 
-  $scope.create = function(project) {
-    // save everything else
-    alert('inside create');
+  $scope.uploadPhoto = function() {
+    document.getElementById('photo').click();
+  };
 
+  $scope.create = function(project) {
     var saveObject = function() {
       alert('saving object');
       var Project = Parse.Object.extend("Project");
@@ -38,7 +39,6 @@ frankieApp.controller('NewCtrl', function ($scope, today) {
       var base64 = $scope.photo.split('base64,')[1];
       var parseFile = new Parse.File("photo.jpg", { base64: base64 });
       parseFile.save().then(function() {
-        debugger;
         alert('file saved');
         saveObject();
       }, function(error) {
