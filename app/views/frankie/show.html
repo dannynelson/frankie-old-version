@@ -20,9 +20,15 @@
             {{ project.start }} - {{ project.end }}
           </div>
           <div>
-            <a class="contact-button" href="tel:{{ project.clientInfo.phone }}">call</a>
-            <a class="contact-button" href="mailto:{{ project.clientInfo.email }}">email</a>
-            <a class="contact-button" href="sms:{{ project.clientInfo.phone }}">text</a>
+            <a class="contact-button" href="tel:{{ project.clientInfo.phone }}">
+              <i class="fa fa-phone"></i>
+            </a>
+            <a class="contact-button" href="mailto:{{ project.clientInfo.email }}">
+              <i class="fa fa-comment"></i>
+            </a>
+            <a class="contact-button" href="sms:{{ project.clientInfo.phone }}">
+              <i class="fa fa-envelope"></i>
+            </a>
           </div>
         </div>
       </div>
