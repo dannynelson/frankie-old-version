@@ -16,11 +16,10 @@ frankieApp.controller('ShowCtrl', function ($scope) {
     var parseFile = new Parse.File("photo.jpg", { base64: base64 });
     parseFile.save().then(function() {
       debugger;
-      alert('file saved');
-      $scope.project.timeline[0].photo = parseFile;
+      $scope.project.timeline[0].photoURL = parseFile.url();
       $scope.$apply();
       $scope.parseProject.attributes = $scope.project;
-      $scope.parseProject.save($scope.parseProject);
+      $scope.parseProject.save();
     }, function(error) {
       alert(error);
     });
