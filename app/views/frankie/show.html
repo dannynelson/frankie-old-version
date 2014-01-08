@@ -2,15 +2,16 @@
 
   <div ng-controller="ShowCtrl">
     <div class="spinner" ng-show="loading"></div>
+    <input id="file" type="file" fileread="photo" accept="image/*"></input>
 
     <!-- Header information -->
     <div class="listing-group">
       <div class="listing">
-        <img class="show-img" ng-src="{{ project.photo.url() || placeholder }}"></img>
+        <img class="show-img" ng-src="{{ project.photoURL || placeholder }}"></img>
         <div class="listing-text">
           <div ng-show="!project.clientInfo" class="listing-title"> No client info </div>
           <div ng-show="project.clientInfo" class="listing-title">
-            {{ project.clientInfo.firstName + ' ' + project.clientInfo.lastName }}
+            {{ project.title }}
           </div>
           <div>
             {{ project.start }} - {{ project.end }}
@@ -30,12 +31,15 @@
     <div ng-show="project.timeline">
       <div class="listing-group">
         <div class="listing underline" hm-tap="open(project.id)" ng-repeat="milestone in project.timeline">
-          <img class="listing-img" ng-src="{{ milestone.get('photo').url() || placeholder }}"></img>
+          <input type="checkbox"></input>
+          <img class="listing-img" ng-src="{{ milestone.photoURL || placeholder }}"></img>
           <div class="listing-text">
             <div class="listing-title">{{ milestone.description }}</div>
             <div>Due on: {{ milestone.date }} </div>
           </div>
-          <span class="chevron"/>
+          <div class="timeline-photo-button file-upload">
+            <i class="fa fa-camera fa-2x" hm-tap="uploadPhoto()"></i> 
+          </div>
         </div>
       </div>
     </div>

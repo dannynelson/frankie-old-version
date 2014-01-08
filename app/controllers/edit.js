@@ -30,4 +30,53 @@ frankieApp.controller('EditCtrl', function ($scope) {
 
   steroids.view.navigationBar.show('Edit Project');
 
+  var deleteButton = new steroids.buttons.NavigationBarButton();
+  deleteButton.title = "Delete";
+
+  deleteButton.onTap = function() {
+    var Project = Parse.Object.extend("Project");
+    var query = new Parse.Query(Project);
+    var title = $scope.project.title;
+    query.equalTo("title", title);
+    query.find({
+      success: function(myObject) {
+        Parse.Promise.when(myObject)
+          .then(function(result){
+            result.destroy({});
+            alert('Project Deleted');
+            // var deleteMsg = { status: 'delete' };
+            // window.postMessage(deleteMsg, "*");
+            // steroids.layers.pop();
+            
+            // var msg = { status: 'reload' };
+            // window.postMessage(msg, "*");
+            // steroids.layers.popAll();
+
+            var newIndexView = new steroids.views.WebView("/views/frankie/index.html");
+            steroids.layers.push({
+              view: newIndexView,
+              navigationBar: false
+            });
+
+            // var newIndexView = new steroids.views.WebView("/views/frankie/index.html");
+            // newIndexView.preload({},{
+            //   onSuccess: function() {
+            //     steroids.layers.replace(newIndexView);
+            //   }
+            // });
+
+          }, function(error){
+            alert('promise error');
+          });
+      },
+      error: function(myObject, error) {
+        alert('query error');
+      }
+    });
+  };
+
+  steroids.view.navigationBar.setButtons({
+    right: [deleteButton]
+  });
+
 });

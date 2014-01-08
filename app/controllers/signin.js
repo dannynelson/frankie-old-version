@@ -29,6 +29,12 @@ frankieApp.controller('SigninCtrl', function ($scope) {
   $scope.showIndexView = function() {
     var indexView = new steroids.views.WebView("/views/frankie/index.html");
     steroids.layers.push(indexView);
+    
+    // indexView.preload({}, {
+    //   onSuccess: function() {
+    //     steroids.layers.replace(indexView);
+    //   }
+    // });
   };
 
   $scope.create = function(user) {

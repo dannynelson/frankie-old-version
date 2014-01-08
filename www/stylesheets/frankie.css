@@ -12,8 +12,31 @@ input[type="date"], input[type="submit"], input[type="file"] {
   -webkit-appearance: none;
 }
 
+/* File upload */
+.file-upload {
+  position: relative;
+}
+
+.fa-2x {
+  position: absolute;
+  top: 20px;
+  right: 50px;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+
 input, textarea {
   padding: 0px;
+}
+
+input[type="checkbox"] {
+  vertical-align: top;
+  margin-top: 30px;
+  display: inline-block;
+  width: 10px;
 }
 
 input[type="submit"] {
@@ -40,6 +63,8 @@ body.landing {
   background-color: #273552;
 }
 
+
+
 /* Seach Bar */
 .topcoat-search-input {
   background-color: #fff;
@@ -63,10 +88,6 @@ body.landing {
 .listing-group .listing {
   margin-left: 20px;
 }
-
-/*.listing-group a {
-  font-weight: bold;
-}*/
 
 .listing-img {
   width: 100px;
@@ -104,9 +125,24 @@ body.landing {
   color: #fff;
 }
 
+.timeline-photo-button {
+  margin: 5px 5px 0px 0px;
+  vertical-align: top;
+  padding: 5px 10px 5px 10px;
+  border: none;
+  color: #273552;
+  font-weight: normal;
+  background-color: white;
+  border-radius: 5px;
+  float: right;
+}
+
+
+
 
 
 /* Landing pages */
+
 .title {
   text-align: center;
   font-weight: 900;

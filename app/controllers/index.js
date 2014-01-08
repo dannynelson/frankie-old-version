@@ -36,6 +36,7 @@ frankieApp.controller('IndexCtrl', function ($scope) {
 
   // Helper function for opening new webviews
   $scope.open = function(id) {
+    debugger;
     projectView = new steroids.views.WebView("/views/frankie/show.html?id="+id);
     steroids.layers.push(projectView);
   };
@@ -64,7 +65,8 @@ frankieApp.controller('IndexCtrl', function ($scope) {
       $scope.load();
     }
     if (event.data.status === "logout") {
-      steroids.layers.pop();
+      // steroids.layers.pop();
+      steroids.layers.popAll();
     }
   });
 });

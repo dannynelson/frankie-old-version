@@ -14,8 +14,8 @@ frankieApp.controller('NewCtrl', function ($scope, today) {
       var Project = Parse.Object.extend("Project");
       var privateProject = new Project();
       privateProject.set(project);
-      privateProject.set("photo", parseFile);
-      privateProject.set("timeline", [{description:"cat"},{date:"1234"}]);
+      privateProject.set("photoURL", parseFile.url());
+      privateProject.set("timeline", JSON.parse(localStorage.getItem("timeline")));
       privateProject.set("user", Parse.User.current());
       privateProject.set("clientInfo", JSON.parse(localStorage.getItem("clientInfo")));
       privateProject.setACL(new Parse.ACL(Parse.User.current()));
