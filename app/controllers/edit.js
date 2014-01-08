@@ -44,9 +44,14 @@ frankieApp.controller('EditCtrl', function ($scope) {
           .then(function(result){
             result.destroy({});
             alert('Project Deleted');
-            // var reloadMsg = { status: 'reload' };
-            // window.postMessage(reloadMsg, "*");
+            // var deleteMsg = { status: 'delete' };
+            // window.postMessage(deleteMsg, "*");
             // steroids.layers.pop();
+            
+            // var msg = { status: 'reload' };
+            // window.postMessage(msg, "*");
+            // steroids.layers.popAll();
+
             var newIndexView = new steroids.views.WebView("/views/frankie/index.html");
             steroids.layers.push({
               view: newIndexView,

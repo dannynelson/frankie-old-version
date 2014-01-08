@@ -7,12 +7,12 @@
     <!-- Listing -->
     <div ng-show="projects.length">
       <div class="listing-group">
-        <div class="listing underline" hm-tap="open(project.id)" ng-repeat="project in projects | filter:liveSearch">
+        <div class="listing underline" hm-tap="open(project.id)" ng-repeat="project in projects | filter:liveSearch | orderBy:'attributes.timeline[0].date'">
           <img class="listing-img" ng-src="{{ project.get('photo').url() || placeholder }}"></img>
           <div class="listing-text">
             <div class="listing-title">{{ project.attributes.title }}</div>
             <div>Next step: {{ project.attributes.timeline[0].description }} </div>
-            <div>Due in 1 Day</div>
+            <div>Due: {{ project.attributes.timeline[0].date }}</div>
           </div>
           <span class="chevron"/>
         </div>

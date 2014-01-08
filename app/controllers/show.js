@@ -27,6 +27,9 @@ frankieApp.controller('ShowCtrl', function ($scope) {
     if (event.data.status === "reload") {
       $scope.loadFrankie();
     }
+    if (event.data.status === "delete") {
+      steroids.layers.pop();
+    }
   });
 
   function setNavigation() {
