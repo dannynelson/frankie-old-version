@@ -12,6 +12,26 @@ input[type="date"], input[type="submit"], input[type="file"] {
   -webkit-appearance: none;
 }
 
+/* File upload */
+.file-upload {
+  position: relative;
+}
+
+.fa-2x {
+  position: absolute;
+  top: 20px;
+  right: 50px;
+}
+
+input[type="file"] {
+  position: absolute;
+  top: 20px;
+  right: 50px;
+/*  display: none;
+*/  z-index: 2;
+}
+
+
 input, textarea {
   padding: 0px;
 }
@@ -46,6 +66,8 @@ body {
 body.landing {
   background-color: #273552;
 }
+
+
 
 /* Seach Bar */
 .topcoat-search-input {

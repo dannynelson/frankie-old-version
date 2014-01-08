@@ -2,7 +2,8 @@
 
   <div ng-controller="ShowCtrl">
     <div class="spinner" ng-show="loading"></div>
-    
+    <input id="file" type="file" fileread="photo" accept="image/*"></input>
+
     <!-- Header information -->
     <div class="listing-group">
       <div class="listing">
@@ -36,9 +37,9 @@
             <div class="listing-title">{{ milestone.description }}</div>
             <div>Due on: {{ milestone.date }} </div>
           </div>
-          <button class="timeline-photo-button">
-            <i class="fa fa-camera fa-2x"></i> 
-          </button>
+          <div class="timeline-photo-button file-upload">
+            <i class="fa fa-camera fa-2x" hm-tap="uploadPhoto()"></i> 
+          </div>
         </div>
       </div>
     </div>

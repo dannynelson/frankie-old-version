@@ -3,6 +3,28 @@ frankieApp.controller('ShowCtrl', function ($scope) {
   $scope.placeholder = 'http://placehold.it/140x100';
 
   $scope.project = {};
+
+  $scope.photo = '';
+
+  $scope.uploadPhoto = function() {
+    alert('photo uploaded');
+    document.getElementById('file').click();
+  };
+
+  $scope.savePhoto = function() {
+    debugger;
+    var base64 = $scope.photo.split('base64,')[1];
+    var parseFile = new Parse.File("photo.jpg", { base64: base64 });
+    parseFile.save().then(function() {
+      debugger;
+      alert('file saved');
+      $scope.project.timeline[0].photo = parseFile;
+      $scope.parseProject.attributes = $scope.project;
+      $scope.parseProject.save($scope.parseProject);
+    }, function(error) {
+      alert(error);
+    });
+  };
   
   // retrieve info
   var Project = Parse.Object.extend("Project");
@@ -10,8 +32,8 @@ frankieApp.controller('ShowCtrl', function ($scope) {
   query.equalTo("objectId", steroids.view.params.id);
   query.first({
     success: function(object) {
+      $scope.parseProject = object;
       $scope.project = object.attributes;
-      debugger;
       // Save current project info to localStorage (edit.html gets it from there)
       localStorage.setItem("currentProject", JSON.stringify(object.attributes));
       $scope.$apply();
@@ -27,7 +49,13 @@ frankieApp.controller('ShowCtrl', function ($scope) {
     if (event.data.status === "reload") {
       $scope.loadFrankie();
     }
+    if (event.data.status === "photoUploaded") {
+      alert('in event listener');
+      $scope.savePhoto();
+    }
   });
+
+  $scope.$watch('photo', $scope.savePhoto);
 
   function setNavigation() {
     // -- Native navigation
