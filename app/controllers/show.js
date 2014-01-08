@@ -11,6 +11,10 @@ frankieApp.controller('ShowCtrl', function ($scope) {
     document.getElementById('file').click();
   };
 
+  $scope.toggleCompleted = function($index) {
+    $scope.project.timeline[$index].completed = !$scope.project.timeline[$index].completed;
+  };
+
   //why is this getting called on initialize?
   $scope.savePhoto = function() {
     debugger;
