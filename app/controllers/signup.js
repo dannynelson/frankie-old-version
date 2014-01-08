@@ -9,10 +9,8 @@ frankieApp.controller('SignupCtrl', function ($scope) {
 
   $scope.create = function(credentials) {
     $scope.loading = true;
-
     var user = new Parse.User();
     user.set(credentials);
-     
     user.signUp(null, {
       success: function(user) {
         $scope.loading = false;
