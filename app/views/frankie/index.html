@@ -10,9 +10,9 @@
         <div class="listing underline" hm-tap="open(project.id)" ng-repeat="project in projects | filter:liveSearch | orderBy:'attributes.timeline[0].date'">
           <img class="listing-img" ng-src="{{ project.get('photoURL') || placeholder }}"></img>
           <div class="listing-text">
-            <div class="listing-title">{{ project.attributes.title }}</div>
-            <div>Next step: {{ project.attributes.timeline[0].description }} </div>
-            <div>Due: {{ project.attributes.timeline[0].date }}</div>
+            <div class="listing-title">{{ project.get('title') }}</div>
+            <div>Next step: {{ project.get('timeline')[0].description }} </div>
+            <div>Due: {{ project.get('timeline')[0].date }}</div>
           </div>
           <span class="chevron"/>
         </div>

@@ -22,11 +22,11 @@ input[type="date"], input[type="submit"], input[type="file"] {
   top: 20px;
   right: 50px;
 }
-
+/*
 input[type="file"] {
   display: none;
 }
-
+*/
 
 input, textarea {
   padding: 0px;
