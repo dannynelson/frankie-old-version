@@ -16,6 +16,13 @@ input, textarea {
   padding: 0px;
 }
 
+input[type="checkbox"] {
+  vertical-align: top;
+  margin-top: 30px;
+  display: inline-block;
+  width: 10px;
+}
+
 input[type="submit"] {
   margin-top: 10px;
   background: #ff6b26;
@@ -104,9 +111,24 @@ body.landing {
   color: #fff;
 }
 
+.timeline-photo-button {
+  margin: 5px 5px 0px 0px;
+  vertical-align: top;
+  padding: 5px 10px 5px 10px;
+  border: none;
+  color: #273552;
+  font-weight: normal;
+  background-color: white;
+  border-radius: 5px;
+  float: right;
+}
+
+
+
 
 
 /* Landing pages */
+
 .title {
   text-align: center;
   font-weight: 900;
