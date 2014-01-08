@@ -3,26 +3,26 @@
   <div ng-controller="SettingsCtrl">
   
     <div class="content-padded">
-
-      <div class="header">Update Settings</div>
       
-      <form class="simple-form" ng-submit="create(user)">
+        <form class="simple-form" ng-submit="update(updateUser)">
 
         <div class="floating-input-group">
-          
-          <div class="input underline">
-            <label for="username">Old Username</label>
-            <input type="text" id="username" placeholder="Required" ng-model="user.username" />
+
+          <div class="input">
+            <label for="username">New Username</label>
+            <input type="text" id="username" placeholder="Required" ng-model="updateUser.username" />
           </div>
           
-          <div class="input">
-            <label for="password">Old Password</label>
-            <input type="password" id="password" placeholder="Required" ng-model="user.password" />
+          <div class="input underline">
+            <label for="password">New Password</label>
+            <input type="password" id="password" placeholder="Required" ng-model="updateUser.password" />
           </div>
 
         </div>
         
         <input type="submit" value="Update" />
+
+      </form>
 
     </div>
 

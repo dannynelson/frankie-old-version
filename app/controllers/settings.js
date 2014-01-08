@@ -1,14 +1,16 @@
 frankieApp.controller('SettingsCtrl', function ($scope) {
 
-  $scope.action = function() {
-    alert("ACTION");
-    // var currentUser = Parse.User.current();
-    // alert(currentUser.username);
-  };
+  steroids.view.navigationBar.show('Settings');
 
-  // $scope.close = function() {
-  //   steroids.layers.pop();
-  // };
+  var currentUser = Parse.User.current();
+  $scope.currentUser = currentUser;
+
+  $scope.update = function(updatedCredentials) {
+    currentUser.requestPasswordReset(currentUser.getEmail());
+    alert(currentUser.getEmail());
+  };
+  
+  $scope.updateUser = {};
 
   // $scope.create = function(credentials) {
   //   $scope.loading = true;
