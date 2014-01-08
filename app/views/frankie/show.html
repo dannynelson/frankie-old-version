@@ -9,8 +9,7 @@
       <div class="listing">
         <img class="show-img" ng-src="{{ project.photoURL || placeholder }}"></img>
         <div class="listing-text">
-          <div ng-show="!project.clientInfo" class="listing-title"> No client info </div>
-          <div ng-show="project.clientInfo" class="listing-title">
+          <div class="listing-title">
             {{ project.title }}
           </div>
           <div ng-show="project.price">

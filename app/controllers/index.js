@@ -49,6 +49,7 @@ frankieApp.controller('IndexCtrl', function ($scope) {
     query.find({
       success: function(results) {
         $scope.projects = results;
+        localStorage.setItem("projects", JSON.stringify(results));
         // necessary to update bindings for promises, should be wrapped in function to catch errors?
         $scope.$apply();
       },
