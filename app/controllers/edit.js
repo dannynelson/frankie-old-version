@@ -44,14 +44,18 @@ frankieApp.controller('EditCtrl', function ($scope) {
           .then(function(result){
             result.destroy({});
             alert('Project Deleted');
-            // var reloadMsg = { status: 'reload' };
-            // window.postMessage(reloadMsg, "*");
+            // var deleteMsg = { status: 'delete' };
+            // window.postMessage(deleteMsg, "*");
             // steroids.layers.pop();
-            var newIndexView = new steroids.views.WebView("/views/frankie/index.html");
-            steroids.layers.push({
-              view: newIndexView,
-              navigationBar: false
-            });
+            var msg = { status: 'reload' };
+            window.postMessage(msg, "*");
+            steroids.layers.popAll();
+
+            // var newIndexView = new steroids.views.WebView("/views/frankie/index.html");
+            // steroids.layers.push({
+            //   view: newIndexView,
+            //   navigationBar: false
+            // });
 
             // var newIndexView = new steroids.views.WebView("/views/frankie/index.html");
             // newIndexView.preload({},{
