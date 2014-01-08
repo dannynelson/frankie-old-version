@@ -4,21 +4,21 @@ frankieApp.controller('ShowCtrl', function ($scope) {
 
   $scope.project = {};
 
-  $scope.photo = '';
-
   $scope.uploadPhoto = function() {
     alert('photo uploaded');
     document.getElementById('file').click();
   };
 
+  //why is this getting called on initialize?
   $scope.savePhoto = function() {
-    debugger;
+    if (!$scope.photo) return; //why is this getting called on initialize?
     var base64 = $scope.photo.split('base64,')[1];
     var parseFile = new Parse.File("photo.jpg", { base64: base64 });
     parseFile.save().then(function() {
       debugger;
       alert('file saved');
       $scope.project.timeline[0].photo = parseFile;
+      $scope.$apply();
       $scope.parseProject.attributes = $scope.project;
       $scope.parseProject.save($scope.parseProject);
     }, function(error) {
@@ -49,13 +49,10 @@ frankieApp.controller('ShowCtrl', function ($scope) {
     if (event.data.status === "reload") {
       $scope.loadFrankie();
     }
-    if (event.data.status === "photoUploaded") {
-      alert('in event listener');
-      $scope.savePhoto();
-    }
   });
 
   $scope.$watch('photo', $scope.savePhoto);
+
 
   function setNavigation() {
     // -- Native navigation

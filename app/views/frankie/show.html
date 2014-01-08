@@ -32,7 +32,7 @@
       <div class="listing-group">
         <div class="listing underline" hm-tap="open(project.id)" ng-repeat="milestone in project.timeline">
           <input type="checkbox"></input>
-          <img class="listing-img" ng-src="{{ milestone.get('photo').url() || placeholder }}"></img>
+          <img class="listing-img" ng-src="{{ milestone.photo.url() || placeholder }}"></img>
           <div class="listing-text">
             <div class="listing-title">{{ milestone.description }}</div>
             <div>Due on: {{ milestone.date }} </div>
