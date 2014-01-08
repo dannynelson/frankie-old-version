@@ -6,11 +6,18 @@ frankieApp.controller('SettingsCtrl', function ($scope) {
   $scope.currentUser = currentUser;
 
   $scope.update = function(updatedCredentials) {
-    currentUser.requestPasswordReset(currentUser.getEmail());
-    alert(currentUser.getEmail());
+    alert(currentUser.password);
+    currentUser.requestPasswordReset(currentUser.getEmail(), {
+      success: function() {
+        alert("Reset instructions emailed to you.");
+      },
+      error: function(error) {
+        alert(error.message);
+      }
+    });
   };
   
-  $scope.updateUser = {};
+  $scope.updatePassword = {};
 
   // $scope.create = function(credentials) {
   //   $scope.loading = true;

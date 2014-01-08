@@ -4,18 +4,23 @@
   
     <div class="content-padded">
       
-        <form class="simple-form" ng-submit="update(updateUser)">
+        <form class="simple-form" ng-submit="update(updatePassword)">
 
         <div class="floating-input-group">
 
-          <div class="input">
-            <label for="username">New Username</label>
-            <input type="text" id="username" placeholder="Required" ng-model="updateUser.username" />
-          </div>
+<!--           <div class="input underline">
+            <label for="username">Old Password</label>
+            <input type="text" id="username" placeholder="Required" ng-model="updatePassword.currentPassword" />
+          </div> -->
           
           <div class="input underline">
             <label for="password">New Password</label>
-            <input type="password" id="password" placeholder="Required" ng-model="updateUser.password" />
+            <input type="password" id="password" placeholder="Required" ng-model="updatePassword.newPassword" />
+          </div>
+
+          <div class="input">
+            <label for="password">Confirm Password</label>
+            <input type="password" id="password" placeholder="Required" ng-model="updatePassword.confirmPassword" />
           </div>
 
         </div>
