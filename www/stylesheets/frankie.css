@@ -86,11 +86,11 @@ body.landing {
 }
 
 .listing-img {
-  width: 80px;
-  height: 50px;
+  width: 100px;
+  height: 70px;
   border-radius: 5px;
-  float: right;
 }
+
 
 .show-img {
   width: 120px;
@@ -135,6 +135,7 @@ body.landing {
   border-radius: 5px;
   float: right;
 }
+
 
 .checkbox {
   line-height: 60px;
