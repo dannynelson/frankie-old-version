@@ -66,10 +66,14 @@ frankieApp.controller('ShowCtrl', function ($scope) {
     }
   });
 
+  // $scope.project = JSON.parse(localStorage.getItem("currentProject"));
+
   // When the data is modified in the edit.html, get notified and update (edit is on top of this view)
   window.addEventListener("message", function(event) {
     if (event.data.status === "reload") {
-      $scope.loadFrankie();
+      // $scope.loadFrankie();
+      $scope.project = JSON.parse(localStorage.getItem("currentProject"));
+      $scope.$apply();
     }
     if (event.data.status === "delete") {
       steroids.layers.pop();
@@ -78,7 +82,7 @@ frankieApp.controller('ShowCtrl', function ($scope) {
 
   $scope.$watch('photo', $scope.loadPhoto);
 
-  function setNavigation() {
+  (function setNavigation() {
     // -- Native navigation
     steroids.view.navigationBar.show($scope.project.title);
 
@@ -93,6 +97,6 @@ frankieApp.controller('ShowCtrl', function ($scope) {
     steroids.view.navigationBar.setButtons({
       right: [editButton]
     });
-  }
+  }());
 
 });
