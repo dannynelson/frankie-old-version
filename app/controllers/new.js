@@ -32,6 +32,11 @@ frankieApp.controller('NewCtrl', function ($scope, today) {
       // Notify the index.html to reload
       var msg = { status: 'reload' };
       window.postMessage(msg, "*");
+      // Clear local storage
+      localStorage.removeItem('timeline');
+      localStorage.removeItem('clientInfo');
+
+      // Return to index
       steroids.layers.pop();
     };
 
@@ -86,7 +91,6 @@ frankieApp.controller('NewCtrl', function ($scope, today) {
     }
     if (event.data.status === "timelineUpdated") {
       $scope.project.timeline = JSON.parse(localStorage.getItem('timeline'));
-      debugger;
     }
     $scope.$apply();
   });

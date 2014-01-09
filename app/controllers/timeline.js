@@ -1,6 +1,7 @@
 frankieApp.controller('TimelineCtrl', function ($scope, today) {
 
-  $scope.milestones = [{
+  $scope.milestones = JSON.parse(localStorage.getItem('timeline')) ||
+  [{
     description: "",
     date: today
   }];

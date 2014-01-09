@@ -51,10 +51,7 @@
           <a hm-tap="openClientInfo()">
             <div class="input">
               <label for="client">Client</label>
-<!--               <span id="client">{{ project.clientInfo.firstName }}</span>
- -->
-              <input id="client" type="text" placeholder="No Client" value="{{ project.clientInfo.firstName + ' ' + project.clientInfo.lastName }}" disabled>
-              </input>
+              <span ng-show="project.clientInfo" id="client">{{ project.clientInfo.firstName + ' ' + project.clientInfo.lastName }}</span>
               <span class="chevron"/>
             </div>
           </a>  
@@ -64,8 +61,7 @@
           <a hm-tap="openTimeline()">
             <div class="input">
               <label for="timeline">Timeline</label>
-<!--               <span id="timeline">{{ project.timeline.length + ' ' + 'milestones' }}</span>
- -->              <input id="timeline" type="text" placeholder="0 Milestones" value="{{ project.timeline.length + ' ' + 'milestones' }}" disabled/>
+              <span ng-show="project.timeline" id="timeline">{{ project.timeline.length + ' ' + 'milestones' }}</span>
               <span class="chevron"/>
             </div>
           </a> 
