@@ -16,9 +16,9 @@ frankieApp.controller('NewCtrl', function ($scope, today) {
       var privateProject = new Project();
       privateProject.set(project);
       if (parseFile) privateProject.set("photoURL", parseFile.url());
-      privateProject.set("timeline", JSON.parse(localStorage.getItem("timeline")));
+      if ($scope.project.timeline) privateProject.set("timeline", $scope.project.timeline);
+      if ($scope.project.clientInfo) privateProject.set("clientInfo", $scope.project.clientInfo);
       privateProject.set("user", Parse.User.current());
-      privateProject.set("clientInfo", JSON.parse(localStorage.getItem("clientInfo")));
       privateProject.setACL(new Parse.ACL(Parse.User.current()));
       privateProject.save(null, {
         success: function(object) {

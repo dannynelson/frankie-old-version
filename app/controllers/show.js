@@ -17,12 +17,10 @@ frankieApp.controller('ShowCtrl', function ($scope) {
 
   //why is this getting called on initialize?
   $scope.savePhoto = function() {
-    debugger;
     if (!$scope.photo) return; //why is this getting called on initialize?
     var base64 = $scope.photo.split('base64,')[1];
     var parseFile = new Parse.File("photo.jpg", { base64: base64 });
     parseFile.save().then(function() {
-      debugger;
       $scope.project.timeline[$scope.selectedIdx].photoURL = parseFile.url();
       $scope.$apply();
       $scope.parseProject.attributes = $scope.project;
