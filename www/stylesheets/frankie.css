@@ -86,9 +86,10 @@ body.landing {
 }
 
 .listing-img {
-  width: 100px;
-  height: 70px;
+  width: 80px;
+  height: 50px;
   border-radius: 5px;
+  float: right;
 }
 
 .show-img {
@@ -98,9 +99,8 @@ body.landing {
 }
 
 .listing-text {
-  margin-top: 3px;
   display: inline-block;
-  margin-left: 10px;
+  margin: 5px 0px 0px 10px;
   vertical-align: top;
 }
 
@@ -122,15 +122,23 @@ body.landing {
 }
 
 .timeline-photo {
+  line-height: 60px;
+  vertical-align: middle;
   float: right;
-  vertical-align: top;
-  margin: 20px 20px 0px 0px;
   color: #273552;
+  margin-right: 15px;
+}
+
+.timeline-img {
+  width: 80px;
+  height: 50px;
+  border-radius: 5px;
+  float: right;
 }
 
 .checkbox {
-  vertical-align: top;
-  margin: 20px 10px 0px 0px;
+  line-height: 60px;
+  vertical-align: middle;
   color: #D3D3D3; 
 }
 

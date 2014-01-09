@@ -40,12 +40,13 @@
       <div class="listing-group">
         <div class="listing underline" hm-tap="open(project.id)" ng-repeat="milestone in project.timeline">
           <i class="fa fa-check-circle fa-2x checkbox" ng-class="{ selected: milestone.completed }" hm-tap="toggleCompleted($index)"></i>
-          <img class="listing-img" ng-src="{{ milestone.photoURL || placeholder }}"></img>
           <div class="listing-text">
             <div class="listing-title">{{ milestone.description }}</div>
             <div>Due on: {{ milestone.date }} </div>
           </div>
-          <i class="fa fa-camera fa-2x timeline-photo" hm-tap="uploadPhoto($index)"></i> 
+          <!-- not too sure how this works but it's awesome -->
+          <img ng-show="photo + $index" class="timeline-img" ng-src="{{ milestone.photoURL || placeholder }}"></img>
+          <i ng-hide="photo + $index" class="fa fa-camera fa-2x timeline-photo" hm-tap="uploadPhoto($index)"></i> 
         </div>
       </div>
     </div>
