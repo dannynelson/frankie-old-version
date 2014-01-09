@@ -36,9 +36,9 @@ frankieApp.controller('IndexCtrl', function ($scope) {
   $scope.projects = [];
 
   // Helper function for opening new webviews
-  $scope.open = function($index) {
-    localStorage.setItem("currentProject", JSON.stringify($scope.projects[$index]));
-    projectView = new steroids.views.WebView("/views/frankie/show.html");
+  $scope.open = function(id) {
+    // localStorage.setItem("currentProject", JSON.stringify($scope.projects[$index]));
+    projectView = new steroids.views.WebView("/views/frankie/show.html?id=" + id);
     steroids.layers.push(projectView);
   };
 
