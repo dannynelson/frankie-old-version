@@ -1,4 +1,4 @@
-var frankieApp = angular.module('frankieApp', ['hmTouchevents']);
+var frankieApp = angular.module('frankieApp', ['hmTouchevents', 'ngSanitize']);
 
 frankieApp.directive("fileread", [function () {
   return {
@@ -16,6 +16,12 @@ frankieApp.directive("fileread", [function () {
         reader.readAsDataURL(changeEvent.target.files[0]);
       });
     }
+  };
+}]);
+
+frankieApp.directive("nav", [function ($scope) {
+  return {
+    template: '<div class="navigation" ng-bind-html="test"> </div>'
   };
 }]);
 

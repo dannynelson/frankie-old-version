@@ -1,6 +1,7 @@
 frankieApp.controller('IndexCtrl', function ($scope) {
 
   $scope.placeholder = 'http://placehold.it/140x100';
+  $scope.test = '<i class="fa fa-plus"></i>';
 
   // Build Drawer
   var leftDrawer = new steroids.views.WebView("/views/frankie/drawer.html");

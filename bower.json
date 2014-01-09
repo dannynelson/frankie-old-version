@@ -12,9 +12,10 @@
   ],
   "dependencies": {
     "steroids-js": "3.1.x",
-    "angular": "1.0.7",
+    "angular": "latest",
     "underscore": "1.5.1",
     "restangular": "1.0.7",
-    "momentjs": "~2.5.0"
+    "momentjs": "~2.5.0",
+    "angular-sanitize": "~1.2.7"
   }
 }
