@@ -8,6 +8,12 @@ frankieApp.controller('SignupCtrl', function ($scope) {
   };
 
   $scope.create = function(credentials) {
+
+    if(!$scope.frankie.username && !$scope.frankie.password && !$scope.frankie.email){
+      alert("Enter a username, password, and email");
+      return;
+    }
+
     $scope.loading = true;
     var user = new Parse.User();
     user.set(credentials);

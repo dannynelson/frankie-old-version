@@ -40,6 +40,12 @@
   $scope.create = function(user) {
     $scope.loading = true;
 
+    if(!$scope.frankie.username && !$scope.frankie.password) {
+      alert("Enter a username & password");
+      $scope.loading = false;
+      return;
+    }
+  
     Parse.User.logIn(user.username, user.password, {
       success: function(user) {
         $scope.loading = false;
@@ -59,5 +65,7 @@
   if (currentUser) {
     $scope.showIndexView();
   }
+
+
 
 });
