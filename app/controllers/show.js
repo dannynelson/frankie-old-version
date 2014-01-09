@@ -8,6 +8,14 @@ frankieApp.controller('ShowCtrl', function ($scope) {
     return moment(milestone.date, "YYYY-MM-DD").fromNow();
   };
 
+  $scope.formatStart = function(project) {
+    return moment(project.start).format("MMM Do");
+  };
+  $scope.formatEnd = function(project) {
+    return moment(project.end).format("MMM Do");
+  };
+
+
   $scope.uploadPhoto = function($index) {
     $scope.selectedIdx = $index;
     // debugger;

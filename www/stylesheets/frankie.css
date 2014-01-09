@@ -8,6 +8,12 @@
   font-size: 17px;
 }
 
+/* miscellaneous styles */
+
+.margin-top-5 {
+  margin-top: 5px;
+}
+
 input[type="date"], input[type="submit"], input[type="file"] {
   -webkit-appearance: none;
 }
@@ -81,8 +87,15 @@ body.landing {
   padding: 12px 0px 8px 0px;
 }
 
+.listing-header {
+  margin: 15px 0px 5px 20px;
+  font-size: 15px;
+  font-family: helvetica;
+}
+
 .listing-group {
-  background-color: #fff;
+/*  margin-top: 60px;
+*/  background-color: #fff;
   border-top: 1px solid #cfcfcf;
   border-bottom: 1px solid #cfcfcf;
 }
@@ -106,7 +119,7 @@ body.landing {
 
 .listing-text {
   display: inline-block;
-  margin: 5px 0px 0px 10px;
+  margin: 0px 0px 0px 10px;
   vertical-align: top;
 }
 
@@ -120,8 +133,9 @@ body.landing {
   text-decoration: none;
   text-align: center;
   border-radius: 5px;
-  width: 50px;
+  width: 40px;
   height: 25px;
+  margin: 2px;
   line-height: 25px;
   background-color: #273552;
   color: #fff;
@@ -331,4 +345,10 @@ li, .input {
   -webkit-animation-duration:        1s;
   -webkit-animation-iteration-count: infinite;
   -webkit-animation-timing-function: linear;
+}
+
+/* Miscellaneous adjustments */
+
+.margin-top-5 {
+  margin-top: 5px;
 }

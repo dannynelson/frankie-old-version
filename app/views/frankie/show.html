@@ -6,7 +6,9 @@
 
 
     <!-- Header information -->
+    <div class="listing-header">OVERVIEW</div>
     <div class="listing-group">
+      <!-- Project summary -->
       <div class="listing underline">
         <img class="show-img" ng-src="{{ project.photoURL || placeholder }}"></img>
         <div class="listing-text">
@@ -17,10 +19,15 @@
             ${{ project.price }}
           </div>
           <div>
-            {{ project.start }} - {{ project.end }}
+            {{ formatStart(project) }} - {{ formatEnd(project) }}
           </div>
         </div>
       </div>
+    </div>
+
+      <!-- Client info -->
+    <div class="listing-header">CLIENT INFO</div>
+    <div class="listing-group">
       <div class="listing underline">
         <img class="profile-img" src="https://s3.amazonaws.com/akiaisoxi7kjcprfrvjq/artists/placeholder.png"></img>
         <div class="listing-text">
@@ -45,11 +52,13 @@
       </div>
     </div>
 
-    <div ng-show="project.timeline">
-      <div class="listing-group">
+    <!-- Timeline -->
+    <div class="listing-header">TIMELINE</div>
+    <div class="listing-group">
+      <div ng-show="project.timeline">
         <div class="listing underline" hm-tap="open(project.id)" ng-repeat="milestone in project.timeline">
           <i class="fa fa-check-circle fa-2x checkbox" ng-class="{ selected: milestone.completed }" hm-tap="toggleCompleted($index)"></i>
-          <div class="listing-text">
+          <div class="listing-text margin-top-5">
             <div class="listing-title">{{ milestone.description }}</div>
             <div>Due: {{ findNextDate(milestone) }} </div>
           </div>
