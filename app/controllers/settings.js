@@ -3,41 +3,30 @@ frankieApp.controller('SettingsCtrl', function ($scope) {
   steroids.view.navigationBar.show('Settings');
 
   var currentUser = Parse.User.current();
-  $scope.currentUser = currentUser;
 
-  $scope.update = function(updatedCredentials) {
-    alert(currentUser.password);
-    currentUser.requestPasswordReset(currentUser.getEmail(), {
+  $scope.sendRequest = function() {
+    Parse.User.requestPasswordReset(currentUser.getEmail(), {
       success: function() {
-        alert("Reset instructions emailed to you.");
+        alert("Request Sent");
       },
       error: function(error) {
-        alert(error.message);
+        alert("Error: " + error.code + " " + error.message);
       }
     });
+    steroids.layers.pop();
   };
-  
-  $scope.updatePassword = {};
 
-  // $scope.create = function(credentials) {
-  //   $scope.loading = true;
+  $scope.updateEmail = function(update) {
+    if(update.newEmail === update.confirmEmail) {
+      currentUser.set("email", update.confirmEmail);
+      currentUser.save();
+      alert("New email set");
+    } else if(update.newEmail !== update.confirmEmail) {
+      alert("Emails do not match");
+    }
+    steroids.layers.pop();
+  };
 
-  //   var user = new Parse.User();
-  //   user.set(credentials);
-     
-  //   user.signUp(null, {
-  //     success: function(user) {
-  //       $scope.loading = false;
-  //       alert('account created');
-  //       $scope.close();
-  //     },
-  //     error: function(user, error) {
-  //       $scope.loading = false;
-  //       alert("Error: " + error.code + " " + error.message);
-  //     }
-  //   });
-  // };
-
-  // $scope.frankie = {};
+  $scope.update = {};
 
 });

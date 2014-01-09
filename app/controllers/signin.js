@@ -1,4 +1,4 @@
-frankieApp.controller('SigninCtrl', function ($scope) {
+  frankieApp.controller('SigninCtrl', function ($scope) {
 
   $scope.init = function() {
     // Landing class to add purple background
