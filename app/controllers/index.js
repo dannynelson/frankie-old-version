@@ -1,7 +1,9 @@
 frankieApp.controller('IndexCtrl', function ($scope) {
 
   $scope.placeholder = 'http://placehold.it/140x100';
-  $scope.test = '<i class="fa fa-plus"></i>';
+  $scope.navigation = {
+    left: '<i class="fa fa-plus"></i>'
+  };
 
   // Build Drawer
   var leftDrawer = new steroids.views.WebView("/views/frankie/drawer.html");
@@ -13,25 +15,25 @@ frankieApp.controller('IndexCtrl', function ($scope) {
   }
   
   // build navigation bar
-  steroids.view.navigationBar.show('Calendar');
-  var addButton = new steroids.buttons.NavigationBarButton();
-  // addButton.title = 'add';
-  addButton.imagePath = "/icons/plus.png";
-  addButton.onTap = function() {
-    var newView = new steroids.views.WebView('/views/frankie/new.html');
-    steroids.layers.push(newView);
-  };
-  var settingsButton = new steroids.buttons.NavigationBarButton();
-  // settingsButton.title = 'settings';
-  settingsButton.imagePath = "/icons/cogwheels.png";
-  settingsButton.onTap = function() {
-    steroids.drawers.show(leftDrawer);
-  };
-  steroids.view.navigationBar.setButtons({
-    right: [addButton],
-    left: [settingsButton],
-    overrideBackButton: true
-  });
+  // steroids.view.navigationBar.show('Calendar');
+  // var addButton = new steroids.buttons.NavigationBarButton();
+  // // addButton.title = 'add';
+  // addButton.imagePath = "/icons/plus.png";
+  // addButton.onTap = function() {
+  //   var newView = new steroids.views.WebView('/views/frankie/new.html');
+  //   steroids.layers.push(newView);
+  // };
+  // var settingsButton = new steroids.buttons.NavigationBarButton();
+  // // settingsButton.title = 'settings';
+  // settingsButton.imagePath = "/icons/cogwheels.png";
+  // settingsButton.onTap = function() {
+  //   steroids.drawers.show(leftDrawer);
+  // };
+  // steroids.view.navigationBar.setButtons({
+  //   right: [addButton],
+  //   left: [settingsButton],
+  //   overrideBackButton: true
+  // });
 
   // This will be populated with Parse
   $scope.projects = [];

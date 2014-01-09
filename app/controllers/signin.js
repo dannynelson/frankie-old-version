@@ -5,17 +5,17 @@
     document.body.className = "landing";
 
     // Navigation Bar
-    steroids.view.navigationBar.show();
-    var signupButton = new steroids.buttons.NavigationBarButton();
-    signupButton.title = "signup";
-    signupButton.onTap = function() {
-      var signupView = new steroids.views.WebView("/views/frankie/signup.html");
-      steroids.layers.push(signupView);
-    };
-    steroids.view.navigationBar.setButtons({
-      right: [signupButton],
-      overrideBackButton: true
-    });
+    // steroids.view.navigationBar.show();
+    // var signupButton = new steroids.buttons.NavigationBarButton();
+    // signupButton.title = "signup";
+    // signupButton.onTap = function() {
+    //   var signupView = new steroids.views.WebView("/views/frankie/signup.html");
+    //   steroids.layers.push(signupView);
+    // };
+    // steroids.view.navigationBar.setButtons({
+    //   right: [signupButton],
+    //   overrideBackButton: true
+    // });
 
   };
   $scope.init();
@@ -40,22 +40,21 @@
   $scope.create = function(user) {
     $scope.loading = true;
 
-    if(!$scope.frankie.username && !$scope.frankie.password) {
+    if(!user.username && !user.password) {
       alert("Enter a username & password");
-      $scope.loading = false;
       return;
     }
   
     Parse.User.logIn(user.username, user.password, {
       success: function(user) {
-        $scope.loading = false;
         $scope.showIndexView();
       },
       error: function(user, error) {
-        $scope.loading = false;
         alert("Invalid Username or Password");
       }
     });
+    $scope.loading = false;
+
   };
 
   $scope.frankie = {};

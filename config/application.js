@@ -16,3 +16,5 @@ steroids.config.loadingScreen.tintColor = "#262626";
 steroids.config.statusBar.enabled = true;
 
 steroids.config.statusBar.style = "light";
+
+steroids.config.watch.exclude = ["www"];

@@ -9,7 +9,7 @@ frankieApp.controller('SignupCtrl', function ($scope) {
 
   $scope.create = function(credentials) {
 
-    if(!$scope.frankie.username && !$scope.frankie.password && !$scope.frankie.email){
+    if(!credentials.username && !credentials.password && !credentials.email){
       alert("Enter a username, password, and email");
       return;
     }
@@ -19,15 +19,15 @@ frankieApp.controller('SignupCtrl', function ($scope) {
     user.set(credentials);
     user.signUp(null, {
       success: function(user) {
-        $scope.loading = false;
         alert('account created');
         $scope.close();
       },
       error: function(user, error) {
-        $scope.loading = false;
         alert("Error: " + error.code + " " + error.message);
       }
     });
+    $scope.loading = false;
+
   };
 
   $scope.frankie = {};

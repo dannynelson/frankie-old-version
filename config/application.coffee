@@ -46,7 +46,9 @@ steroids.config.statusBar.enabled = true;
 steroids.config.statusBar.style = "light"
 
 # -- File Watcher --
-# steroids.config.watch.exclude = ["www/my_excluded_file.js", "www/my_excluded_dir"]
+steroids.config.watch.exclude = [
+  "www"
+]
 
 # -- Pre- and Post-Make hooks --
 # steroids.config.hooks.preMake.cmd = "echo"

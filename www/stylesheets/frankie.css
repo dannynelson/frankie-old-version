@@ -8,17 +8,37 @@
   font-size: 17px;
 }
 
-.navigation {
+.nav {
   position: fixed;
   top: 0px;
+  padding: 0px 10px 0px 10px;
   width: 100%;
-  height: 60px;
+  height: 44px;
   color: #fff;
   background-color: #273552;
 }
-.navigation-title {
-  margin: auto;
-  font-style: bold;
+.nav .left {
+  line-height: 44px;
+  float: left;
+  width:33.33333%;
+  text-align:left;
+}
+.nav .center {
+  line-height: 44px;
+  float: left;
+  width:33.33333%;
+  text-align:center;
+}
+.nav .right {
+  line-height: 44px;
+
+ float: left;
+ width:33.33333%;
+ text-align:right;
+}
+
+.nav-margin {
+  margin-bottom: 44px;
 }
 
 /* miscellaneous styles */
@@ -366,3 +386,4 @@ li, .input {
 .margin-top-5 {
   margin-top: 5px;
 }
+

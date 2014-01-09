@@ -20,8 +20,14 @@ frankieApp.directive("fileread", [function () {
 }]);
 
 frankieApp.directive("nav", [function ($scope) {
+  // TODO: put this template into frankie.html
   return {
-    template: '<div class="navigation" ng-bind-html="test"> </div>'
+    template: '<div class="nav" >'+
+      '<div class="left" ng-bind-html="navigation.left"></div>'+
+      '<div class="center" ng-bind-html="navigation.center"></div>'+
+      '<div class="right" ng-bind-html="navigation.right"></div>'+
+    '</div>'+
+    '<div class="nav-margin"></div>'
   };
 }]);
 
@@ -52,4 +58,5 @@ frankieApp.run(function() {
     "P2Z0R55WriW7Mi8h6bQqmhlLgGZQxjPe3Vc7PVQx",
     "jvPhmi8qIckRbuv6C1ezzXCMMivYTfJrjjHK5Tcc"
   );
+  steroids.view.setBackgroundColor("#273552");
 });
