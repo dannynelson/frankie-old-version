@@ -42,6 +42,10 @@ frankieApp.controller('IndexCtrl', function ($scope) {
     steroids.layers.push(projectView);
   };
 
+  $scope.findNextDate = function(project) {
+    return moment(project.get('end'), "YYYY-MM-DD").fromNow();
+  };
+
   // Fetch all objects from the backend (see app/models/frankie.js)
   $scope.load = function() {
     var Project = Parse.Object.extend("Project");
@@ -61,6 +65,7 @@ frankieApp.controller('IndexCtrl', function ($scope) {
     });
   };
   $scope.load();
+  debugger;
 
   // Event listeners
   window.addEventListener("message", function(event) {

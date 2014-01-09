@@ -43,7 +43,7 @@
           <i class="fa fa-check-circle fa-2x checkbox" ng-class="{ selected: milestone.completed }" hm-tap="toggleCompleted($index)"></i>
           <div class="listing-text">
             <div class="listing-title">{{ milestone.description }}</div>
-            <div>Due on: {{ milestone.date }} </div>
+            <div>Due: {{ findNextDate(milestone) }} </div>
           </div>
           <!-- not too sure how this works but it's awesome -->
 

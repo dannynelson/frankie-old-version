@@ -12,7 +12,7 @@
           <div class="listing-text">
             <div class="listing-title">{{ project.get('title') }}</div>
             <div>Next step: {{ project.get('timeline')[0].description }} </div>
-            <div>Due: {{ project.get('timeline')[0].date }}</div>
+            <div>Due: {{ findNextDate(project) }}</div>
           </div>
           <span class="chevron"/>
         </div>

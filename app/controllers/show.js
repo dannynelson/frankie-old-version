@@ -4,6 +4,10 @@ frankieApp.controller('ShowCtrl', function ($scope) {
 
   $scope.project = {};
 
+  $scope.findNextDate = function(milestone) {
+    return moment(milestone.date, "YYYY-MM-DD").fromNow();
+  };
+
   $scope.uploadPhoto = function($index) {
     $scope.selectedIdx = $index;
     // debugger;
