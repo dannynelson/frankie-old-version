@@ -1,33 +1,68 @@
 <div ng-app="frankieApp">
-
   <div ng-controller="EditCtrl">
     <div class="spinner" ng-show="loading"></div>
-    <div class="content-padded">
       <form class="simple-form" ng-submit="create(project)">
         
-        <input class="topcoat-text-input full" type="text" placeholder="Title of Project" ng-model="project.title" /><br />
+        <!-- Basic Info -->
+        <div class="input-group">
+          <div class="input underline">
+            <label for="title">Title</label>
+            <input id="title" type="text" placeholder="My Project" ng-model="project.title" /><br />
+          </div>
 
-        <input class="topcoat-text-input full" type="text" placeholder="Notes" ng-model="project.notes" /><br />
+          <div class="input underline">
+            <label for="price">Price</label>
+            $<input id="price" type="number" placeholder="150" ng-model="project.price" /><br />
+          </div>
 
-        <input class="topcoat-text-input full" type="date" placeholder="Start Date" ng-model="project.start" />
-
-        <input class="topcoat-text-input full" type="date" placeholder="End Date" ng-model="project.end" /><br />
-
-        <a class="topcoat-button full" hm-tap="openClientInfo()">
-          Client Information
-          <span class="chevron"/>
-        </a>  
-
-        <a class="topcoat-button full" hm-tap="openTimeline()">
-          Timeline
-          <span class="chevron"/>
-        </a> 
+          <div class="input">
+            <textarea class="text-box" rows="2" placeholder="Notes" ng-model="project.notes"></textarea><br />
+          </div>
+        </div>
         
-        <input type="submit" value="Update"></input>
+        <!-- Photo upload -->
+        <div class="input-group">
+          <div class="input new-photo">
+            <input id="photo" type="file" fileread="photo" accept="image/*" />
+            <i ng-hide="photo" class="fa fa-camera fa-4x" hm-tap="uploadPhoto()"></i>
+            <img ng-show="photo" ng-src="{{ photo }}"></img>
+          </div>
+        </div>
 
+        <!-- Dates -->
+        <div class="input-group">
+          <div class="input underline">
+            <label for="start">Start date</label>
+            <input type="date" placeholder="2014/11/11" id="start" placeholder="Start Date" ng-model="project.start"></input>
+          </div>
+          <div class="input">
+            <label for="end">End date</label>
+            <input type="date" placeholder="2014/11/11" id="start" placeholder="Start Date" ng-model="project.end"></input>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <a hm-tap="openClientInfo()">
+            <div class="input">
+              <label for="client">Client</label>
+              <span ng-show="project.clientInfo" id="client">{{ project.clientInfo.firstName + ' ' + project.clientInfo.lastName }}</span>
+              <span class="chevron"/>
+            </div>
+          </a>  
+        </div>
+        
+        <div class="input-group">
+          <a hm-tap="openTimeline()">
+            <div class="input">
+              <label for="timeline">Timeline</label>
+              <span ng-show="project.timeline" id="timeline">{{ project.timeline.length + ' ' + 'milestones' }}</span>
+              <span class="chevron"/>
+            </div>
+          </a> 
+        </div>
+
+        <input type="submit" value="Save"></input>
       </form>
-
-    </div>
 
   </div>
 

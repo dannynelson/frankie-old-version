@@ -23,12 +23,16 @@
           </div>
         </div>
       </div>
+      <div ng-show="project.notes" class="listing">
+        {{ project.notes }}
+      </div>
     </div>
 
       <!-- Client info -->
+    <div ng-show="project.clientInfo">
     <div class="listing-header">CLIENT INFO</div>
     <div class="listing-group">
-      <div class="listing underline">
+      <div class="listing">
         <img class="profile-img" src="https://s3.amazonaws.com/akiaisoxi7kjcprfrvjq/artists/placeholder.png"></img>
         <div class="listing-text">
           <div class="listing-title">
@@ -47,12 +51,11 @@
           </div>
         </div>
       </div>
-      <div ng-show="project.notes" class="listing underline">
-        {{ project.notes }}
-      </div>
+    </div>
     </div>
 
     <!-- Timeline -->
+    <div ng-show="project.timeline">
     <div class="listing-header">TIMELINE</div>
     <div class="listing-group">
       <div ng-show="project.timeline">
@@ -68,6 +71,7 @@
           <i ng-hide="milestone.photoURL" class="fa fa-camera fa-2x timeline-photo" hm-tap="uploadPhoto($index)"></i> 
         </div>
       </div>
+    </div>
     </div>
 
   </div>

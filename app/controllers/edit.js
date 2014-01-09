@@ -1,6 +1,7 @@
 frankieApp.controller('EditCtrl', function ($scope) {
 
   $scope.project = JSON.parse(localStorage.getItem("currentProject"));
+  debugger;
 
   //project gets modified by passing into function?
   $scope.update = function(project) {
