@@ -19,9 +19,9 @@ input[type="date"], input[type="submit"], input[type="file"] {
 
 
 
-input[type="file"] {
+/*input[type="file"] {
   display: none;
-}
+}*/
 
 
 input, textarea {

@@ -2,7 +2,6 @@
 
   <div ng-controller="ShowCtrl">
     <div class="spinner" ng-show="loading"></div>
-    <input id="file" type="file" fileread="photo" accept="image/*"></input>
 
     <!-- Header information -->
     <div class="listing-group">
@@ -45,8 +44,10 @@
             <div>Due on: {{ milestone.date }} </div>
           </div>
           <!-- not too sure how this works but it's awesome -->
-          <img ng-show="photo + $index" class="timeline-img" ng-src="{{ milestone.photoURL || placeholder }}"></img>
-          <i ng-hide="photo + $index" class="fa fa-camera fa-2x timeline-photo" hm-tap="uploadPhoto($index)"></i> 
+          <input id="{{'file' + 1}}" type="file" fileread="photo" accept="image/*"></input>
+
+          <img ng-show="photo" class="timeline-img" ng-src="{{ milestone.photoURL || placeholder }}"></img>
+          <i ng-hide="photo" class="fa fa-camera fa-2x timeline-photo" hm-tap="uploadPhoto($index)"></i> 
         </div>
       </div>
     </div>
