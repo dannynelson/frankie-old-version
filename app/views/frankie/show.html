@@ -7,7 +7,7 @@
 
     <!-- Header information -->
     <div class="listing-group">
-      <div class="listing">
+      <div class="listing underline">
         <img class="show-img" ng-src="{{ project.photoURL || placeholder }}"></img>
         <div class="listing-text">
           <div class="listing-title">
@@ -19,7 +19,15 @@
           <div>
             {{ project.start }} - {{ project.end }}
           </div>
-          <div>
+        </div>
+      </div>
+      <div class="listing underline">
+        <img class="profile-img" src="https://s3.amazonaws.com/akiaisoxi7kjcprfrvjq/artists/placeholder.png"></img>
+        <div class="listing-text">
+          <div class="listing-title">
+            {{ project.clientInfo.firstName + ' ' + project.clientInfo.lastName }}
+          </div>
+          <div class="contact-buttons">
             <a class="contact-button" href="tel:{{ project.clientInfo.phone }}">
               <i class="fa fa-phone"></i>
             </a>
