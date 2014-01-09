@@ -119,6 +119,7 @@ body.landing {
 
 .listing-text {
   display: inline-block;
+  width: 60%;
   margin: 0px 0px 0px 10px;
   vertical-align: top;
 }

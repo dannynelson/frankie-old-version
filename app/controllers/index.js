@@ -65,7 +65,6 @@ frankieApp.controller('IndexCtrl', function ($scope) {
     });
   };
   $scope.load();
-  debugger;
 
   // Event listeners
   window.addEventListener("message", function(event) {

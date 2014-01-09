@@ -11,7 +11,7 @@
           <img class="listing-img" ng-src="{{ project.get('photoURL') || placeholder }}"></img>
           <div class="listing-text">
             <div class="listing-title">{{ project.get('title') }}</div>
-            <div>Next step: {{ project.get('timeline')[0].description }} </div>
+            <div>Estimate: ${{ project.get('price')}} </div>
             <div>Due: {{ findNextDate(project) }}</div>
           </div>
           <span class="chevron"/>
