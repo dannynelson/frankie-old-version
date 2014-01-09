@@ -6,13 +6,19 @@ frankieApp.controller('ShowCtrl', function ($scope) {
 
   $scope.uploadPhoto = function($index) {
     $scope.selectedIdx = $index;
-    debugger;
-    alert('photo uploaded');
+    // debugger;
+    // alert('photo uploaded');
     document.getElementById('file').click();
   };
 
   $scope.toggleCompleted = function($index) {
     $scope.project.timeline[$index].completed = !$scope.project.timeline[$index].completed;
+  };
+
+  $scope.loadPhoto = function() {
+    debugger;
+    $scope.project.timeline[$scope.selectedIdx].photoURL = $scope.photo;
+    $scope.$appy();
   };
 
   //why is this getting called on initialize?
@@ -58,7 +64,7 @@ frankieApp.controller('ShowCtrl', function ($scope) {
     }
   });
 
-  $scope.$watch('photo', $scope.savePhoto);
+  $scope.$watch('photo', $scope.loadPhoto);
 
   function setNavigation() {
     // -- Native navigation
