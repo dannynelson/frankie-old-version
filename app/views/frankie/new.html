@@ -37,12 +37,12 @@
           
           <div class="input underline">
             <label for="start">Start date</label>
-            <input type="date" value="2013/11/11" placeholder="2014/11/11" id="start" placeholder="Start Date" ng-model="project.start"></input>
+            <input type="date" placeholder="2014/11/11" id="start" placeholder="Start Date" ng-model="project.start"></input>
           </div>
 
           <div class="input">
             <label for="end">End date</label>
-            <input type="date" id="end" placeholder="End Date" ng-model="project.end" /><br />
+            <input type="date" placeholder="2014/11/11" id="start" placeholder="Start Date" ng-model="project.end"></input>
           </div>
 
         </div>
@@ -51,7 +51,10 @@
           <a hm-tap="openClientInfo()">
             <div class="input">
               <label for="client">Client</label>
-              <input id="client" type="text" placeholder="No Client" ng-model="project.price" disabled/>
+<!--               <span id="client">{{ project.clientInfo.firstName }}</span>
+ -->
+              <input id="client" type="text" placeholder="No Client" value="{{ project.clientInfo.firstName + ' ' + project.clientInfo.lastName }}" disabled>
+              </input>
               <span class="chevron"/>
             </div>
           </a>  
@@ -61,7 +64,8 @@
           <a hm-tap="openTimeline()">
             <div class="input">
               <label for="timeline">Timeline</label>
-              <input id="timeline" type="text" placeholder="0 Milestones" ng-model="project.price" disabled/>
+<!--               <span id="timeline">{{ project.timeline.length + ' ' + 'milestones' }}</span>
+ -->              <input id="timeline" type="text" placeholder="0 Milestones" value="{{ project.timeline.length + ' ' + 'milestones' }}" disabled/>
               <span class="chevron"/>
             </div>
           </a> 

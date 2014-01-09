@@ -11,6 +11,8 @@ frankieApp.controller('ClientCtrl', function ($scope) {
     };
     localStorage.setItem("clientInfo", JSON.stringify(client));
 
+    var msg = { status: 'clientUpdated' };
+    window.postMessage(msg, "*");
     steroids.layers.pop();
   };
 });

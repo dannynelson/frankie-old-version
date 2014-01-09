@@ -25,6 +25,8 @@ frankieApp.controller('TimelineCtrl', function ($scope, today) {
 
   $scope.save = function() {
     localStorage.setItem("timeline", angular.toJson($scope.milestones));
+    var msg = { status: 'timelineUpdated' };
+    window.postMessage(msg, "*");
     steroids.layers.pop();
   };
 });

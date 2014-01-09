@@ -1,7 +1,7 @@
 <div ng-app="frankieApp">
 
   <div ng-controller="TimelineCtrl">
-
+    <form ng-submit="save()">
       <div class="input-group" ng-repeat="milestone in milestones">
 
         <div class="input underline">
@@ -15,8 +15,8 @@
         </div>
 
       </div>
-
-    <a class="topcoat-button--cta full center" hm-tap="save()">Save Timeline</a>
+      <input type="submit" value="Save"/>
+    </form>
 
   </div>
 

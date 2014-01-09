@@ -14,20 +14,21 @@ frankieApp.controller('IndexCtrl', function ($scope) {
   // build navigation bar
   steroids.view.navigationBar.show('Calendar');
   var addButton = new steroids.buttons.NavigationBarButton();
-  addButton.title = 'add';
-  // addButton.imagePath = "/icons/plus.png";
+  // addButton.title = 'add';
+  addButton.imagePath = "/icons/plus.png";
   addButton.onTap = function() {
     var newView = new steroids.views.WebView('/views/frankie/new.html');
     steroids.layers.push(newView);
   };
   var settingsButton = new steroids.buttons.NavigationBarButton();
+  // settingsButton.title = 'settings';
   settingsButton.imagePath = "/icons/cogwheels.png";
   settingsButton.onTap = function() {
     steroids.drawers.show(leftDrawer);
   };
   steroids.view.navigationBar.setButtons({
-    left: [settingsButton],
     right: [addButton],
+    left: [settingsButton],
     overrideBackButton: true
   });
 
@@ -35,9 +36,9 @@ frankieApp.controller('IndexCtrl', function ($scope) {
   $scope.projects = [];
 
   // Helper function for opening new webviews
-  $scope.open = function(id) {
-    debugger;
-    projectView = new steroids.views.WebView("/views/frankie/show.html?id="+id);
+  $scope.open = function($index) {
+    localStorage.setItem("currentProject", JSON.stringify($scope.projects[$index]));
+    projectView = new steroids.views.WebView("/views/frankie/show.html");
     steroids.layers.push(projectView);
   };
 
@@ -49,6 +50,7 @@ frankieApp.controller('IndexCtrl', function ($scope) {
     query.find({
       success: function(results) {
         $scope.projects = results;
+        // save to local storage for faster retrieval
         localStorage.setItem("projects", JSON.stringify(results));
         // necessary to update bindings for promises, should be wrapped in function to catch errors?
         $scope.$apply();

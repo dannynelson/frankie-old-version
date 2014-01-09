@@ -33,22 +33,8 @@ frankieApp.controller('ShowCtrl', function ($scope) {
   };
   
   // retrieve info
-  var Project = Parse.Object.extend("Project");
-  var query = new Parse.Query(Project);
-  query.equalTo("objectId", steroids.view.params.id);
-  query.first({
-    success: function(object) {
-      $scope.parseProject = object;
-      $scope.project = object.attributes;
-      // Save current project info to localStorage (edit.html gets it from there)
-      localStorage.setItem("currentProject", JSON.stringify(object.attributes));
-      $scope.$apply();
-      setNavigation();
-    },
-    error: function(error) {
-      alert("Error: " + error.code + " " + error.message);
-    }
-  });
+  $scope.project = JSON.parse(localStorage.getItem("currentProject"));
+  setNavigation();
 
   // When the data is modified in the edit.html, get notified and update (edit is on top of this view)
   window.addEventListener("message", function(event) {
@@ -61,7 +47,6 @@ frankieApp.controller('ShowCtrl', function ($scope) {
   });
 
   $scope.$watch('photo', $scope.savePhoto);
-
 
   function setNavigation() {
     // -- Native navigation

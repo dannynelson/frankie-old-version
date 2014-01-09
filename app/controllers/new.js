@@ -79,4 +79,15 @@ frankieApp.controller('NewCtrl', function ($scope, today) {
     right: [saveButton],
     overrideBackButton: true
   });
+  // $scope.project.clientInfo = {firstName: 'hello'};
+  window.addEventListener("message", function(event) {
+    if (event.data.status === "clientUpdated") {
+      $scope.project.clientInfo = JSON.parse(localStorage.getItem('clientInfo'));
+    }
+    if (event.data.status === "timelineUpdated") {
+      $scope.project.timeline = JSON.parse(localStorage.getItem('timeline'));
+      debugger;
+    }
+    $scope.$apply();
+  });
 });
