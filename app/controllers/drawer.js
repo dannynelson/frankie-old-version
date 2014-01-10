@@ -1,4 +1,5 @@
 frankieApp.controller('DrawerCtrl', function ($scope) {
+  document.body.className = "drawer";
 
   $scope.logout = function() {
     Parse.User.logOut();

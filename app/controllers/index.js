@@ -4,12 +4,14 @@ frankieApp.controller('IndexCtrl', function ($scope) {
 
   // Build Drawer
   var leftDrawer = new steroids.views.WebView("/views/frankie/drawer.html");
-  leftDrawer.preload({},{
-    onSuccess: initGesture  // When the view has loaded, enable finger tracking
-  });
-  function initGesture() {
-    steroids.drawers.enableGesture(leftDrawer);
-  }
+  var leftDrawerShowing = false;
+  leftDrawer.preload();
+  // leftDrawer.preload({},{
+  //   onSuccess: initGesture  // When the view has loaded, enable finger tracking
+  // });
+  // function initGesture() {
+  //   steroids.drawers.enableGesture(leftDrawer);
+  // }
   
   // build navigation bar
   steroids.view.navigationBar.show('Calendar');
@@ -22,9 +24,16 @@ frankieApp.controller('IndexCtrl', function ($scope) {
   };
   var settingsButton = new steroids.buttons.NavigationBarButton();
   // settingsButton.title = 'settings';
-  settingsButton.imagePath = "/icons/cogwheels.png";
+  settingsButton.imagePath = "/icons/lines.png";
   settingsButton.onTap = function() {
-    steroids.drawers.show(leftDrawer);
+    if (!leftDrawerShowing) {
+      leftDrawerShowing = true;
+      steroids.drawers.show(leftDrawer);
+    } else {
+      leftDrawerShowing = false;
+      steroids.drawers.hide();
+
+    }
   };
   steroids.view.navigationBar.setButtons({
     right: [addButton],

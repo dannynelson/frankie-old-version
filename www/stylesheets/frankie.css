@@ -67,6 +67,10 @@ body.landing {
   background-color: #273552;
 }
 
+body.drawer {
+  background-color: #2a2f3b;
+}
+
 .profile-img {
   height: 50px;
   width: 50px;
@@ -98,6 +102,17 @@ body.landing {
 */  background-color: #fff;
   border-top: 1px solid #cfcfcf;
   border-bottom: 1px solid #cfcfcf;
+}
+
+.listing-dark {
+  color: #fff;
+}
+.listing-dark .listing {
+  margin-left: 15px;
+  border-bottom: 1px solid #454b57;
+}
+.listing-dark i {
+  color: #454b57;
 }
 
 .listing-group .listing {

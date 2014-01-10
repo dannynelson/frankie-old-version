@@ -13,7 +13,7 @@ steroids.config.location = "http://localhost/views/frankie/index.html"
 #   {
 #     title: "Index"
 #     icon: "icons/pill@2x.png"
-#     location: "http://localhost/index.html"
+#     location: "http://localhost/views/frankie/index.html"
 #   },
 #   {
 #     title: "Internet"

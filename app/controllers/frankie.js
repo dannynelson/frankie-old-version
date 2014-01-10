@@ -46,4 +46,6 @@ frankieApp.run(function() {
     "P2Z0R55WriW7Mi8h6bQqmhlLgGZQxjPe3Vc7PVQx",
     "jvPhmi8qIckRbuv6C1ezzXCMMivYTfJrjjHK5Tcc"
   );
+  steroids.view.setBackgroundColor('#000')
+  // steroids.view.setBackgroundColor('#2a2f3b');
 });
