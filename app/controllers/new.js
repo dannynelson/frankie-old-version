@@ -1,9 +1,17 @@
-frankieApp.controller('NewCtrl', function ($scope, today) {
-
-  $scope.project = {
-    start: today,
-    end: today
+frankieApp.controller('NewCtrl', function ($scope, today, navigation) {
+  $scope.init = function() {
+    $scope.project = {
+      start: today,
+      end: today
+    };
+    navigation.build(
+      'New Project',
+      {title: "Save", action: function() { $scope.create($scope.project); } },
+      {title: "Cancel", action: steroids.layers.pop }
+    );
   };
+  $scope.init();
+  
 
   $scope.uploadPhoto = function() {
     document.getElementById('photo').click();
@@ -71,26 +79,6 @@ frankieApp.controller('NewCtrl', function ($scope, today) {
   };
 
 
-  // navigationbar
-  steroids.view.navigationBar.show('New Project');
-
-  var cancelButton = new steroids.buttons.NavigationBarButton();
-  cancelButton.title = "cancel";
-  cancelButton.onTap = function() {
-    steroids.layers.pop();
-  };
-
-  var saveButton = new steroids.buttons.NavigationBarButton();
-  saveButton.title = "save";
-  saveButton.onTap = function() {
-    $scope.create($scope.project);
-  };
-  steroids.view.navigationBar.setButtons({
-    left: [cancelButton],
-    right: [saveButton],
-    overrideBackButton: true
-  });
-  // $scope.project.clientInfo = {firstName: 'hello'};
   window.addEventListener("message", function(event) {
     if (event.data.status === "clientUpdated") {
       $scope.project.clientInfo = JSON.parse(localStorage.getItem('clientInfo'));
