@@ -128,6 +128,15 @@ frankieApp.factory('Project', function() {
     });
   };
 
+  var getById = function(id, successCallback) {
+    query.get(id, {
+      success: successCallback,
+      error: function(error) {
+        alert("Error: " + error.code + " " + error.message);
+      }
+    });
+  };
+
   var save = function(projectAttributes, successCallback) {
     var privateProject = new Project();
     privateProject.set(projectAttributes);
@@ -142,17 +151,25 @@ frankieApp.factory('Project', function() {
   };
 
   var update = function(project, successCallback) {
-    project.save(null, {
-      success: successCallback,
-      error: function(object, error) {
-        alert('Failed to create new object, with error code: ' + error.description);
-      }
+    getById(project.objectId, function(object) {
+      project.save(project, {
+        success: successCallback,
+        error: function(object, error) {
+          alert('Failed to create new object, with error code: ' + error.description);
+        }
+      });
     });
+    // project.save(null, {
+    //   success: successCallback,
+    //   error: function(object, error) {
+    //     alert('Failed to create new object, with error code: ' + error.description);
+    //   }
+    // });
   };
 
   return {
     get: getAll,
-    getFirst: getFirst,
+    getById: getById,
     save: save,
     update: update
   };

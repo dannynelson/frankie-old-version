@@ -51,7 +51,7 @@ frankieApp.controller('ShowCtrl', function ($scope, Project, navigation) {
   };
   
   // retrieve info
-  Project.getFirst("objectId", steroids.view.params.id, function(object) {
+  Project.getById(steroids.view.params.id, function(object) {
     $scope.parseProject = object;
     $scope.project = object.attributes;
     // Save current project info to localStorage (edit.html gets it from there)

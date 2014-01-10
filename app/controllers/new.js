@@ -50,6 +50,7 @@ frankieApp.controller('NewCtrl', function ($scope, today, navigation, Photo, Pro
       Project.save($scope.project, successCallback);
     };
     var updateObject = function() {
+      alert('update');
       if (photoURL) $scope.project.photoURL = photoURL;
       Project.update($scope.project, successCallback);
     };
