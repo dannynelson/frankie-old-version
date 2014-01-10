@@ -14,7 +14,7 @@ frankieApp.controller('IndexCtrl', function ($scope) {
   // }
   
   // build navigation bar
-  steroids.view.navigationBar.show('Calendar');
+  steroids.view.navigationBar.show('Index');
   var addButton = new steroids.buttons.NavigationBarButton();
   // addButton.title = 'add';
   addButton.imagePath = "/icons/plus.png";
@@ -28,7 +28,10 @@ frankieApp.controller('IndexCtrl', function ($scope) {
   settingsButton.onTap = function() {
     if (!leftDrawerShowing) {
       leftDrawerShowing = true;
-      steroids.drawers.show(leftDrawer);
+      steroids.drawers.show({
+        view: leftDrawer,
+        widthOfDrawerInPixels: 150
+      });
     } else {
       leftDrawerShowing = false;
       steroids.drawers.hide();
