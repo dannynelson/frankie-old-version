@@ -104,9 +104,23 @@ frankieApp.factory('User', function() {
   
 });
 
-frankieApp.factory('Project', function() {
+frankieApp.factory('project', function() {
     // generate current date
   var Project = Parse.Object.extend("Project");
+  var getAll = function(column, successCallback) {
+    var query = new Parse.Query(Project);
+    query.equalTo(column, Parse.User.current());
+    query.find({
+      success: successCallback,
+      error: function(error) {
+        alert("Error: " + error.code + " " + error.message);
+      }
+    });
+  };
+
+  return {
+    get: getAll
+  };
 });
 
 frankieApp.run(function() {

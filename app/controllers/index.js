@@ -1,4 +1,4 @@
-frankieApp.controller('IndexCtrl', function ($scope, navigation, drawer) {
+frankieApp.controller('IndexCtrl', function ($scope, project, navigation, drawer) {
 
   $scope.init = function() {
     $scope.placeholder = 'http://placehold.it/140x100';
@@ -30,24 +30,32 @@ frankieApp.controller('IndexCtrl', function ($scope, navigation, drawer) {
   };
 
   // Fetch all objects from the backend (see app/models/frankie.js)
-  $scope.load = function() {
-    var Project = Parse.Object.extend("Project");
-    var query = new Parse.Query(Project);
-    query.equalTo("user", Parse.User.current());
-    query.find({
-      success: function(results) {
-        $scope.projects = results;
-        // save to local storage for faster retrieval
-        localStorage.setItem("projects", JSON.stringify(results));
-        // necessary to update bindings for promises, should be wrapped in function to catch errors?
-        $scope.$apply();
-      },
-      error: function(error) {
-        alert("Error: " + error.code + " " + error.message);
-      }
-    });
-  };
-  $scope.load();
+  project.get('user', function(results) {
+    $scope.projects = results;
+    // save to local storage for faster retrieval
+    localStorage.setItem("projects", JSON.stringify(results));
+    // necessary to update bindings for promises, should be wrapped in function to catch errors?
+    $scope.$apply();
+  });
+  
+  // $scope.load = function() {
+  //   var Project = Parse.Object.extend("Project");
+  //   var query = new Parse.Query(Project);
+  //   query.equalTo("user", Parse.User.current());
+  //   query.find({
+  //     success: function(results) {
+  //       $scope.projects = results;
+  //       // save to local storage for faster retrieval
+  //       localStorage.setItem("projects", JSON.stringify(results));
+  //       // necessary to update bindings for promises, should be wrapped in function to catch errors?
+  //       $scope.$apply();
+  //     },
+  //     error: function(error) {
+  //       alert("Error: " + error.code + " " + error.message);
+  //     }
+  //   });
+  // };
+  // $scope.load();
 
   // Event listeners
   window.addEventListener("message", function(event) {
