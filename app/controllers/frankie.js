@@ -96,12 +96,7 @@ frankieApp.factory('drawer', function() {
   };
   return {
     open: openDrawer
-  }
-});
-
-frankieApp.factory('open', function() {
-    // generate current date
-  
+  };
 });
 
 frankieApp.factory('User', function() {
@@ -111,7 +106,7 @@ frankieApp.factory('User', function() {
 
 frankieApp.factory('Project', function() {
     // generate current date
-  
+  var Project = Parse.Object.extend("Project");
 });
 
 frankieApp.run(function() {
@@ -119,6 +114,6 @@ frankieApp.run(function() {
     "P2Z0R55WriW7Mi8h6bQqmhlLgGZQxjPe3Vc7PVQx",
     "jvPhmi8qIckRbuv6C1ezzXCMMivYTfJrjjHK5Tcc"
   );
-  steroids.view.setBackgroundColor('#000')
+  steroids.view.setBackgroundColor('#000');
   // steroids.view.setBackgroundColor('#2a2f3b');
 });
