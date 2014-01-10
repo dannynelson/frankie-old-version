@@ -1,7 +1,6 @@
-frankieApp.controller('SettingsCtrl', function ($scope) {
+frankieApp.controller('SettingsCtrl', function ($scope, navigation) {
 
-  steroids.view.navigationBar.show('Settings');
-
+  navigation.build('Settings');
   var currentUser = Parse.User.current();
 
   $scope.sendRequest = function() {

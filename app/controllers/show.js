@@ -1,8 +1,4 @@
-frankieApp.controller('ShowCtrl', function ($scope) {
-
-  $scope.placeholder = 'http://placehold.it/140x100';
-
-  $scope.project = {};
+frankieApp.controller('ShowCtrl', function ($scope, navigation) {
 
   $scope.findNextDate = function(milestone) {
     return moment(milestone.date, "YYYY-MM-DD").fromNow();
@@ -80,19 +76,10 @@ frankieApp.controller('ShowCtrl', function ($scope) {
 
   function setNavigation() {
     // -- Native navigation
-    steroids.view.navigationBar.show($scope.project.title);
-
-    var editButton = new steroids.buttons.NavigationBarButton();
-    editButton.title = "Edit";
-
-    editButton.onTap = function() {
-      editProjectView = new steroids.views.WebView("/views/frankie/edit.html");
-      steroids.layers.push(editProjectView);
-    };
-
-    steroids.view.navigationBar.setButtons({
-      right: [editButton]
-    });
+    navigation.build(
+      $scope.project.title,
+      {title: 'Edit', action: '/views/frankie/edit.html' }
+    );
   }
 
 });
