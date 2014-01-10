@@ -1,22 +1,20 @@
-  frankieApp.controller('SigninCtrl', function ($scope) {
+frankieApp.controller('SigninCtrl', function ($scope, navigation) {
+
+  $scope.showIndexView = function() {
+    var indexView = new steroids.views.WebView("/views/frankie/index.html");
+    steroids.layers.push(indexView);
+  };
 
   $scope.init = function() {
+    // test if user is logged in
+    var currentUser = Parse.User.current();
+    if (currentUser) $scope.showIndexView();
+
     // Landing class to add purple background
     document.body.className = "landing";
 
-    // Navigation Bar
-    steroids.view.navigationBar.show();
-    var signupButton = new steroids.buttons.NavigationBarButton();
-    signupButton.title = "signup";
-    signupButton.onTap = function() {
-      var signupView = new steroids.views.WebView("/views/frankie/signup.html");
-      steroids.layers.push(signupView);
-    };
-    steroids.view.navigationBar.setButtons({
-      right: [signupButton],
-      overrideBackButton: true
-    });
-
+    // Build NavBar
+    navigation.build('', {title: 'Signup', action: "/views/frankie/signup.html"});
   };
   $scope.init();
 
@@ -26,26 +24,13 @@
     steroids.modal.show(signupView);
   };
 
-  $scope.showIndexView = function() {
-    var indexView = new steroids.views.WebView("/views/frankie/index.html");
-    steroids.layers.push(indexView);
-    
-    // indexView.preload({}, {
-    //   onSuccess: function() {
-    //     steroids.layers.replace(indexView);
-    //   }
-    // });
-  };
-
   $scope.create = function(user) {
     $scope.loading = true;
-
     if(!$scope.frankie.username && !$scope.frankie.password) {
       alert("Enter a username & password");
       $scope.loading = false;
       return;
     }
-  
     Parse.User.logIn(user.username, user.password, {
       success: function(user) {
         $scope.loading = false;
@@ -57,14 +42,6 @@
       }
     });
   };
-
-  $scope.frankie = {};
-
-  // test if user is logged in
-  var currentUser = Parse.User.current();
-  if (currentUser) {
-    $scope.showIndexView();
-  }
 
 
 

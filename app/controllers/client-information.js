@@ -4,15 +4,7 @@ frankieApp.controller('ClientCtrl', function ($scope) {
   $scope.client = JSON.parse(localStorage.getItem("clientInfo")) || {};
 
   $scope.create = function(input) {
-
-    var client = {
-      firstName: input.firstName,
-      lastName: input.lastName,
-      phone: input.phone,
-      email: input.email
-    };
-    localStorage.setItem("clientInfo", JSON.stringify(client));
-
+    localStorage.setItem("clientInfo", JSON.stringify(input));
     var msg = { status: 'clientUpdated' };
     window.postMessage(msg, "*");
     steroids.layers.pop();

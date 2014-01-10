@@ -1,55 +1,26 @@
-frankieApp.controller('IndexCtrl', function ($scope) {
+frankieApp.controller('IndexCtrl', function ($scope, Project, navigation, drawer) {
 
-  $scope.placeholder = 'http://placehold.it/140x100';
-
-  // Build Drawer
-  var leftDrawer = new steroids.views.WebView("/views/frankie/drawer.html");
-  var leftDrawerShowing = false;
-  leftDrawer.preload();
-  // leftDrawer.preload({},{
-  //   onSuccess: initGesture  // When the view has loaded, enable finger tracking
-  // });
-  // function initGesture() {
-  //   steroids.drawers.enableGesture(leftDrawer);
-  // }
-  
-  // build navigation bar
-  steroids.view.navigationBar.show('Index');
-  var addButton = new steroids.buttons.NavigationBarButton();
-  // addButton.title = 'add';
-  addButton.imagePath = "/icons/plus.png";
-  addButton.onTap = function() {
-    var newView = new steroids.views.WebView('/views/frankie/new.html');
-    steroids.layers.push(newView);
+  $scope.init = function() {
+    $scope.placeholder = 'http://placehold.it/140x100';
+    $scope.projects = [];
+    navigation.build(
+      'Projects',
+      {title: "/icons/plus.png", action: '/views/frankie/new.html'},
+      {title: "/icons/lines.png", action: drawer.open}
+    );
   };
-  var settingsButton = new steroids.buttons.NavigationBarButton();
-  // settingsButton.title = 'settings';
-  settingsButton.imagePath = "/icons/lines.png";
-  settingsButton.onTap = function() {
-    if (!leftDrawerShowing) {
-      leftDrawerShowing = true;
-      steroids.drawers.show({
-        view: leftDrawer,
-        widthOfDrawerInPixels: 150
-      });
-    } else {
-      leftDrawerShowing = false;
-      steroids.drawers.hide();
-
-    }
-  };
-  steroids.view.navigationBar.setButtons({
-    right: [addButton],
-    left: [settingsButton],
-    overrideBackButton: true
-  });
-
-  // This will be populated with Parse
-  $scope.projects = [];
+  $scope.init();
 
   // Helper function for opening new webviews
   $scope.open = function(id) {
     // localStorage.setItem("currentProject", JSON.stringify($scope.projects[$index]));
+    var index;
+    for (var i = 0; i < $scope.projects.length; i++) {
+      if ($scope.projects[i].id === id) {
+        index = i;
+      }
+    }
+    // localStorage.setItem("currentProject", JSON.stringify($scope.projects[index].attributes));
     projectView = new steroids.views.WebView("/views/frankie/show.html?id=" + id);
     steroids.layers.push(projectView);
   };
@@ -60,20 +31,12 @@ frankieApp.controller('IndexCtrl', function ($scope) {
 
   // Fetch all objects from the backend (see app/models/frankie.js)
   $scope.load = function() {
-    var Project = Parse.Object.extend("Project");
-    var query = new Parse.Query(Project);
-    query.equalTo("user", Parse.User.current());
-    query.find({
-      success: function(results) {
-        $scope.projects = results;
-        // save to local storage for faster retrieval
-        localStorage.setItem("projects", JSON.stringify(results));
-        // necessary to update bindings for promises, should be wrapped in function to catch errors?
-        $scope.$apply();
-      },
-      error: function(error) {
-        alert("Error: " + error.code + " " + error.message);
-      }
+    Project.get('user', Parse.User.current(), function(results) {
+      $scope.projects = results;
+      // save to local storage for faster retrieval
+      localStorage.setItem("projects", JSON.stringify(results));
+      // necessary to update bindings for promises, should be wrapped in function to catch errors?
+      $scope.$apply();
     });
   };
   $scope.load();

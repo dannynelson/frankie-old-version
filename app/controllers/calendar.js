@@ -1,50 +1,12 @@
 frankieApp.controller('CalendarCtrl', function ($scope) {
 
   $scope.placeholder = 'http://placehold.it/140x100';
-
-  // Build Drawer
-  var leftDrawer = new steroids.views.WebView("/views/frankie/drawer.html");
-  var leftDrawerShowing = false;
-  // leftDrawer.preload({},{
-  //   onSuccess: initGesture  // When the view has loaded, enable finger tracking
-  // });
-  // function initGesture() {
-  //   steroids.drawers.enableGesture(leftDrawer);
-  // }
-  
-  // build navigation bar
-  steroids.view.navigationBar.show('Calendar');
-  var addButton = new steroids.buttons.NavigationBarButton();
-  // addButton.title = 'add';
-  addButton.imagePath = "/icons/plus.png";
-  addButton.onTap = function() {
-    var newView = new steroids.views.WebView('/views/frankie/new.html');
-    steroids.layers.push(newView);
-  };
-  var settingsButton = new steroids.buttons.NavigationBarButton();
-  // settingsButton.title = 'settings';
-  settingsButton.imagePath = "/icons/lines.png";
-  settingsButton.onTap = function() {
-    if (!leftDrawerShowing) {
-      leftDrawerShowing = true;
-      steroids.drawers.show({
-        view: leftDrawer,
-        widthOfDrawerInPixels: 150
-      });
-    } else {
-      leftDrawerShowing = false;
-      steroids.drawers.hide();
-
-    }
-  };
-  steroids.view.navigationBar.setButtons({
-    right: [addButton],
-    left: [settingsButton],
-    overrideBackButton: true
-  });
+  steroids.view.navigationBar.show("Calendar");
 
   // This will be populated with Parse
   $scope.projects = [];
+
+  $scope.sort = 'title';
 
   // Helper function for opening new webviews
   $scope.open = function(id) {
@@ -66,7 +28,7 @@ frankieApp.controller('CalendarCtrl', function ($scope) {
       success: function(results) {
         $scope.projects = results;
         // save to local storage for faster retrieval
-        localStorage.setItem("projects", JSON.stringify(results));
+        // localStorage.setItem("projects", JSON.stringify(results));
         // necessary to update bindings for promises, should be wrapped in function to catch errors?
         $scope.$apply();
       },

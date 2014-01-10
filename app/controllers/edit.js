@@ -1,24 +1,62 @@
-frankieApp.controller('EditCtrl', function ($scope) {
+frankieApp.controller('EditCtrl', function ($scope, navigation) {
 
-  $scope.project = JSON.parse(localStorage.getItem("currentProject"));
-  debugger;
+  $scope.init = function() {
+    $scope.project = JSON.parse(localStorage.getItem("currentProject"));
+    navigation.build(
+      'Edit Project',
+      { title: 'Delete', action: $scope.delete }
+    );
+  };
+  $scope.init();
 
   //project gets modified by passing into function?
   $scope.update = function(project) {
     // Retrieve Object
+    // debugger;
+    if (!project.title) {
+      alert ('Please enter a title');
+      return;
+    }
     $scope.loading = true;
+    var currentProject = JSON.parse(localStorage.getItem("currentProject"));
     var Project = Parse.Object.extend("Project");
     var query = new Parse.Query(Project);
-    query.get(project.objectId, {
+    var title = currentProject.title;
+    query.equalTo("title", title);
+    query.first({
       // update and save if successful
-      success: function(object) {
-        object.set(project);
-        object.save();
-        $scope.loading = false;
-        steroids.layers.pop();
+      success: function(myObject) {
+        Parse.Promise.when(myObject)
+          .then(function(result){
+
+            for (var key in project) {
+              if ( !!(key !== 'user' && key !== 'ACL') ) {
+                result.set(key, project[key]);
+              }
+            }
+
+            result.save(null, {
+              success: function(obj) {
+                alert('save success');
+                // $scope.loading = false;
+                var msg = { status: 'reload' };
+                window.postMessage(msg, "*");
+                localStorage.setItem("currentProject", JSON.stringify(obj));
+                // steroids.layers.pop();
+              },
+              error: function(obj, error) {
+                alert('save error');
+              }
+            });
+            $scope.loading = false;
+            steroids.layers.pop();
+
+          }, function(error){
+            alert('promise error');
+          });
       },
       error: function(object, error) {
-        alert(error);
+        alert('query error');
       }
     });
   };
@@ -29,42 +67,23 @@ frankieApp.controller('EditCtrl', function ($scope) {
     steroids.layers.push(clientInfoView);
   };
 
-  steroids.view.navigationBar.show('Edit Project');
-
-  var deleteButton = new steroids.buttons.NavigationBarButton();
-  deleteButton.title = "Delete";
-
-  deleteButton.onTap = function() {
+  $scope.delete = function() {
     var Project = Parse.Object.extend("Project");
     var query = new Parse.Query(Project);
     var title = $scope.project.title;
     query.equalTo("title", title);
-    query.find({
+    query.first({
       success: function(myObject) {
         Parse.Promise.when(myObject)
           .then(function(result){
             result.destroy({});
             alert('Project Deleted');
-            // var deleteMsg = { status: 'delete' };
-            // window.postMessage(deleteMsg, "*");
-            // steroids.layers.pop();
-            
-            // var msg = { status: 'reload' };
-            // window.postMessage(msg, "*");
-            // steroids.layers.popAll();
 
             var newIndexView = new steroids.views.WebView("/views/frankie/index.html");
             steroids.layers.push({
               view: newIndexView,
               navigationBar: false
             });
-
-            // var newIndexView = new steroids.views.WebView("/views/frankie/index.html");
-            // newIndexView.preload({},{
-            //   onSuccess: function() {
-            //     steroids.layers.replace(newIndexView);
-            //   }
-            // });
 
           }, function(error){
             alert('promise error');
@@ -75,9 +94,5 @@ frankieApp.controller('EditCtrl', function ($scope) {
       }
     });
   };
-
-  steroids.view.navigationBar.setButtons({
-    right: [deleteButton]
-  });
 
 });

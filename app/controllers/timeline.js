@@ -1,10 +1,11 @@
-frankieApp.controller('TimelineCtrl', function ($scope, today) {
+frankieApp.controller('TimelineCtrl', function ($scope, today, navigation) {
 
-  $scope.milestones = JSON.parse(localStorage.getItem('timeline')) ||
-  [{
-    description: "",
-    date: today
-  }];
+  navigation.build(
+    'Timeline',
+    {title: '/icons/plus.png', action: function() { $scope.$apply($scope.addMilestone()); }}
+  );
+
+  $scope.milestones = JSON.parse(localStorage.getItem('timeline')) || [{ description: "", date: today }];
 
   $scope.addMilestone = function() {
     $scope.milestones.push({
@@ -12,17 +13,6 @@ frankieApp.controller('TimelineCtrl', function ($scope, today) {
       date: today
     });
   };
-
-  // Add navigation
-  steroids.view.navigationBar.show('Timeline');
-  var addButton = new steroids.buttons.NavigationBarButton();
-  addButton.imagePath = "/icons/plus.png";
-  addButton.onTap = function() {
-    $scope.$apply($scope.addMilestone());
-  };
-  steroids.view.navigationBar.setButtons({
-    right: [addButton],
-  });
 
   $scope.save = function() {
     localStorage.setItem("timeline", angular.toJson($scope.milestones));
