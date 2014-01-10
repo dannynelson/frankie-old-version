@@ -32,7 +32,6 @@ frankieApp.factory('today', function() {
 });
 
 frankieApp.factory('navigation', function() {
-
   var setButton = function(title, action) {
     button = new steroids.buttons.NavigationBarButton();
     if (title.slice(title.length-4) === '.png') {
@@ -99,9 +98,16 @@ frankieApp.factory('drawer', function() {
   };
 });
 
-frankieApp.factory('User', function() {
-    // generate current date
-  
+frankieApp.factory('Photo', function() {
+  return {
+    save: function(photoURL, successCallback) {
+      var base64 = photoURL.split('base64,')[1];
+      var parseFile = new Parse.File("photo.jpg", { base64: base64 });
+      parseFile.save().then(successCallback, function(error) {
+        alert(error);
+      });
+    }
+  };
 });
 
 frankieApp.factory('Project', function() {
@@ -129,9 +135,23 @@ frankieApp.factory('Project', function() {
     });
   };
 
+  var save = function(projectAttributes, successCallback) {
+    var privateProject = new Project();
+    privateProject.set(projectAttributes);
+    privateProject.set("user", Parse.User.current());
+    privateProject.setACL(new Parse.ACL(Parse.User.current()));
+    privateProject.save(null, {
+      success: successCallback,
+      error: function(object, error) {
+        alert('Failed to create new object, with error code: ' + error.description);
+      }
+    });
+  };
+
   return {
     get: getAll,
-    getFirst: getFirst
+    getFirst: getFirst,
+    save: save
   };
 });
 
