@@ -1,6 +1,12 @@
 frankieApp.controller('DrawerCtrl', function ($scope) {
   document.body.className = "drawer";
 
+  $scope.calendar = function() {
+    var calendar = new steroids.views.WebView("/views/frankie/calendar.html");
+    steroids.layers.push(calendar);
+    steroids.drawers.hideAll();
+  };
+
   $scope.logout = function() {
     Parse.User.logOut();
     steroids.drawers.hideAll();
