@@ -1,4 +1,4 @@
-frankieApp.controller('IndexCtrl', function ($scope) {
+frankieApp.controller('IndexCtrl', function ($scope, navigation) {
 
   $scope.placeholder = 'http://placehold.it/140x100';
 
@@ -12,34 +12,26 @@ frankieApp.controller('IndexCtrl', function ($scope) {
   // function initGesture() {
   //   steroids.drawers.enableGesture(leftDrawer);
   // }
-  
-  // build navigation bar
-  steroids.view.navigationBar.show('Calendar');
-  var addButton = new steroids.buttons.NavigationBarButton();
-  // addButton.title = 'add';
-  addButton.imagePath = "/icons/plus.png";
-  addButton.onTap = function() {
+  $scope.add = function() {
     var newView = new steroids.views.WebView('/views/frankie/new.html');
     steroids.layers.push(newView);
   };
-  var settingsButton = new steroids.buttons.NavigationBarButton();
-  // settingsButton.title = 'settings';
-  settingsButton.imagePath = "/icons/lines.png";
-  settingsButton.onTap = function() {
+
+  $scope.openDrawer = function() {
     if (!leftDrawerShowing) {
       leftDrawerShowing = true;
       steroids.drawers.show(leftDrawer);
     } else {
       leftDrawerShowing = false;
       steroids.drawers.hide();
-
     }
   };
-  steroids.view.navigationBar.setButtons({
-    right: [addButton],
-    left: [settingsButton],
-    overrideBackButton: true
-  });
+
+  navigation.build(
+    'Projects',
+    {title: "/icons/plus.png", action: $scope.add},
+    {title: "/icons/lines.png", action: $scope.openDrawer}
+  );
 
   // This will be populated with Parse
   $scope.projects = [];

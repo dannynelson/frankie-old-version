@@ -31,6 +31,50 @@ frankieApp.factory('today', function() {
   return today;
 });
 
+frankieApp.factory('navigation', function() {
+  var rightButton, leftButton;
+  var setRight = function(right, rightAction) {
+    rightButton = new steroids.buttons.NavigationBarButton();
+    if (right.slice(right.length-4) === '.png') {
+      rightButton.imagePath = right;
+    } else {
+      rightButton.title = right;
+    }
+    rightButton.onTap = rightAction;
+  };
+
+  var setLeft = function(left, leftAction) {
+    leftButton = new steroids.buttons.NavigationBarButton();
+    if (left.slice(left.length-4) === '.png') {
+      leftButton.imagePath = left;
+    } else {
+      leftButton.title = left;
+    }
+    leftButton.onTap = leftAction;
+  };
+
+  var buildNav = function(title, right, left) {
+    steroids.view.navigationBar.show(title);
+    if (right) setRight(right.title, right.action);
+    if (left) setLeft(left.title, left.action);
+    if (right && !left) {
+      steroids.view.navigationBar.setButtons({
+        right: [rightButton]
+      });
+    } else if (right && left) {
+      steroids.view.navigationBar.setButtons({
+        left: [leftButton],
+        right: [rightButton],
+        overrideBackButton: true
+      });
+    }
+  };
+
+  return {
+    build: buildNav
+  };
+});
+
 frankieApp.factory('User', function() {
     // generate current date
   
