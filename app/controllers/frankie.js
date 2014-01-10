@@ -141,10 +141,20 @@ frankieApp.factory('Project', function() {
     });
   };
 
+  var update = function(project, successCallback) {
+    project.save(null, {
+      success: successCallback,
+      error: function(object, error) {
+        alert('Failed to create new object, with error code: ' + error.description);
+      }
+    });
+  };
+
   return {
     get: getAll,
     getFirst: getFirst,
-    save: save
+    save: save,
+    update: update
   };
 });
 

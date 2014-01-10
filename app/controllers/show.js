@@ -23,10 +23,17 @@ frankieApp.controller('ShowCtrl', function ($scope, Project, navigation) {
     $scope.project.timeline[$index].completed = !$scope.project.timeline[$index].completed;
   };
 
+  $scope.returnToProjects = function() {
+    localStorage.removeItem('currentProject');
+    steroids.layers.pop();
+  };
+
+  // When a photo is uploaded, add it to the timeline
   $scope.loadPhoto = function() {
     $scope.project.timeline[$scope.selectedIdx].photoURL = $scope.photo;
     $scope.$appy();
   };
+  $scope.$watch('photo', $scope.loadPhoto);
 
   //why is this getting called on initialize?
   $scope.savePhoto = function() {
@@ -83,13 +90,19 @@ frankieApp.controller('ShowCtrl', function ($scope, Project, navigation) {
     }
   });
 
-  $scope.$watch('photo', $scope.loadPhoto);
+  // When back button is pressed, remove currentProject from local storage
+  window.addEventListener("backbutton", onBackKeyDown, false);
+  function onBackKeyDown() {
+    alert('back pressed');
+  }
+
 
   function setNavigation() {
     // -- Native navigation
     navigation.build(
       $scope.project.title,
-      {title: 'Edit', action: '/views/frankie/edit.html' }
+      {title: 'Edit', action: '/views/frankie/new.html' },
+      {title: '/icons/left.png', action: $scope.returnToProjects }
     );
   }
 

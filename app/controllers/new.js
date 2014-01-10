@@ -1,9 +1,16 @@
 frankieApp.controller('NewCtrl', function ($scope, today, navigation, Photo, Project) {
   $scope.init = function() {
-    $scope.project = {
-      start: today,
-      end: today
-    };
+    $scope.project = JSON.parse(localStorage.getItem("currentProject"));
+    if (!$scope.project) {
+      $scope.edit = false;
+      $scope.project = {
+        start: today,
+        end: today
+      };
+    } else {
+      // edit makes it so that functions update, rather than create
+      $scope.edit = true;
+    }
     navigation.build(
       'New Project',
       {title: "Save", action: function() { $scope.create($scope.project); } },
@@ -18,34 +25,48 @@ frankieApp.controller('NewCtrl', function ($scope, today, navigation, Photo, Pro
   };
 
   $scope.create = function(project) {
+    // helper functions
+    var successCallback = function(object) {
+      alert('New object created with objectId: ' + object.id);
+      // Notify the index.html to reload
+      var msg = { status: 'reload' };
+      window.postMessage(msg, "*");
+      // Clear local storage
+      // TODO: merge these into one
+      localStorage.removeItem('timeline');
+      localStorage.removeItem('clientInfo');
+      // Return to index
+      steroids.layers.pop();
+    };
+    var save = function() {
+      if ($scope.edit) {
+        updateObject();
+      } else {
+        saveObject();
+      }
+    };
+    var saveObject = function() {
+      if (photoURL) $scope.project.photoURL = photoURL;
+      Project.save($scope.project, successCallback);
+    };
+    var updateObject = function() {
+      if (photoURL) $scope.project.photoURL = photoURL;
+      Project.update($scope.project, successCallback);
+    };
 
+    // Main logic
     if (!$scope.project.title) {
       alert('Please enter a title.');
       return;
     }
-    var saveObject = function() {
-      if (photoURL) $scope.project.photoURL = photoURL;
-      Project.save($scope.project, function(object) {
-        alert('New object created with objectId: ' + object.id);
-        // Notify the index.html to reload
-        var msg = { status: 'reload' };
-        window.postMessage(msg, "*");
-        // Clear local storage
-        localStorage.removeItem('timeline');
-        localStorage.removeItem('clientInfo');
-        // Return to index
-        steroids.layers.pop();
-      });
-    };
-
     if ($scope.photo) {
       var photoURL;
       Photo.save($scope.photo, function(file) {
         photoURL = file.url();
-        saveObject();
+        save();
       });
     } else {
-      saveObject();
+      save();
     }
   };
 

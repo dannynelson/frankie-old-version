@@ -12,7 +12,6 @@ frankieApp.controller('EditCtrl', function ($scope, navigation) {
   //project gets modified by passing into function?
   $scope.update = function(project) {
     // Retrieve Object
-    // debugger;
     if (!project.title) {
       alert ('Please enter a title');
       return;
