@@ -1,6 +1,6 @@
-frankieApp.controller('UpdateClientCtrl', function ($scope) {
+frankieApp.controller('UpdateClientCtrl', function ($scope, navigation) {
   
-  steroids.view.navigationBar.show('Update Client');
+  navigation.build('Update Client');
 
   $scope.client = JSON.parse(localStorage.getItem("clientInfo"));
   
