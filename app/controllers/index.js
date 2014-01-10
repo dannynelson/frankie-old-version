@@ -14,6 +14,13 @@ frankieApp.controller('IndexCtrl', function ($scope, navigation, drawer) {
   // Helper function for opening new webviews
   $scope.open = function(id) {
     // localStorage.setItem("currentProject", JSON.stringify($scope.projects[$index]));
+    var index;
+    for (var i = 0; i < $scope.projects.length; i++) {
+      if ($scope.projects[i].id === id) {
+        index = i;
+      }
+    }
+    // localStorage.setItem("currentProject", JSON.stringify($scope.projects[index].attributes));
     projectView = new steroids.views.WebView("/views/frankie/show.html?id=" + id);
     steroids.layers.push(projectView);
   };

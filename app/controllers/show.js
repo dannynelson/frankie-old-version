@@ -61,10 +61,14 @@ frankieApp.controller('ShowCtrl', function ($scope, navigation) {
     }
   });
 
+  // $scope.project = JSON.parse(localStorage.getItem("currentProject"));
+
   // When the data is modified in the edit.html, get notified and update (edit is on top of this view)
   window.addEventListener("message", function(event) {
     if (event.data.status === "reload") {
-      $scope.loadFrankie();
+      // $scope.loadFrankie();
+      $scope.project = JSON.parse(localStorage.getItem("currentProject"));
+      $scope.$apply();
     }
     if (event.data.status === "delete") {
       steroids.layers.pop();
@@ -73,12 +77,29 @@ frankieApp.controller('ShowCtrl', function ($scope, navigation) {
 
   $scope.$watch('photo', $scope.loadPhoto);
 
-  function setNavigation() {
+  (function setNavigation() {
     // -- Native navigation
+<<<<<<< HEAD
     navigation.build(
       $scope.project.title,
       {title: 'Edit', action: '/views/frankie/edit.html' }
     );
   }
+=======
+    steroids.view.navigationBar.show($scope.project.title);
+
+    var editButton = new steroids.buttons.NavigationBarButton();
+    editButton.title = "Edit";
+
+    editButton.onTap = function() {
+      editProjectView = new steroids.views.WebView("/views/frankie/edit.html");
+      steroids.layers.push(editProjectView);
+    };
+
+    steroids.view.navigationBar.setButtons({
+      right: [editButton]
+    });
+  }());
+>>>>>>> ta3hoon-master
 
 });
