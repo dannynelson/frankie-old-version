@@ -33,28 +33,46 @@ frankieApp.factory('today', function() {
 
 frankieApp.factory('navigation', function() {
   var rightButton, leftButton;
-  var setRight = function(right, rightAction) {
+  var setRight = function(right, action) {
     rightButton = new steroids.buttons.NavigationBarButton();
     if (right.slice(right.length-4) === '.png') {
       rightButton.imagePath = right;
     } else {
       rightButton.title = right;
     }
-    rightButton.onTap = rightAction;
+    rightButton.onTap = function() {
+      // if it is a url string, push it to the layer stack
+      if (typeof(action) === 'string') {
+        var newView = new steroids.views.WebView(action);
+        steroids.layers.push(newView);
+      // otherwise, execute the action
+      } else {
+        action();
+      }
+    };
   };
-
-  var setLeft = function(left, leftAction) {
+  var setLeft = function(left, action) {
     leftButton = new steroids.buttons.NavigationBarButton();
     if (left.slice(left.length-4) === '.png') {
       leftButton.imagePath = left;
     } else {
       leftButton.title = left;
     }
-    leftButton.onTap = leftAction;
+    leftButton.onTap = function() {
+      // if it is a url string, push it to the layer stack
+      if (typeof(action) === 'string') {
+        var newView = new steroids.views.WebView(action);
+        steroids.layers.push(newView);
+      // otherwise, execute the action
+      } else {
+        action();
+      }
+    };
   };
-
+  // expects right.title and right.pagePath, left.title and left.action
   var buildNav = function(title, right, left) {
     steroids.view.navigationBar.show(title);
+    // action can be function or url to push
     if (right) setRight(right.title, right.action);
     if (left) setLeft(left.title, left.action);
     if (right && !left) {
@@ -73,6 +91,29 @@ frankieApp.factory('navigation', function() {
   return {
     build: buildNav
   };
+});
+
+frankieApp.factory('drawer', function() {
+  var leftDrawer = new steroids.views.WebView("/views/frankie/drawer.html");
+  var leftDrawerShowing = false;
+  leftDrawer.preload();
+  var openDrawer = function() {
+    if (!leftDrawerShowing) {
+      leftDrawerShowing = true;
+      steroids.drawers.show(leftDrawer);
+    } else {
+      leftDrawerShowing = false;
+      steroids.drawers.hide();
+    }
+  };
+  return {
+    open: openDrawer
+  }
+});
+
+frankieApp.factory('open', function() {
+    // generate current date
+  
 });
 
 frankieApp.factory('User', function() {

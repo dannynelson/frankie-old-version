@@ -1,40 +1,15 @@
-frankieApp.controller('IndexCtrl', function ($scope, navigation) {
+frankieApp.controller('IndexCtrl', function ($scope, navigation, drawer) {
 
-  $scope.placeholder = 'http://placehold.it/140x100';
-
-  // Build Drawer
-  var leftDrawer = new steroids.views.WebView("/views/frankie/drawer.html");
-  var leftDrawerShowing = false;
-  leftDrawer.preload();
-  // leftDrawer.preload({},{
-  //   onSuccess: initGesture  // When the view has loaded, enable finger tracking
-  // });
-  // function initGesture() {
-  //   steroids.drawers.enableGesture(leftDrawer);
-  // }
-  $scope.add = function() {
-    var newView = new steroids.views.WebView('/views/frankie/new.html');
-    steroids.layers.push(newView);
+  $scope.init = function() {
+    $scope.placeholder = 'http://placehold.it/140x100';
+    $scope.projects = [];
+    navigation.build(
+      'Projects',
+      {title: "/icons/plus.png", action: '/views/frankie/new.html'},
+      {title: "/icons/lines.png", action: drawer.open}
+    );
   };
-
-  $scope.openDrawer = function() {
-    if (!leftDrawerShowing) {
-      leftDrawerShowing = true;
-      steroids.drawers.show(leftDrawer);
-    } else {
-      leftDrawerShowing = false;
-      steroids.drawers.hide();
-    }
-  };
-
-  navigation.build(
-    'Projects',
-    {title: "/icons/plus.png", action: $scope.add},
-    {title: "/icons/lines.png", action: $scope.openDrawer}
-  );
-
-  // This will be populated with Parse
-  $scope.projects = [];
+  $scope.init();
 
   // Helper function for opening new webviews
   $scope.open = function(id) {
