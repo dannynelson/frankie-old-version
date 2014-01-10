@@ -44,8 +44,7 @@ frankieApp.controller('IndexCtrl', function ($scope) {
         index = i;
       }
     }
-    // console.log($scope.projects[index].attributes);
-    localStorage.setItem("currentProject", JSON.stringify($scope.projects[index].attributes));
+    // localStorage.setItem("currentProject", JSON.stringify($scope.projects[index].attributes));
     projectView = new steroids.views.WebView("/views/frankie/show.html?id=" + id);
     steroids.layers.push(projectView);
   };
