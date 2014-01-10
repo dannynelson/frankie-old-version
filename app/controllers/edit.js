@@ -1,7 +1,13 @@
-frankieApp.controller('EditCtrl', function ($scope) {
+frankieApp.controller('EditCtrl', function ($scope, navigation) {
 
-  $scope.project = JSON.parse(localStorage.getItem("currentProject"));
-  debugger;
+  $scope.init = function() {
+    $scope.project = JSON.parse(localStorage.getItem("currentProject"));
+    navigation.build(
+      'Edit Project',
+      { title: 'Delete', action: $scope.delete }
+    );
+  };
+  $scope.init();
 
   //project gets modified by passing into function?
   $scope.update = function(project) {
@@ -29,12 +35,7 @@ frankieApp.controller('EditCtrl', function ($scope) {
     steroids.layers.push(clientInfoView);
   };
 
-  steroids.view.navigationBar.show('Edit Project');
-
-  var deleteButton = new steroids.buttons.NavigationBarButton();
-  deleteButton.title = "Delete";
-
-  deleteButton.onTap = function() {
+  $scope.delete = function() {
     var Project = Parse.Object.extend("Project");
     var query = new Parse.Query(Project);
     var title = $scope.project.title;
@@ -75,9 +76,5 @@ frankieApp.controller('EditCtrl', function ($scope) {
       }
     });
   };
-
-  steroids.view.navigationBar.setButtons({
-    right: [deleteButton]
-  });
 
 });
