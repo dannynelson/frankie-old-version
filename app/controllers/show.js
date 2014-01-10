@@ -1,4 +1,4 @@
-frankieApp.controller('ShowCtrl', function ($scope, navigation) {
+frankieApp.controller('ShowCtrl', function ($scope, Project, navigation) {
 
   $scope.findNextDate = function(milestone) {
     return moment(milestone.date, "YYYY-MM-DD").fromNow();
@@ -44,22 +44,30 @@ frankieApp.controller('ShowCtrl', function ($scope, navigation) {
   };
   
   // retrieve info
-  var Project = Parse.Object.extend("Project");
-  var query = new Parse.Query(Project);
-  query.equalTo("objectId", steroids.view.params.id);
-  query.first({
-    success: function(object) {
-      $scope.parseProject = object;
-      $scope.project = object.attributes;
-      // Save current project info to localStorage (edit.html gets it from there)
-      localStorage.setItem("currentProject", JSON.stringify(object.attributes));
-      $scope.$apply();
-      setNavigation();
-    },
-    error: function(error) {
-      alert("Error: " + error.code + " " + error.message);
-    }
+  Project.getFirst("objectId", steroids.view.params.id, function(object) {
+    $scope.parseProject = object;
+    $scope.project = object.attributes;
+    // Save current project info to localStorage (edit.html gets it from there)
+    localStorage.setItem("currentProject", JSON.stringify(object.attributes));
+    $scope.$apply();
+    setNavigation();
   });
+  // var Project = Parse.Object.extend("Project");
+  // var query = new Parse.Query(Project);
+  // query.equalTo("objectId", steroids.view.params.id);
+  // query.first({
+  //   success: function(object) {
+  //     $scope.parseProject = object;
+  //     $scope.project = object.attributes;
+  //     // Save current project info to localStorage (edit.html gets it from there)
+  //     localStorage.setItem("currentProject", JSON.stringify(object.attributes));
+  //     $scope.$apply();
+  //     setNavigation();
+  //   },
+  //   error: function(error) {
+  //     alert("Error: " + error.code + " " + error.message);
+  //   }
+  // });
 
   // $scope.project = JSON.parse(localStorage.getItem("currentProject"));
 
@@ -77,29 +85,13 @@ frankieApp.controller('ShowCtrl', function ($scope, navigation) {
 
   $scope.$watch('photo', $scope.loadPhoto);
 
-  (function setNavigation() {
+  function setNavigation() {
     // -- Native navigation
-<<<<<<< HEAD
     navigation.build(
       $scope.project.title,
       {title: 'Edit', action: '/views/frankie/edit.html' }
     );
   }
-=======
-    steroids.view.navigationBar.show($scope.project.title);
 
-    var editButton = new steroids.buttons.NavigationBarButton();
-    editButton.title = "Edit";
-
-    editButton.onTap = function() {
-      editProjectView = new steroids.views.WebView("/views/frankie/edit.html");
-      steroids.layers.push(editProjectView);
-    };
-
-    steroids.view.navigationBar.setButtons({
-      right: [editButton]
-    });
-  }());
->>>>>>> ta3hoon-master
 
 });

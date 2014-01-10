@@ -104,12 +104,13 @@ frankieApp.factory('User', function() {
   
 });
 
-frankieApp.factory('project', function() {
+frankieApp.factory('Project', function() {
     // generate current date
   var Project = Parse.Object.extend("Project");
-  var getAll = function(column, successCallback) {
-    var query = new Parse.Query(Project);
-    query.equalTo(column, Parse.User.current());
+  var query = new Parse.Query(Project);
+
+  var getAll = function(column, value, successCallback) {
+    query.equalTo(column, value);
     query.find({
       success: successCallback,
       error: function(error) {
@@ -118,8 +119,19 @@ frankieApp.factory('project', function() {
     });
   };
 
+  var getFirst = function(column, value, successCallback) {
+    query.equalTo(column, value);
+    query.first({
+      success: successCallback,
+      error: function(error) {
+        alert("Error: " + error.code + " " + error.message);
+      }
+    });
+  };
+
   return {
-    get: getAll
+    get: getAll,
+    getFirst: getFirst
   };
 });
 

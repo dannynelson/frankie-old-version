@@ -18,19 +18,11 @@ frankieApp.controller('NewCtrl', function ($scope, today, navigation) {
   };
 
   $scope.create = function(project) {
-<<<<<<< HEAD
 
-    if(!$scope.project.title){
-      alert("Please enter a project title");
-      return;
-    }
-
-=======
     if (!$scope.project.title) {
       alert('Please enter a title.');
       return;
     }
->>>>>>> ta3hoon-master
     var saveObject = function() {
       alert('saving object');
       var Project = Parse.Object.extend("Project");

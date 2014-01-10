@@ -1,4 +1,4 @@
-frankieApp.controller('IndexCtrl', function ($scope, project, navigation, drawer) {
+frankieApp.controller('IndexCtrl', function ($scope, Project, navigation, drawer) {
 
   $scope.init = function() {
     $scope.placeholder = 'http://placehold.it/140x100';
@@ -30,14 +30,14 @@ frankieApp.controller('IndexCtrl', function ($scope, project, navigation, drawer
   };
 
   // Fetch all objects from the backend (see app/models/frankie.js)
-  project.get('user', function(results) {
+  Project.get('user', Parse.User.current(), function(results) {
     $scope.projects = results;
     // save to local storage for faster retrieval
     localStorage.setItem("projects", JSON.stringify(results));
     // necessary to update bindings for promises, should be wrapped in function to catch errors?
     $scope.$apply();
   });
-  
+
   // $scope.load = function() {
   //   var Project = Parse.Object.extend("Project");
   //   var query = new Parse.Query(Project);
