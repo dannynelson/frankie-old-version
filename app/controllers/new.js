@@ -25,7 +25,6 @@ frankieApp.controller('NewCtrl', function ($scope, today, navigation, Photo, Pro
     }
     var saveObject = function() {
       if (photoURL) $scope.project.photoURL = photoURL;
-      alert($scope.project.photoURL);
       Project.save($scope.project, function(object) {
         alert('New object created with objectId: ' + object.id);
         // Notify the index.html to reload

@@ -5,11 +5,7 @@ frankieApp.controller('TimelineCtrl', function ($scope, today, navigation) {
     {title: '/icons/plus.png', action: function() { $scope.$apply($scope.addMilestone()); }}
   );
 
-  $scope.milestones = JSON.parse(localStorage.getItem('timeline')) ||
-  [{
-    description: "",
-    date: today
-  }];
+  $scope.milestones = JSON.parse(localStorage.getItem('timeline')) || [{ description: "", date: today }];
 
   $scope.addMilestone = function() {
     $scope.milestones.push({

@@ -20,7 +20,7 @@ frankieApp.directive("fileread", [function () {
 }]);
 
 frankieApp.factory('today', function() {
-    // generate current date
+  // generate current date
   var today = new Date();
   var dd = today.getDate();
   var mm = today.getMonth()+1; //January is 0!
@@ -55,13 +55,10 @@ frankieApp.factory('navigation', function() {
   // expects right.title and right.pagePath, left.title and left.action
   var buildNav = function(title, right, left) {
     steroids.view.navigationBar.show(title);
-    // action can be function or url to push
-    if (right) {
-      var rightButton = setButton(right.title, right.action);
-    }
-    if (left) {
-      var leftButton = setButton(left.title, left.action);
-    }
+    // action can be function or path to push
+    var rightButton, leftButton;
+    if (right) rightButton = setButton(right.title, right.action);
+    if (left) leftButton = setButton(left.title, left.action);
     if (right && !left) {
       steroids.view.navigationBar.setButtons({
         right: [rightButton]
@@ -75,9 +72,7 @@ frankieApp.factory('navigation', function() {
     }
   };
 
-  return {
-    build: buildNav
-  };
+  return { build: buildNav };
 });
 
 frankieApp.factory('drawer', function() {
@@ -93,9 +88,7 @@ frankieApp.factory('drawer', function() {
       steroids.drawers.hide();
     }
   };
-  return {
-    open: openDrawer
-  };
+  return { open: openDrawer };
 });
 
 frankieApp.factory('Photo', function() {

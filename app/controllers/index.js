@@ -41,26 +41,6 @@ frankieApp.controller('IndexCtrl', function ($scope, Project, navigation, drawer
   };
   $scope.load();
 
-
-  // $scope.load = function() {
-  //   var Project = Parse.Object.extend("Project");
-  //   var query = new Parse.Query(Project);
-  //   query.equalTo("user", Parse.User.current());
-  //   query.find({
-  //     success: function(results) {
-  //       $scope.projects = results;
-  //       // save to local storage for faster retrieval
-  //       localStorage.setItem("projects", JSON.stringify(results));
-  //       // necessary to update bindings for promises, should be wrapped in function to catch errors?
-  //       $scope.$apply();
-  //     },
-  //     error: function(error) {
-  //       alert("Error: " + error.code + " " + error.message);
-  //     }
-  //   });
-  // };
-  // $scope.load();
-
   // Event listeners
   window.addEventListener("message", function(event) {
     if (event.data.status === "reload") {
