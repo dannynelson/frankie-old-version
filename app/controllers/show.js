@@ -24,7 +24,6 @@ frankieApp.controller('ShowCtrl', function ($scope, navigation) {
   };
 
   $scope.loadPhoto = function() {
-    debugger;
     $scope.project.timeline[$scope.selectedIdx].photoURL = $scope.photo;
     $scope.$appy();
   };

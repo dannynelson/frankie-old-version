@@ -1,22 +1,14 @@
-  frankieApp.controller('SigninCtrl', function ($scope) {
+  frankieApp.controller('SigninCtrl', function ($scope, navigation) {
 
   $scope.init = function() {
     // Landing class to add purple background
     document.body.className = "landing";
 
     // Navigation Bar
-    steroids.view.navigationBar.show();
-    var signupButton = new steroids.buttons.NavigationBarButton();
-    signupButton.title = "signup";
-    signupButton.onTap = function() {
-      var signupView = new steroids.views.WebView("/views/frankie/signup.html");
-      steroids.layers.push(signupView);
-    };
-    steroids.view.navigationBar.setButtons({
-      right: [signupButton],
-      overrideBackButton: true
-    });
-
+    navigation.build(
+      '',
+      {title: 'Signup', action: "/views/frankie/signup.html"}
+    );
   };
   $scope.init();
 
