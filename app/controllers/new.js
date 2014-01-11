@@ -39,6 +39,7 @@ frankieApp.controller('NewCtrl', function ($scope, today, navigation, Photo, Pro
       steroids.layers.pop();
     };
     var save = function() {
+      debugger;
       if ($scope.edit) {
         updateObject();
       } else {
@@ -51,8 +52,9 @@ frankieApp.controller('NewCtrl', function ($scope, today, navigation, Photo, Pro
     };
     var updateObject = function() {
       alert('update');
+      debugger;
       if (photoURL) $scope.project.photoURL = photoURL;
-      Project.update($scope.project, successCallback);
+      Project.update($scope.project, localStorage.getItem('currentObjectId'), successCallback);
     };
 
     // Main logic
