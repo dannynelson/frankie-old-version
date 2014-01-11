@@ -1,12 +1,12 @@
-frankieApp.controller('CalendarCtrl', function ($scope) {
+frankieApp.controller('CalendarCtrl', function ($scope, today) {
 
   $scope.placeholder = 'http://placehold.it/140x100';
   steroids.view.navigationBar.show("Calendar");
 
   // This will be populated with Parse
   $scope.projects = [];
-
-  $scope.sort = 'title';
+  $scope.overDueProjects = [];
+  $scope.dueLaterProjects = [];
 
   // Helper function for opening new webviews
   $scope.open = function(id) {
@@ -27,6 +27,7 @@ frankieApp.controller('CalendarCtrl', function ($scope) {
     query.find({
       success: function(results) {
         $scope.projects = results;
+        $scope.sortProjects($scope.projects);
         // save to local storage for faster retrieval
         // localStorage.setItem("projects", JSON.stringify(results));
         // necessary to update bindings for promises, should be wrapped in function to catch errors?
@@ -38,6 +39,18 @@ frankieApp.controller('CalendarCtrl', function ($scope) {
     });
   };
   $scope.load();
+
+
+  $scope.sortProjects = function(arrayOfProjects) {
+    for(var i = 0; i < arrayOfProjects.length; i++){
+      if(arrayOfProjects[i].attributes.end <= today){
+        $scope.overDueProjects.push(arrayOfProjects[i]);
+      } else {
+        $scope.dueLaterProjects.push(arrayOfProjects[i]);
+      }
+    }
+  };
+  
 
   // Event listeners
   window.addEventListener("message", function(event) {
