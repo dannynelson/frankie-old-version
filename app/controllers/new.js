@@ -35,7 +35,7 @@ frankieApp.controller('NewCtrl', function ($scope, today, navigation, Photo, Pro
   $scope.create = function(project) {
     // helper functions
     var successCallback = function(object) {
-      alert('Object created/updated with objectId: ' + object.id);
+      // alert('Object created/updated with objectId: ' + object.id);
       // Notify the index.html to reload
       var msg = { status: 'reload' };
       window.postMessage(msg, "*");
