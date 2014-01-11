@@ -51,21 +51,24 @@ frankieApp.controller('ShowCtrl', function ($scope, Project, navigation) {
   };
   
   // retrieve info
-  Project.getById(steroids.view.params.id, function(object) {
-    $scope.parseProject = object;
-    $scope.project = object.attributes;
-    // Save current project info to localStorage (edit.html gets it from there)
-    localStorage.setItem("currentProject", JSON.stringify(object.attributes));
-    localStorage.setItem("currentObjectId", steroids.view.params.id);
-    $scope.$apply();
-    setNavigation();
-  });
+  $scope.load = function() {
+    Project.getById(steroids.view.params.id, function(object) {
+      $scope.parseProject = object;
+      $scope.project = object.attributes;
+      // Save current project info to localStorage (edit.html gets it from there)
+      localStorage.setItem("currentProject", JSON.stringify(object.attributes));
+      localStorage.setItem("currentObjectId", steroids.view.params.id);
+      $scope.$apply();
+      setNavigation();
+    });
+  };
+  $scope.load();
 
   // When the data is modified in the edit.html, get notified and update (edit is on top of this view)
   window.addEventListener("message", function(event) {
     if (event.data.status === "reload") {
       // $scope.loadFrankie();
-      $scope.project = JSON.parse(localStorage.getItem("currentProject"));
+      $scope.load();
       $scope.$apply();
     }
     if (event.data.status === "delete") {
@@ -73,18 +76,12 @@ frankieApp.controller('ShowCtrl', function ($scope, Project, navigation) {
     }
   });
 
-  // When back button is pressed, remove currentProject from local storage
-  window.addEventListener("backbutton", onBackKeyDown, false);
-  function onBackKeyDown() {
-    alert('back pressed');
-  }
-
 
   function setNavigation() {
     // -- Native navigation
     navigation.build(
       $scope.project.title,
-      {title: 'Edit', action: '/views/frankie/new.html' },
+      {title: 'Edit', action: '/views/frankie/new.html?id=' + steroids.view.params.id },
       {title: '/icons/left.png', action: $scope.returnToProjects }
     );
   }

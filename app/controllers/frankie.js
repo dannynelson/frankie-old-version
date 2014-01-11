@@ -150,33 +150,14 @@ frankieApp.factory('Project', function() {
     });
   };
 
-  var update = function(project, objectId, successCallback) {
-    debugger;
-    alert(JSON.stringify(project));
-    getById(objectId, function(object) {
-      debugger;
-      object.set(project);
-      object.save();
-
-      // Parse.Promise.when(object).then(function(result) {
-      //   alert('got object');
-      //   debugger;
-      //   result.save(project, {
-      //     success: successCallback,
-      //     error: function(object, error) {
-      //       alert('Failed to create new object, with error code: ' + error.description);
-      //     }
-      //   });
-      // }, function(error) {
-      //   alert('promise error');
-      // });
+  var update = function(parseProject, attributes, successCallback) {
+    parseProject.set(attributes);
+    parseProject.save(null, {
+      success: successCallback,
+      error: function(object, error) {
+        alert('Failed to create new object, with error code: ' + error.description);
+      }
     });
-    // project.save(null, {
-    //   success: successCallback,
-    //   error: function(object, error) {
-    //     alert('Failed to create new object, with error code: ' + error.description);
-    //   }
-    // });
   };
 
   return {

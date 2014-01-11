@@ -1,6 +1,14 @@
 frankieApp.controller('NewCtrl', function ($scope, today, navigation, Photo, Project) {
   $scope.init = function() {
-    $scope.project = JSON.parse(localStorage.getItem("currentProject"));
+    Project.getById(steroids.view.params.id, function(object) {
+      $scope.edit = true;
+      $scope.parseProject = object;
+      $scope.project = object.attributes;
+      // Save current project info to localStorage (edit.html gets it from there)
+      $scope.$apply();
+      setNavigation();
+    });
+    // $scope.project = JSON.parse(localStorage.getItem("currentProject"));
     if (!$scope.project) {
       $scope.edit = false;
       $scope.project = {
@@ -27,7 +35,7 @@ frankieApp.controller('NewCtrl', function ($scope, today, navigation, Photo, Pro
   $scope.create = function(project) {
     // helper functions
     var successCallback = function(object) {
-      alert('New object created with objectId: ' + object.id);
+      alert('Object created/updated with objectId: ' + object.id);
       // Notify the index.html to reload
       var msg = { status: 'reload' };
       window.postMessage(msg, "*");
@@ -39,7 +47,6 @@ frankieApp.controller('NewCtrl', function ($scope, today, navigation, Photo, Pro
       steroids.layers.pop();
     };
     var save = function() {
-      debugger;
       if ($scope.edit) {
         updateObject();
       } else {
@@ -51,10 +58,16 @@ frankieApp.controller('NewCtrl', function ($scope, today, navigation, Photo, Pro
       Project.save($scope.project, successCallback);
     };
     var updateObject = function() {
-      alert('update');
-      debugger;
       if (photoURL) $scope.project.photoURL = photoURL;
-      Project.update($scope.project, localStorage.getItem('currentObjectId'), successCallback);
+      // Project.update($scope.parseProject, $scope.project, successCallback);
+      $scope.parseProject.set($scope.project);
+      $scope.parseProject.save(null, {
+        success: successCallback,
+        error: function(error) {
+          alert(error);
+        }
+      });
+      // Project.update($scope.project, successCallback);
     };
 
     // Main logic
